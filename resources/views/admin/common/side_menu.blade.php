@@ -51,6 +51,30 @@
                 </li>
             @endif
 
+             {{--  Hotel Info --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Hotelinfo') && $sideMenuPermissions['Hotelinfo']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/hotel-info*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/hotel-info') }}" class="nav-link">
+                        <i data-feather="info"></i>
+                        <span>Hotel Info</span>
+                    </a>
+                </li>
+            @endif
+
+            {{--  Reservation Info --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('ReservationInfo') && $sideMenuPermissions['ReservationInfo']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/reservation-info*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/reservation-info') }}" class="nav-link">
+                        <i data-feather="info"></i>
+                        <span>Reservation Info</span>
+                    </a>
+                </li>
+            @endif
+
 
             {{--  Blogs --}}
 

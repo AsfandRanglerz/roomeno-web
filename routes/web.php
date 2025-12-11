@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SecurityController;
+use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -36,6 +37,8 @@ use App\Http\Controllers\Admin\RolePermissionController;
 // | Web Routes
 Route::get('/index',[HomeController::class ,'index'])->name('index');
 Route::get('/hotel',[HomeController::class ,'hotelinfo'])->name('hotel');
+Route::get('/sellhotel-info',[HomeController::class ,'hotelDetails'])->name('hotel.details');
+Route::post('/save-hotel-form',[HomeController::class ,'hotelstore'])->name('hotel.store');
 
 
 /*Admin routes
@@ -138,6 +141,12 @@ Route::delete('/users/{id}/force', [UserController::class, 'forceDelete'])->name
 
 Route::post('/users/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggle-status');
 
+// ############ Hotel Info #################
+Route::get('/hotel-info', [SellRoomController::class, 'hotelInfoIndex'])->name('hotelinfo.index') ->middleware('check.permission:HotelInfo,view');
+Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])->name('hotel.toggle-status');
+
+// ############ Reservation Info #################
+Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index') ->middleware('check.permission:ReservationInfo,view');
 
 
 
