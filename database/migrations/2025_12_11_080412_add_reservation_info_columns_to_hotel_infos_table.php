@@ -16,7 +16,7 @@ class AddReservationInfoColumnsToHotelInfosTable extends Migration
         Schema::table('hotel_infos', function (Blueprint $table) {
             $table->string('first_name')->nullable()->after('people_number');
             $table->string('last_name')->nullable()->after('first_name');
-            $table->string('Country')->nullable()->after('last_name');
+            $table->string('country')->nullable()->after('last_name');
             $table->string('phone_number')->nullable()->after('Country');
             $table->string('email')->nullable()->after('phone_number');
             $table->string('place_of_booking')->nullable()->after('email');

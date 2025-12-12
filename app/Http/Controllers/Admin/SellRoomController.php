@@ -19,8 +19,14 @@ class SellRoomController extends Controller
 
     public function reservationInfoIndex()
     {
-        $reservations = HotelInfo::select(['first_name','last_name', 'country', 'phone_number', 'email', 'place_of_booking', 'confirm_no'])->latest()->get();
+        $reservations = HotelInfo::latest()->get();
         return view('admin.sellaroom.reservationinfo',compact('reservations'));
+    }
+
+    public function paymentInfoIndex($reservationId)
+    {
+        $payments = HotelInfo::findOrFail($reservationId);
+        return view('admin.sellaroom.paymentinfo', ['payment' => $payments]);
     }
 
     public function toggleStatus(Request $request)

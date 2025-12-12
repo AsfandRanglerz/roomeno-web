@@ -37,8 +37,16 @@ use App\Http\Controllers\Admin\RolePermissionController;
 // | Web Routes
 Route::get('/index',[HomeController::class ,'index'])->name('index');
 Route::get('/hotel',[HomeController::class ,'hotelinfo'])->name('hotel');
+// Web hotel info routes
 Route::get('/sellhotel-info',[HomeController::class ,'hotelDetails'])->name('hotel.details');
 Route::post('/save-hotel-form',[HomeController::class ,'hotelstore'])->name('hotel.store');
+// Web reservation info routes
+Route::get('/reservation/create', [HomeController::class, 'reservationinfocreate'])->name('reservation.create');
+Route::post('/reservation/store', [HomeController::class, 'reservationinfostore'])->name('reservation.store');
+// web payment info routes
+Route::get('/payment-info/create/{reservation}', [HomeController::class, 'paymentInfoCreate'])->name('payment.create');
+Route::post('/payment-info/store', [HomeController::class, 'paymentInfoStore'])->name('payment.store');
+
 
 
 /*Admin routes
@@ -137,17 +145,18 @@ Route::post('/user-update/{id}', [UserController::class, 'update'])->name('user.
 Route::delete('/users-destory/{id}', [UserController::class, 'delete'])->name('user.delete') ->middleware('check.permission:Users,delete');
 // Route::get('/users/trashed', [UserController::class, 'trashed']);
 // Route::post('/users/{id}/restore', [UserController::class, 'restore']);
-Route::delete('/users/{id}/force', [UserController::class, 'forceDelete'])->name('user.forceDelete') ->middleware('check.permission:Users,delete');
+Route::delete('/users/{id}/force', [UserController::class, 'forceDelete'])->name('user.forceDelete')->middleware('check.permission:Users,delete');
 
 Route::post('/users/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggle-status');
 
 // ############ Hotel Info #################
-Route::get('/hotel-info', [SellRoomController::class, 'hotelInfoIndex'])->name('hotelinfo.index') ->middleware('check.permission:HotelInfo,view');
+Route::get('/hotel-info', [SellRoomController::class, 'hotelInfoIndex'])->name('hotelinfo.index')->middleware('check.permission:HotelInfo,view');
 Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])->name('hotel.toggle-status');
 
 // ############ Reservation Info #################
-Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index') ->middleware('check.permission:ReservationInfo,view');
-
+Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:ReservationInfo,view');
+// ############ Payment Info #################
+Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
 
 
     // ############ Sub Admin #################
