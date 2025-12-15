@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
@@ -37,15 +38,7 @@ use App\Http\Controllers\Admin\RolePermissionController;
 // | Web Routes
 Route::get('/index',[HomeController::class ,'index'])->name('index');
 Route::get('/hotel',[HomeController::class ,'hotelinfo'])->name('hotel');
-// Web hotel info routes
-Route::get('/sellhotel-info',[HomeController::class ,'hotelDetails'])->name('hotel.details');
-Route::post('/save-hotel-form',[HomeController::class ,'hotelstore'])->name('hotel.store');
-// Web reservation info routes
-Route::get('/reservation/create', [HomeController::class, 'reservationinfocreate'])->name('reservation.create');
-Route::post('/reservation/store', [HomeController::class, 'reservationinfostore'])->name('reservation.store');
-// web payment info routes
-Route::get('/payment-info/create/{reservation}', [HomeController::class, 'paymentInfoCreate'])->name('payment.create');
-Route::post('/payment-info/store', [HomeController::class, 'paymentInfoStore'])->name('payment.store');
+
 
 
 
@@ -157,6 +150,12 @@ Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])
 Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:ReservationInfo,view');
 // ############ Payment Info #################
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
+
+// ############ Bookings  #################
+Route::get('/bookings', [BookingController::class, 'bookingIndex'])->name('booking.index')->middleware('check.permission:Bookings,view');
+Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name('booking.counter');
+Route::post('/booking/approve/{id}', [BookingController::class, 'approve'])->name('booking.approve');
+Route::post('/booking/reject/{id}', [BookingController::class, 'reject'])->name('booking.reject');
 
 
     // ############ Sub Admin #################

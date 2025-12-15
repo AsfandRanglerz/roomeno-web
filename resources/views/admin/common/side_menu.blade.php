@@ -75,28 +75,47 @@
                 </li>
             @endif
 
+            {{--  Bookings --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Booking') && $sideMenuPermissions['Booking']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/bookings*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/bookings') }}" class="nav-link">
+                        <i data-feather="calendar"></i>
+                        <span>Bookings</span>
+                        <div id="updatebookingCounter"
+                        class="badge {{ request()->is('admin/booking*') ? 'bg-white text-dark' : 'bg-primary text-white' }} rounded-circle"
+                        style="display: inline-flex; justify-content: center; align-items: center; 
+                            min-width: 22px; height: 22px; border-radius: 50%; 
+                            text-align: center; font-size: 12px; margin-left: 5px; padding: 3px;">
+                        0
+                    </div>
+                    </a>
+                </li>
+            @endif
+
 
             {{--  Blogs --}}
 
-            @if (Auth::guard('admin')->check() ||
+            {{-- @if (Auth::guard('admin')->check() ||
                     ($sideMenuPermissions->has('Blogs') && $sideMenuPermissions['Blogs']->contains('view')))
-                {{-- FAQS --}}
+                
                 <li class="dropdown {{ request()->is('admin/blogs*') ? 'active' : '' }}">
                     <a href="{{ url('admin/blogs-index') }}" class="nav-link"><i
                             data-feather="book-open"></i><span>Blogs</span></a>
                 </li>
-            @endif
+            @endif --}}
 
              {{--  SEO --}}
 
-            @if (Auth::guard('admin')->check() ||
+            {{-- @if (Auth::guard('admin')->check() ||
                     ($sideMenuPermissions->has('Roles') && $sideMenuPermissions['seo']->contains('seo')))
-                {{-- FAQS --}}
+                
                 <li class="dropdown {{ request()->is('admin/seo*') ? 'active' : '' }}">
                     <a href="{{ url('admin/seo') }}" class="nav-link"><i
                             data-feather="trending-up"></i><span>SEO</span></a>
                 </li>
-            @endif
+            @endif --}}
             
              {{-- Notification --}}
 
