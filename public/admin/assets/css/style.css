@@ -2527,7 +2527,7 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 }
 
 .bg-primary {
-    background-color: #6777ef !important
+    background-color: #e8532b !important
 }
 
 .bg-secondary {
@@ -6904,7 +6904,7 @@ body.layout-3 .main-footer {
 }
 
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-    color: #6777ef;
+    color: #e8532b;
     background-color: inherit
 }
 
@@ -10570,7 +10570,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 }
 
 .theme-white .bg-primary {
-    background-color: #6777ef !important
+    background-color: #e8532b!important
 }
 
 .theme-white .text-primary {

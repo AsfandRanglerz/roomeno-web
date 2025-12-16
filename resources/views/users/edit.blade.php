@@ -26,7 +26,7 @@
                                                 id="name" name="name" value="{{ old('name', $user->name) }}"
                                                 placeholder="Enter your name" required>
                                             @error('name')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                                 id="email" name="email" value="{{ old('email', $user->email) }}"
                                                 placeholder="example@gmail.com" required>
                                             @error('email')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                                 id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
                                                 placeholder="Enter your phone" required>
                                             @error('phone')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
 													name="image" 
 													accept="image/*">
 												@error('image')
-													<div class="invalid-feedback">{{ $message }}</div>
+													<div class="text-danger">{{ $message }}</div>
 												@enderror
 											</div>
 										</div>
@@ -83,7 +83,7 @@
                                             <span class="fa fa-eye toggle-password position-absolute"
                                                 style="top: 42px; right: 15px; cursor: pointer;"></span>
                                             @error('password')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>

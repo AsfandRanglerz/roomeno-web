@@ -94,6 +94,70 @@
                 </li>
             @endif
 
+             {{--  How it works --}}
+
+           @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('HowItWorks') && $sideMenuPermissions['HowItWorks']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="layout"></i> {{-- Icon for How it works --}}
+                        <span>How it works</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/selling*') ? 'show' : '' }} || {{ request()->is('admin/buying*') ? 'show' : '' }} || {{ request()->is('admin/questions*') ? 'show' : '' }}">
+
+                        <li>
+                            <a href="{{ url('admin/selling') }}"
+                            class="nav-link {{ request()->is('admin/selling*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Selling</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/buying') }}"
+                            class="nav-link {{ request()->is('admin/buying*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Buying</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/questions') }}"
+                            class="nav-link {{ request()->is('admin/questions*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Questions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
+            {{-- Seller Protection --}}
+
+            @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('SellerProtection') && $sideMenuPermissions['SellerProtection']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="shield"></i> 
+                        <span>Seller Protection</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/seller-protection-intro*') ? 'show' : '' }}">
+
+                        <li>
+                            <a href="{{ url('admin/seller-protection-intro') }}"
+                            class="nav-link {{ request()->is('admin/seller-protection-intro*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Introduction</span>
+                            </a>
+                        </li>
+
+                       
+                    </ul>
+                </li>
+            @endif
+
+
+
 
             {{--  Blogs --}}
 

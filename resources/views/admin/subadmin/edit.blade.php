@@ -23,7 +23,7 @@
                                                 name="name" id="name" value="{{ old('name', $subAdmin->name) }}"
                                                 placeholder="Enter name">
                                             @error('name')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                                 name="email" id="email" value="{{ old('email', $subAdmin->email) }}"
                                                 placeholder="Enter email">
                                             @error('email')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                                 @endforeach
                                             </select>
                                             @error('role')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                                 </div>
                                             @endif
                                             @error('image')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>

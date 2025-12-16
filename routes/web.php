@@ -20,9 +20,11 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
+use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\SellerProtectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,7 +159,31 @@ Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name
 Route::post('/booking/approve/{id}', [BookingController::class, 'approve'])->name('booking.approve');
 Route::post('/booking/reject/{id}', [BookingController::class, 'reject'])->name('booking.reject');
 
+// ############ Selling #################
+Route::get('/selling', [HowItWorksController::class, 'sellingMain'])->name('selling.index')->middleware('check.permission:Selling,view');
+Route::get('/selling-edit/{id}', [HowItWorksController::class, 'edit'])->name('selling.edit')->middleware('check.permission:Selling,edit');
+Route::post('/selling-update/{id}', [HowItWorksController::class, 'update'])->name('selling.update')->middleware('check.permission:Selling,edit');
+Route::get('/selling-show/{id}', [HowItWorksController::class, 'show'])->name('selling.show')->middleware('check.permission:Selling,show');
+Route::get('/sellingshow-edit/{id}', [HowItWorksController::class, 'editsellingshow'])->name('sellingshow.edit')->middleware('check.permission:Selling,edit');
+Route::post('/sellingshow-update/{id}', [HowItWorksController::class,  'updatesellingshow'])->name('sellingshow.update')->middleware('check.permission:Selling,edit');
 
+// ############ Buying #################
+Route::get('/buying', [HowItWorksController::class, 'buyingMain'])->name('buying.index')->middleware('check.permission:Buying,view');
+Route::get('/buying-edit/{id}', [HowItWorksController::class, 'edit'])->name('buying.edit')->middleware('check.permission:Buying,edit');
+Route::post('/buying-update/{id}', [HowItWorksController::class, 'update'])->name('buying.update')->middleware('check.permission:Buying,edit');
+Route::get('/buying-show/{id}', [HowItWorksController::class, 'showbuying'])->name('buying.show')->middleware('check.permission:Buying,show');
+Route::get('/buyingshow-edit/{id}', [HowItWorksController::class, 'editbuyingshow'])->name('buyingshow.edit')->middleware('check.permission:Buying,edit');
+Route::post('/buyingshow-update/{id}', [HowItWorksController::class,  'updatebuyingshow'])->name('buyingshow.update')->middleware('check.permission:Buying,edit');
+
+// ############ Questions #################
+Route::get('/questions', [HowItWorksController::class, 'questionsIndex'])->name('questions.index')->middleware('check.permission:Questions,view');
+Route::get('/questions-edit/{id}', [HowItWorksController::class, 'questionsEdit'])->name('questions.edit')->middleware('check.permission:Questions,edit');
+Route::post('/questions-update/{id}', [HowItWorksController::class, 'questionsUpdate'])->name('questions.update')->middleware('check.permission:Questions,edit');
+
+// ############ Seller Protection Introduction #################
+Route::get('/seller-protection-intro', [SellerProtectionController::class, 'sellerProtectionIntroIndex'])->name('sellerprotectionintro.index')->middleware('check.permission:Seller Protection Introduction,view');
+Route::get('/seller-protection-intro-edit/{id}', [SellerProtectionController::class, 'sellerProtectionIntroEdit'])->name('sellerprotectionintro.edit')->middleware('check.permission:Seller Protection Introduction,edit');
+Route::post('/seller-protection-intro-update/{id}', [SellerProtectionController::class, 'sellerProtectionIntroUpdate'])->name('sellerprotectionintro.update')->middleware('check.permission:Seller Protection Introduction,edit');
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
         Route::get('/subadmin',  'index')->name('subadmin.index') ->middleware('check.permission:Sub Admins,view');
