@@ -20,11 +20,13 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
+use App\Http\Controllers\Admin\SellARoomController;
 use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\SellerProtectionController;
+use App\Http\Controllers\Admin\CancellationGuideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +186,45 @@ Route::post('/questions-update/{id}', [HowItWorksController::class, 'questionsUp
 Route::get('/seller-protection-intro', [SellerProtectionController::class, 'sellerProtectionIntroIndex'])->name('sellerprotectionintro.index')->middleware('check.permission:Seller Protection Introduction,view');
 Route::get('/seller-protection-intro-edit/{id}', [SellerProtectionController::class, 'sellerProtectionIntroEdit'])->name('sellerprotectionintro.edit')->middleware('check.permission:Seller Protection Introduction,edit');
 Route::post('/seller-protection-intro-update/{id}', [SellerProtectionController::class, 'sellerProtectionIntroUpdate'])->name('sellerprotectionintro.update')->middleware('check.permission:Seller Protection Introduction,edit');
+
+// ############ Seller Protection Section One #################
+Route::get('/seller-protection-section-one', [SellerProtectionController::class, 'sellerProtectionSectionOneIndex'])->name('sellerprotectionsectionone.index')->middleware('check.permission:Seller Protection Section One,view');
+Route::get('/seller-protection-section-one-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionOneEdit'])->name('sellerprotectionsectionone.edit')->middleware('check.permission:Seller Protection Section One,edit');
+Route::post('/seller-protection-section-one-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionOneUpdate'])->name('sellerprotectionsectionone.update')->middleware('check.permission:Seller Protection Section One,edit');
+Route::get('/seller-protection-section-one-show/{id}', [SellerProtectionController::class, 'sellerProtectionSectionOneShow'])->name('sellerprotectionsectionone.show')->middleware('check.permission:Seller Protection Section One,show');
+Route::get('/seller-protection-section-one-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionOneShowEdit'])->name('sellerprotectionsectionone.showedit')->middleware('check.permission:Seller Protection Section One,edit');
+Route::post('/seller-protection-section-one-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionOneShowUpdate'])->name('sellerprotectionsectionone.showupdate')->middleware('check.permission:Seller Protection Section One,edit');
+
+// ############ Seller Protection Section Two #################
+Route::get('/seller-protection-section-two', [SellerProtectionController::class, 'sellerProtectionSectionTwoIndex'])->name('sellerprotectionsectiontwo.index')->middleware('check.permission:Seller Protection Section Two,view');
+Route::get('/seller-protection-section-two-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoEdit'])->name('sellerprotectionsectiontwo.edit')->middleware('check.permission:Seller Protection Section Two,edit');  
+Route::post('/seller-protection-section-two-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoUpdate'])->name('sellerprotectionsectiontwo.update')->middleware('check.permission:Seller Protection Section Two,edit');
+Route::get('/seller-protection-section-two-show/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoShow'])->name('sellerprotectionsectiontwo.show')->middleware('check.permission:Seller Protection Section Two,show');
+Route::get('/seller-protection-section-two-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoShowEdit'])->name('sellerprotectionsectiontwo.showedit')->middleware('check.permission:Seller Protection Section Two,edit');
+Route::post('/seller-protection-section-two-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoShowUpdate'])->name('sellerprotectionsectiontwo.showupdate')->middleware('check.permission:Seller Protection Section Two,edit');
+
+// ############ Seller Protection Section Three #################
+Route::get('/seller-protection-section-three', [SellerProtectionController::class, 'sellerProtectionSectionThreeIndex'])->name('sellerprotectionsectionthree.index')->middleware('check.permission:Seller Protection Section Three,view');
+Route::get('/seller-protection-section-three-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeEdit'])->name('sellerprotectionsectionthree.edit')->middleware('check.permission:Seller Protection Section Three,edit');  
+Route::post('/seller-protection-section-three-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeUpdate'])->name('sellerprotectionsectionthree.update')->middleware('check.permission:Seller Protection Section Three,edit');
+Route::get('/seller-protection-section-three-show/{id}', [SellerProtectionController::class , 'sellerProtectionSectionThreeShow'])->name('sellerprotectionsectionthree.show')->middleware('check.permission:Seller Protection Section Three,show');
+Route::get('/seller-protection-section-three-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowEdit'])->name('sellerprotectionsectionthree.showedit')->middleware('check.permission:Seller Protection Section Three,edit');
+Route::post('/seller-protection-section-three-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowUpdate'])->name('sellerprotectionsectionthree.showupdate')->middleware('check.permission:Seller Protection Section Three,edit');
+
+// ############ Cancellation Guide #################
+Route::get('/cancellation-guide', [CancellationGuideController::class, 'cancellationGuideIndex'])->name('cancellationguide.index')->middleware('check.permission:Cancellation Guide,view');
+Route::get('/cancellation-guide-edit/{id}', [CancellationGuideController::class, 'cancellationGuideEdit'])->name('cancellationguide.edit')->middleware('check.permission:Cancellation Guide,edit');
+Route::post('/cancellation-guide-update/{id}', [CancellationGuideController::class, 'cancellationGuideUpdate'])->name('cancellationguide.update')->middleware('check.permission:Cancellation Guide,edit');
+Route::get('/cancellation-guide-show/{id}', [CancellationGuideController::class, 'cancellationGuideShow'])->name('cancellationguide.show')->middleware('check.permission:Cancellation Guide,show');
+Route::get('/cancellation-guide-show-edit/{id}', [CancellationGuideController::class, 'cancellationGuideShowEdit'])->name('cancellationguide.showedit')->middleware('check.permission:Cancellation Guide,edit');
+Route::post('/cancellation-guide-show-update/{id}', [CancellationGuideController::class, 'cancellationGuideShowUpdate'])->name('cancellationguide.showupdate')->middleware('check.permission:Cancellation Guide,edit');
+
+// ############ Sell a room #################
+Route::get('/sell-a-room', [SellARoomController::class, 'sellARoomIndex'])->name('sellaroom.index')->middleware('check.permission:Sell a Room,view');
+Route::get('/sell-a-room-edit', [SellARoomController::class, 'sellARoomEdit'])->name('sellaroom.edit')->middleware('check.permission:Sell a Room,edit');
+Route::post('/sell-a-room-update', [SellARoomController::class, 'sellARoomUpdate'])->name('sellaroom.update')->middleware('check.permission:Sell a Room,edit');
+Route::get('/sell-a-room-view', [SellARoomController::class, 'sellARoomView']) ->middleware('check.permission:Sell a Room,view');
+
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
         Route::get('/subadmin',  'index')->name('subadmin.index') ->middleware('check.permission:Sub Admins,view');

@@ -25,7 +25,7 @@
                                     <tr>
                                         <td>{{ $intros->title ?? '--' }}</td>
                                         <td>{{ $intros->description ?? '--' }}</td>
-                                        <td>@if($intros->image)
+                                        <td>@if($intros &&$intros->image)
                                             <img src="{{ asset($intros->image) }}" alt="" height="50"
                                                         width="50" class="image">
                                             @else

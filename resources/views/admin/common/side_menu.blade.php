@@ -142,7 +142,7 @@
                         <span>Seller Protection</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/seller-protection-intro*') ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/seller-protection-intro*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-one*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-two*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-three*') ? 'show' : '' }}">
 
                         <li>
                             <a href="{{ url('admin/seller-protection-intro') }}"
@@ -151,13 +151,64 @@
                             </a>
                         </li>
 
-                       
+                        <li>
+                            <a href="{{ url('admin/seller-protection-section-one') }}"
+                            class="nav-link {{ request()->is('admin/seller-protection-section-one*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Seller Protection Section One</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/seller-protection-section-two') }}"
+                            class="nav-link {{ request()->is('admin/seller-protection-section-two*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Seller Protection Section Two</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/seller-protection-section-three') }}"
+                            class="nav-link {{ request()->is('admin/seller-protection-section-three*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Questions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            
+            {{-- Cancellation Guide  --}}
+              @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('CancellationGuide') && $sideMenuPermissions['CancellationGuide']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="x-circle"></i> 
+                        <span>Hotel Cancellation Guide</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/cancellation-guide*') ? 'show' : '' }}">
+
+                        <li>
+                            <a href="{{ url('admin/cancellation-guide') }}"
+                            class="nav-link {{ request()->is('admin/cancellation-guide*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Cancellation Guide One</span>
+                            </a>
+                        </li>
+
+                        
                     </ul>
                 </li>
             @endif
 
-
-
+            {{-- How to sell a room --}}
+             @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('sellroom') && $sideMenuPermissions['sellroom']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/sell-a-room*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/sell-a-room') }}" class="nav-link">
+                        <i data-feather="tag"></i>
+                        <span>Sell a Room</span>
+                    </a>
+                </li>
+            @endif
 
             {{--  Blogs --}}
 

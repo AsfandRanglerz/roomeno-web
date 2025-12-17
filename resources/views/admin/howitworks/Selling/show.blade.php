@@ -16,6 +16,7 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Actions</th>
@@ -24,6 +25,7 @@
                                 <tbody>
                                      @foreach ($sellings as $selling)
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $selling->title ?? '--' }}</td>
                                         <td>{{ $selling->description ?? '--' }}</td>
                                         <td style="vertical-align: middle;">

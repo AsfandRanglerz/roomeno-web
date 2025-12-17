@@ -1,15 +1,16 @@
 @extends('admin.layout.app')
-@section('title', 'Questions')
+@section('title', 'Seller Protection Section One')
 
 @section('content')
 <div class="main-content" style="min-height: 562px;">
     <section class="section">
         <div class="section-body">
+            <a class="btn btn-primary mb-3" href="{{ route('sellerprotectionsectionone.index')}}">Back</a>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Questions</h4>
+                            <h4>Seller Protection Section One</h4>
                         </div>
                         <div class="card-body table-striped table-bordered table-responsive">
                             <table class="responsive table" id="table_id_events">
@@ -22,22 +23,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     @foreach ($questions as $question)
+                                     @foreach ($sectionOnes as $sectionOne)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $question->title ?? '--' }}</td>
-                                        <td>{{ $question->description ?? '--' }}</td>
+                                        <td>{{ $sectionOne->title ?? '--' }}</td>
+                                        <td>{{ $sectionOne->description ?? '--' }}</td>
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Questions') && $sideMenuPermissions['Questions']->contains('edit')))
-                                                <a href="{{ route('questions.edit', $question->id) }}"
+                                                ($sideMenuPermissions->has('Seller Protection Section One') && $sideMenuPermissions['Seller Protection Section One']->contains('show')))
+                                                <a href="{{ route('sellerprotectionsectionone.showedit', $sectionOne->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
-
                                             </div>
                                         </td>
                                     </tr>

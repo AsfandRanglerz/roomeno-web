@@ -15,33 +15,46 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
-                                        <th>Sr.</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
+                                        <th>Image</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     @foreach ($questions as $question)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $question->title ?? '--' }}</td>
-                                        <td>{{ $question->description ?? '--' }}</td>
+                                        <td>@if($sectionthree && $sectionthree->image)
+                                            <img src="{{ asset($sectionthree->image) }}" alt="" height="50"
+                                                        width="50" class="image">
+                                            @else
+                                            <span>--</span>
+                                            @endif
+                                        </td>
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Questions') && $sideMenuPermissions['Questions']->contains('edit')))
-                                                <a href="{{ route('questions.edit', $question->id) }}"
+                                                ($sideMenuPermissions->has('Seller Protection Section Three') && $sideMenuPermissions['Seller Protection Section Three']->contains('edit')))
+                                                <a href="{{ route('sellerprotectionsectionthree.edit', $sectionthree->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
-
+                                                <div class="d-flex align-items-center" style="gap: 6px;">
+                                                    @if (Auth::guard('admin')->check() ||
+                                                    ($sideMenuPermissions->has('Seller Protection Section Three') && $sideMenuPermissions['Seller Protection Section Three']->contains('show')))
+                                                    <a href="{{ route('sellerprotectionsectionthree.show', $sectionthree->id) }}"
+                                                        class="btn btn-primary p-2"
+                                                        style="background-color: #cb84fe;">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    @endif
                                             </div>
+
+                                        </td>
+                                        
+                                        </div>
+                                        </div>
                                         </td>
                                     </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div> <!-- /.card-body -->

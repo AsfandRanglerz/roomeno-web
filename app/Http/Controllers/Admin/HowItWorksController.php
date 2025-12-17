@@ -77,7 +77,11 @@ class HowItWorksController extends Controller
     {
         $request->validate([
             'maintitle' => 'required|max:255',
-        ]);
+        ],
+        [
+            'maintitle.required' => 'The main title field is required.',
+        ]
+    );
 
         $buying = Buying::findOrFail($id);
         $buying->main_title = $request->input('maintitle');
