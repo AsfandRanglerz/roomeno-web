@@ -243,6 +243,15 @@ Route::post('/roomeno-works-update/{id}', [SellRoomController::class, 'roomenoWo
 Route::get('/roomeno-works-show/{id}', [SellRoomController::class, 'roomenoWorksShow'])->name('roomenoworks.show')->middleware('check.permission:How Roomeno Works,show');
 Route::get('/roomeno-works-show-edit/{id}', [SellRoomController::class, 'roomenoWorksShowEdit'])->name('roomenoworks.showedit')->middleware('check.permission:How Roomeno Works,edit');
 Route::post('/roomeno-works-show-update/{id}', [SellRoomController::class, 'roomenoWorksShowUpdate'])->name('roomenoworks.showupdate')->middleware('check.permission:How Roomeno Works,edit');
+
+// ############ We Protect Our Sellers ############
+Route::get('/protect-sellers', [SellRoomController::class, 'protectSellersIndex'])->name('protectsellers.index')->middleware('check.permission:We Protect Our Sellers,view');
+Route::get('/protect-sellers-edit/{id}', [SellRoomController::class, 'protectSellersEdit'])->name('protectsellers.edit')->middleware('check.permission:We Protect Our Sellers,edit');
+Route::post('/protect-sellers-update/{id}', [SellRoomController::class, 'protectSellerUpdate'])->name('protectsellers.update')->middleware('check.permission:We Protect Our Sellers,edit');
+Route::get('/protect-sellers-show/{id}', [SellRoomController::class, 'protectSellersShow'])->name('protectsellers.show')->middleware('check.permission:We Protect Our Sellers,show');
+Route::get('/protect-sellers-show-edit/{id}', [SellRoomController::class, 'protectSellersShowEdit'])->name('protectsellers.showedit')->middleware('check.permission:We Protect Our Sellers,edit');
+Route::post('/protect-sellers-show-update/{id}', [SellRoomController::class, 'protectSellersShowUpdate'])->name('protectsellers.showupdate')->middleware('check.permission:We Protect Our Sellers,edit');
+
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
         Route::get('/subadmin',  'index')->name('subadmin.index') ->middleware('check.permission:Sub Admins,view');

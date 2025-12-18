@@ -227,7 +227,7 @@
                         <span>Sell Reservation</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/sell-reservation*')  || request()->is('admin/roomeno-works*') ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/sell-reservation*')  || request()->is('admin/roomeno-works*') || request()->is('admin/protect-sellers*')? 'show' : '' }}">
 
 
                         <li>
@@ -241,6 +241,13 @@
                             <a href="{{ url('admin/roomeno-works') }}"
                             class="nav-link {{ request()->is('admin/roomeno-works*') ? 'active bg-primary text-white' : '' }}">
                                 <span>How Roomeno Works</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/protect-sellers') }}"
+                            class="nav-link {{ request()->is('admin/protect-sellers*') ? 'active bg-primary text-white' : '' }}">
+                                <span>We Protect Our Sellers</span>
                             </a>
                         </li>
 
