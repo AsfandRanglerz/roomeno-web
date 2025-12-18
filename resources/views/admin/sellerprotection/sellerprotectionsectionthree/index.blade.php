@@ -15,12 +15,14 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>Image</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>@if($sectionthree && $sectionthree->image)
                                             <img src="{{ asset($sectionthree->image) }}" alt="" height="50"
                                                         width="50" class="image">

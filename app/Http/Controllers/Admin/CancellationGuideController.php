@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\CancellationGuide;
+use App\Models\UserRolePermission;
 use App\Http\Controllers\Controller;
+use App\Models\CancellationGuideTwo;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CancellationGuideController extends Controller
 {
@@ -46,8 +50,8 @@ class CancellationGuideController extends Controller
 
     public function cancellationGuideShow($id)
     {
-        $cancelguide = CancellationGuide::wherenotNull('description')->get();
-        return view('admin.cancellationguide.show', compact('cancelguide'));
+        $cancelguides = CancellationGuide::wherenotNull('description')->get();
+        return view('admin.cancellationguide.show', compact('cancelguides'));
     }
 
     public function cancellationGuideShowEdit($id)
@@ -66,6 +70,69 @@ class CancellationGuideController extends Controller
         $cancelguide->description = $request->input('description');
         $cancelguide->save();
         
-        return redirect()->route('cancellationguide.show')->with('success', 'Cancellation guide one updated successfully.');
+        return redirect()->route('cancellationguide.show', $id)->with('success', 'Cancellation guide one updated successfully.');
+    }
+
+     public function cancellationGuideTwoIndex()
+    {
+        $data = CancellationGuideTwo::first();
+          $sideMenuPermissions = collect();
+
+    // ✅ Check if user is not admin (normal subadmin)
+    if (!Auth::guard('admin')->check()) {
+        $user =Auth::guard('subadmin')->user()->load('roles');
+
+
+        // ✅ 1. Get role_id of subadmin
+        $roleId = $user->role_id;
+
+        // ✅ 2. Get all permissions assigned to this role
+        $permissions = UserRolePermission::with(['permission', 'sideMenue'])
+            ->where('role_id', $roleId)
+            ->get();
+
+        // ✅ 3. Group permissions by side menu
+        $sideMenuPermissions = $permissions->groupBy('sideMenue.name')->map(function ($items) {
+            return $items->pluck('permission.name'); // ['view', 'create']
+        });
+    }
+
+
+        return view('admin.cancellationguide.cancellationguidetwo.index', compact('data',  'sideMenuPermissions'));
+    }
+
+
+    public function cancellationGuideTwoView()
+    {
+        $data = CancellationGuideTwo::first();
+        return view('admin.cancellationguide.cancellationguidetwo.cancellationguideTwo', compact('data'));
+    }
+
+    public function cancellationGuideTwoEdit()
+    {
+        $data = CancellationGuideTwo::first();
+        
+        return view('admin.cancellationguide.cancellationguidetwo.edit', compact('data'));
+    }
+
+    public function cancellationGuideTwoUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+                'description' => 'required',
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        $data = CancellationGuideTwo::first();
+        if ($data) {
+            $data->update($request->all());
+        } else {
+            CancellationGuideTwo::create($request->all());
+        }
+        return redirect('/admin/cancellation-guide-two')->with('success', 'Cancellation guide two updated successfully');
     }
 }

@@ -15,6 +15,7 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>Title</th>
                                         <th>Image</th>
                                         <th>Actions</th>
@@ -22,6 +23,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>{{ $cancelguides->title ?? '--' }}</td>
                                         <td>@if($cancelguides && $cancelguides->image)
                                             <img src="{{ asset($cancelguides->image) }}" alt="" height="50"

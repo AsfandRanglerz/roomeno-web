@@ -1,13 +1,13 @@
 @extends('admin.layout.app')
-@section('title', 'Edit Cancellation Guide One')
+@section('title', 'Edit Changed Travel Plans')
 @section('content')
 
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <a class="btn btn-primary mb-3" href="{{ url('admin/cancellation-guide-show/' . $cancelguide->id) }}">Back</a>
+                <a class="btn btn-primary mb-3" href="{{ url('admin/sell-reservation') }}">Back</a>
 
-                <form id="edit_farmer" action="{{ route('cancellationguide.showupdate', $cancelguide->id) }}" method="POST"
+                <form id="edit_farmer" action="{{ route('sellreservation.update', $reservation->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST') <!-- Correct method for updating -->
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card">
-                                <h4 class="text-center my-4">Edit Cancellation Guide One</h4>
+                                <h4 class="text-center my-4">Edit Changed Travel Plans</h4>
                                 <div class="row mx-0 px-4">
                                     <!-- Description Field -->
                                     <div class="col-sm-6 pl-sm-0 pr-sm-3">
@@ -26,13 +26,14 @@
                                                 id="description"
                                                 name="description"
                                                 rows="3"
-                                                placeholder="Enter Description">{{ old('description', $cancelguide->description) }}</textarea>
+                                                placeholder="Enter Description">{{ old('description', $reservation->description) }}</textarea>
 
                                             @error('description')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
+                                    
                                     <!-- Submit Button -->
                                     <div class="card-footer text-center row">
                                         <div class="col-12">

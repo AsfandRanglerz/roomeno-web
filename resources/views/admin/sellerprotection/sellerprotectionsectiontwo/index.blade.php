@@ -15,6 +15,7 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>Main Title</th>
                                         <th>Description</th>
                                         <th>Image</th>
@@ -23,6 +24,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>{{ $sectiontwo->main_title ?? '--' }}</td>
                                         <td>{{ $sectiontwo->main_description ?? '--' }}</td>
                                         <td>@if($sectiontwo && $sectiontwo->image)

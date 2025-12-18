@@ -211,13 +211,19 @@ Route::get('/seller-protection-section-three-show/{id}', [SellerProtectionContro
 Route::get('/seller-protection-section-three-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowEdit'])->name('sellerprotectionsectionthree.showedit')->middleware('check.permission:Seller Protection Section Three,edit');
 Route::post('/seller-protection-section-three-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowUpdate'])->name('sellerprotectionsectionthree.showupdate')->middleware('check.permission:Seller Protection Section Three,edit');
 
-// ############ Cancellation Guide #################
-Route::get('/cancellation-guide', [CancellationGuideController::class, 'cancellationGuideIndex'])->name('cancellationguide.index')->middleware('check.permission:Cancellation Guide,view');
+// ############ Cancellation Guide One #################
+Route::get('/cancellation-guide-one', [CancellationGuideController::class, 'cancellationGuideIndex'])->name('cancellationguide.index')->middleware('check.permission:Cancellation Guide,view');
 Route::get('/cancellation-guide-edit/{id}', [CancellationGuideController::class, 'cancellationGuideEdit'])->name('cancellationguide.edit')->middleware('check.permission:Cancellation Guide,edit');
 Route::post('/cancellation-guide-update/{id}', [CancellationGuideController::class, 'cancellationGuideUpdate'])->name('cancellationguide.update')->middleware('check.permission:Cancellation Guide,edit');
 Route::get('/cancellation-guide-show/{id}', [CancellationGuideController::class, 'cancellationGuideShow'])->name('cancellationguide.show')->middleware('check.permission:Cancellation Guide,show');
 Route::get('/cancellation-guide-show-edit/{id}', [CancellationGuideController::class, 'cancellationGuideShowEdit'])->name('cancellationguide.showedit')->middleware('check.permission:Cancellation Guide,edit');
 Route::post('/cancellation-guide-show-update/{id}', [CancellationGuideController::class, 'cancellationGuideShowUpdate'])->name('cancellationguide.showupdate')->middleware('check.permission:Cancellation Guide,edit');
+
+// ############ Cancellation Guide Two #################
+Route::get('/cancellation-guide-two', [CancellationGuideController::class, 'cancellationGuideTwoIndex'])->name('cancellationguidetwo.index')->middleware('check.permission:Cancellation Guide Two,view');
+Route::get('/cancellation-guide-two-edit', [CancellationGuideController::class, 'cancellationGuideTwoEdit'])->name('cancellationguidetwo.edit')->middleware('check.permission:Cancellation Guide Two,edit');
+Route::post('/cancellation-guide-two-update', [CancellationGuideController::class, 'cancellationGuideTwoUpdate'])->name('cancellationguidetwo.update')->middleware('check.permission:Cancellation Guide Two,edit');
+Route::get('/cancellation-guide-two-view', [CancellationGuideController::class, 'cancellationGuideTwoView']) ->middleware('check.permission:Cancellation Guide Two,view');
 
 // ############ Sell a room #################
 Route::get('/sell-a-room', [SellARoomController::class, 'sellARoomIndex'])->name('sellaroom.index')->middleware('check.permission:Sell a Room,view');
@@ -225,6 +231,18 @@ Route::get('/sell-a-room-edit', [SellARoomController::class, 'sellARoomEdit'])->
 Route::post('/sell-a-room-update', [SellARoomController::class, 'sellARoomUpdate'])->name('sellaroom.update')->middleware('check.permission:Sell a Room,edit');
 Route::get('/sell-a-room-view', [SellARoomController::class, 'sellARoomView']) ->middleware('check.permission:Sell a Room,view');
 
+// ############ Sell Reservation #################
+Route::get('/sell-reservation', [SellRoomController::class, 'sellReservationIndex'])->name('sellreservation.index')->middleware('check.permission:Sell Reservation,view');
+Route::get('/sell-reservation-edit/{id}', [SellRoomController::class, 'sellReservationEdit'])->name('sellreservation.edit')->middleware('check.permission:Sell Reservation,edit');
+Route::post('/sell-reservation-update/{id}', [SellRoomController::class, 'sellReservationUpdate'])->name('sellreservation.update')->middleware('check.permission:Sell Reservation,edit');
+
+// ############ How Roomeno Works #################
+Route::get('/roomeno-works', [SellRoomController::class, 'roomenoWorksIndex'])->name('roomenoworks.index')->middleware('check.permission:How Roomeno Works,view');
+Route::get('/roomeno-works-edit/{id}', [SellRoomController::class, 'roomenoWorksEdit'])->name('roomenoworks.edit')->middleware('check.permission:How Roomeno Works,edit');
+Route::post('/roomeno-works-update/{id}', [SellRoomController::class, 'roomenoWorksUpdate'])->name('roomenoworks.update')->middleware('check.permission:How Roomeno Works,edit');
+Route::get('/roomeno-works-show/{id}', [SellRoomController::class, 'roomenoWorksShow'])->name('roomenoworks.show')->middleware('check.permission:How Roomeno Works,show');
+Route::get('/roomeno-works-show-edit/{id}', [SellRoomController::class, 'roomenoWorksShowEdit'])->name('roomenoworks.showedit')->middleware('check.permission:How Roomeno Works,edit');
+Route::post('/roomeno-works-show-update/{id}', [SellRoomController::class, 'roomenoWorksShowUpdate'])->name('roomenoworks.showupdate')->middleware('check.permission:How Roomeno Works,edit');
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
         Route::get('/subadmin',  'index')->name('subadmin.index') ->middleware('check.permission:Sub Admins,view');

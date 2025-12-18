@@ -15,6 +15,7 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>Main Title</th>
                                         <th>Image</th>
                                         <th>Actions</th>
@@ -22,6 +23,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>{{ $sectionOne->main_title ?? '--' }}</td>
                                         <td>@if($sectionOne && $sectionOne->image)
                                             <img src="{{ asset($sectionOne->image) }}" alt="" height="50"

@@ -1,17 +1,17 @@
 @extends('admin.layout.app')
-@section('title', 'Edit Sell a Room')
+@section('title', 'Edit Cancellation Guide Two')
 @section('content')
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <a href="{{ url('/admin/sell-a-room') }}" class="btn btn-primary mb-4">Back</a>
-                <form id="sellARoomForm" action="{{ url('admin/sell-a-room-update') }}" method="POST">
+                <a href="{{ url('/admin/cancellation-guide-two') }}" class="btn btn-primary mb-4">Back</a>
+                <form id="CancellationGuideTwoForm" action="{{ url('admin/cancellation-guide-two-update') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Edit Sell a Room</h4>
+                                    <h4>Edit Cancellation Guide Two</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
@@ -39,7 +39,7 @@
         CKEDITOR.replace('description');
 
         $(document).ready(function() {
-            $('#sellARoomForm').on('submit', function(e) {
+            $('#CancellationGuideTwoForm').on('submit', function(e) {
                 // Get CKEditor content
                 for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();

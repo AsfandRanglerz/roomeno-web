@@ -105,7 +105,7 @@
                         <span>How it works</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/selling*') ? 'show' : '' }} || {{ request()->is('admin/buying*') ? 'show' : '' }} || {{ request()->is('admin/questions*') ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/selling*') || request()->is('admin/buying*') || request()->is('admin/questions*') ? 'show' : '' }}">
 
                         <li>
                             <a href="{{ url('admin/selling') }}"
@@ -142,7 +142,7 @@
                         <span>Seller Protection</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/seller-protection-intro*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-one*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-two*') ? 'show' : '' }} || {{ request()->is('admin/seller-protection-section-three*') ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/seller-protection-intro*') ||  request()->is('admin/seller-protection-section-one*') ||  request()->is('admin/seller-protection-section-two*') ||  request()->is('admin/seller-protection-section-three*') ? 'show' : '' }}">
 
                         <li>
                             <a href="{{ url('admin/seller-protection-intro') }}"
@@ -185,15 +185,22 @@
                         <span>Hotel Cancellation Guide</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/cancellation-guide*') ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/cancellation-guide-one*') || request()->is('admin/cancellation-guide-two*') ? 'show' : '' }}">
+
 
                         <li>
-                            <a href="{{ url('admin/cancellation-guide') }}"
-                            class="nav-link {{ request()->is('admin/cancellation-guide*') ? 'active bg-primary text-white' : '' }}">
+                            <a href="{{ url('admin/cancellation-guide-one') }}"
+                            class="nav-link {{ request()->is('admin/cancellation-guide-one*') ? 'active bg-primary text-white' : '' }}">
                                 <span>Cancellation Guide One</span>
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ url('admin/cancellation-guide-two') }}"
+                            class="nav-link {{ request()->is('admin/cancellation-guide-two*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Cancellation Guide Two</span>
+                            </a>
+                        </li>
                         
                     </ul>
                 </li>
@@ -201,12 +208,43 @@
 
             {{-- How to sell a room --}}
              @if (Auth::guard('admin')->check() ||
-                    ($sideMenuPermissions->has('sellroom') && $sideMenuPermissions['sellroom']->contains('view')))
+                    ($sideMenuPermissions->has('Sell a Room') && $sideMenuPermissions['Sell a Room']->contains('view')))
                 <li class="dropdown {{ request()->is('admin/sell-a-room*') ? 'active' : '' }}">
                     <a href="{{ url('admin/sell-a-room') }}" class="nav-link">
                         <i data-feather="tag"></i>
                         <span>Sell a Room</span>
                     </a>
+                </li>
+            @endif
+
+            {{-- Sell Reservation --}}
+             @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('Sell Reservation') && $sideMenuPermissions['Sell Reservation']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="tag"></i> 
+                        <span>Sell Reservation</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/sell-reservation*')  || request()->is('admin/roomeno-works*') ? 'show' : '' }}">
+
+
+                        <li>
+                            <a href="{{ url('admin/sell-reservation') }}"
+                            class="nav-link {{ request()->is('admin/sell-reservation*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Changed Travel Plans</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/roomeno-works') }}"
+                            class="nav-link {{ request()->is('admin/roomeno-works*') ? 'active bg-primary text-white' : '' }}">
+                                <span>How Roomeno Works</span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
             @endif
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Log;
 use Exception;
 use App\Models\HotelInfo;
+use App\Models\RoomenoWorks;
 use Illuminate\Http\Request;
+use App\Models\SellReservation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -74,5 +76,75 @@ protected function sendDeactivationEmail($hotel, $reason)
         Log::error("Failed to send deactivation email: " . $e->getMessage());
     }
 }
+
+public function sellReservationIndex()
+    {
+        $reservations = SellReservation::first();
+        return view('admin.sellreservation.changedtravelplans.index', ['reservations' => $reservations]);
+    }
+
+    public function sellReservationEdit($id)
+    {
+        $reservation = SellReservation::findOrFail($id);
+        return view('admin.sellreservation.changedtravelplans.edit', compact('reservation'));
+    }
+    public function sellReservationUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'description' => 'required',
+        ]);
+        $reservation = SellReservation::findOrFail($id);
+        $reservation->description = $request->input('description');
+        $reservation->save();
+        return redirect()->route('sellreservation.index')->with('success', 'Reservation updated successfully.');
+    }
+
+    public function roomenoWorksIndex()
+    {
+        $works = RoomenoWorks::wherenotNull('main_title')->first();
+        return view('admin.sellreservation.howroomenoworks.index', ['works' => $works]);
+    }
+
+    public function roomenoWorksEdit($id)
+    {
+        $work = RoomenoWorks::findOrFail($id);
+        return view('admin.sellreservation.howroomenoworks.edit', compact('work'));
+    }
+
+    public function roomenoWorksUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'main_title' => 'required',
+        ]);
+        $work = RoomenoWorks::findOrFail($id);
+        $work->main_title = $request->input('main_title');
+        $work->save();
+        return redirect()->route('roomenoworks.index')->with('success', 'How roomeno works updated successfully.');
+    }
+
+    public function roomenoWorksShow($id)
+    {
+        $works = RoomenoWorks::wherenotNull('title')->wherenotNull('description')->get();
+        return view('admin.sellreservation.howroomenoworks.show', compact('works'));
+    }
+
+    public function roomenoWorksShowEdit($id)
+    {
+        $work = RoomenoWorks::findOrFail($id);
+        return view('admin.sellreservation.howroomenoworks.editshow', compact('work'));
+    }
+
+    public function roomenoWorksShowUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+        $work = RoomenoWorks::findOrFail($id);
+        $work->title = $request->input('title');
+        $work->description = $request->input('description');
+        $work->save();
+        return redirect()->route('roomenoworks.show', ['id' => $work->id])->with('success', 'How roomeno works updated successfully.');
+    }
 
 }

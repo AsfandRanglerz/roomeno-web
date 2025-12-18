@@ -1,13 +1,13 @@
 @extends('admin.layout.app')
-@section('title', 'Cancellation Guide One')
+@section('title', 'Edit How Roomeno Works')
 @section('content')
 
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <a class="btn btn-primary mb-3" href="{{ url('admin/cancellation-guide-one') }}">Back</a>
+                <a class="btn btn-primary mb-3" href="{{ url('admin/how-roomeno-works-show/' . $work->id) }}">Back</a>
 
-                <form id="edit_farmer" action="{{ route('cancellationguide.update', $cancelguide->id) }}" method="POST"
+                <form id="edit_farmer" action="{{ route('roomenoworks.showupdate', $work->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST') <!-- Correct method for updating -->
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card">
-                                <h4 class="text-center my-4">Cancellation Guide One</h4>
+                                <h4 class="text-center my-4">Edit How Roomeno Works</h4>
                                 <div class="row mx-0 px-4">
 
                                     <!-- Title Field -->
@@ -23,29 +23,28 @@
                                         <div class="form-group">
                                             <label for="title">Title <span style="color: red;">*</span></label>
                                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                                id="title" name="title" value="{{ old('title', $cancelguide->title) }}"
+                                                id="title" name="title" value="{{ old('title', $work->title) }}"
                                                 placeholder="Enter Title">
                                             @error('title')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
-                                      <div class="col-sm-6 pl-sm-0 pr-sm-3">
-                                        <div class="form-group mb-2">
-                                            <label>Image <span style="color: red;">*</span></label>
-                                            <input type="file" name="image" class="form-control">
-                                            <small text-muted>(Image should be of size 2MB)</small>
-                                            @error('image')
+                                    <!-- Description Field -->
+                                    <div class="col-sm-6 pl-sm-0 pr-sm-3">
+                                        <div class="form-group">
+                                            <label for="description">Description <span style="color: red;">*</span></label>
+                                            <textarea
+                                                class="form-control @error('description') is-invalid @enderror"
+                                                id="description"
+                                                name="description"
+                                                rows="3"
+                                                placeholder="Enter Description">{{ old('description', $work->description) }}</textarea>
+
+                                            @error('description')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        @if($cancelguide->image)
-                                        <div class="ms-3">
-                                            <img src="{{ asset($cancelguide->image) }}" 
-                                                 alt="image" 
-                                                 style="width: 80px; height: 80px; border: 1px solid #ddd;">
-                                        </div>
-                                    @endif
                                     </div>
                                     <!-- Submit Button -->
                                     <div class="card-footer text-center row">
