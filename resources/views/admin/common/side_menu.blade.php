@@ -255,6 +255,30 @@
                 </li>
             @endif
 
+            {{-- Cancellation Policy --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Cancellation Policy') && $sideMenuPermissions['Cancellation Policy']->contains('view')))
+                {{-- Notification --}}
+                <li class="dropdown {{ request()->is('admin/cancellation-policy*') ? 'active' : '' }}">
+                    <a href="{{ route('cancellationpolicy.index') }}" class="nav-link">
+                        <i data-feather="x-circle"></i><span>Cancellation Policy</span>
+                    </a>
+                </li>
+            @endif
+
+            {{-- Career --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Career') && $sideMenuPermissions['Career']->contains('view')))
+                {{-- Notification --}}
+                <li class="dropdown {{ request()->is('admin/career*') ? 'active' : '' }}">
+                    <a href="{{ route('career.index') }}" class="nav-link">
+                        <i data-feather="briefcase"></i><span>Career</span>
+                    </a>
+                </li>
+            @endif
+
             {{--  Blogs --}}
 
             {{-- @if (Auth::guard('admin')->check() ||

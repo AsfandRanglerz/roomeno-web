@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\SecurityController;
@@ -251,6 +252,24 @@ Route::post('/protect-sellers-update/{id}', [SellRoomController::class, 'protect
 Route::get('/protect-sellers-show/{id}', [SellRoomController::class, 'protectSellersShow'])->name('protectsellers.show')->middleware('check.permission:We Protect Our Sellers,show');
 Route::get('/protect-sellers-show-edit/{id}', [SellRoomController::class, 'protectSellersShowEdit'])->name('protectsellers.showedit')->middleware('check.permission:We Protect Our Sellers,edit');
 Route::post('/protect-sellers-show-update/{id}', [SellRoomController::class, 'protectSellersShowUpdate'])->name('protectsellers.showupdate')->middleware('check.permission:We Protect Our Sellers,edit');
+
+// ############ Cancellation Policy ############
+Route::get('/cancellation-policy', [CancellationGuideController::class, 'cancellationPolicyIndex'])->name('cancellationpolicy.index')->middleware('check.permission:Cancellation Policy,view');
+Route::get('/cancellation-policy-edit', [CancellationGuideController::class, 'cancellationPolicyEdit'])->name('cancellationpolicy.edit')->middleware('check.permission:Cancellation Policy,edit');
+Route::post('/cancellation-policy-update', [CancellationGuideController::class, 'cancellationPolicyUpdate'])->name('cancellationpolicy.update')->middleware('check.permission:Cancellation Policy,edit');
+Route::get('/cancellation-policy-show/{id}', [CancellationGuideController::class, 'cancellationPolicyShow'])->name('cancellationpolicy.show')->middleware('check.permission:Cancellation Policy,show');
+Route::get('/cancellation-policy-show-edit/{id}', [CancellationGuideController::class, 'cancellationPolicyShowEdit'])->name('cancellationpolicy.showedit')->middleware('check.permission:Cancellation Policy,edit');
+Route::post('/cancellation-policy-show-update/{id}', [CancellationGuideController::class, 'cancellationPolicyShowUpdate'])->name('cancellationpolicy.showupdate')->middleware('check.permission:Cancellation Policy,edit');
+
+// ############ Career ############ 
+Route::get('/career', [CareerController::class, 'careerIndex'])->name('career.index')->middleware('check.permission:Career,view');
+Route::get('/career-edit/{id}', [CareerController::class, 'careerEdit'])->name('career.edit')->middleware('check.permission:Career,edit');
+Route::post('/career-update/{id}', [CareerController::class, 'careerUpdate'])->name('career.update')->middleware('check.permission:Career,edit');
+Route::get('/career-show/{id}', [CareerController::class, 'careerShow'])->name('career.show')->middleware('check.permission:Career,show');
+Route::get('/career-show-edit/{id}', [CareerController::class, 'careerShowEdit'])->name('career.showedit')->middleware('check.permission:Career,edit');
+Route::post('/career-show-update/{id}', [CareerController::class, 'careerShowUpdate'])->name('career.showupdate')->middleware('check.permission:Career,edit');
+
+
 
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
