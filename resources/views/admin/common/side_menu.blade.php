@@ -279,6 +279,65 @@
                 </li>
             @endif
 
+            {{-- Partner with us --}}
+
+              @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('Partner with us') && $sideMenuPermissions['Partner with us']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="user-plus"></i> 
+                        <span>Partner with us</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/partner-introduction*') || request()->is('admin/roomeno-helps-hotels*') || request()->is('admin/roomeno-helps-agencies*') || request()->is('admin/roomeno-solutions*') ? 'show' : '' }}">
+
+
+                        <li>
+                            <a href="{{ url('admin/partner-introduction') }}"
+                            class="nav-link {{ request()->is('admin/partner-introduction*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Introduction</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/roomeno-helps-hotels') }}"
+                            class="nav-link {{ request()->is('admin/roomeno-helps-hotels*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Roomeno Helps Hotels</span>
+                            </a>
+                        </li>
+
+                        
+                        <li>
+                            <a href="{{ url('admin/roomeno-helps-agencies') }}"
+                            class="nav-link {{ request()->is('admin/roomeno-helps-agencies*') ? 'active bg-primary text-white' : '' }}">
+                            <span>Roomeno Helps Agencies</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/roomeno-solutions') }}"
+                            class="nav-link {{ request()->is('admin/roomeno-solutions*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Roomeno Solutions</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            @endif   
+
+            {{-- Press --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Press') && $sideMenuPermissions['Press']->contains('view')))
+                {{-- Notification --}}
+                <li class="dropdown {{ request()->is('admin/press*') ? 'active' : '' }}">
+                    <a href="{{ route('press.index') }}" class="nav-link">
+                        <i data-feather="file-text"></i><span>Press</span>
+                    </a>
+                </li>
+            @endif
+
             {{--  Blogs --}}
 
             {{-- @if (Auth::guard('admin')->check() ||

@@ -15,9 +15,11 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PressController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
@@ -269,7 +271,40 @@ Route::get('/career-show/{id}', [CareerController::class, 'careerShow'])->name('
 Route::get('/career-show-edit/{id}', [CareerController::class, 'careerShowEdit'])->name('career.showedit')->middleware('check.permission:Career,edit');
 Route::post('/career-show-update/{id}', [CareerController::class, 'careerShowUpdate'])->name('career.showupdate')->middleware('check.permission:Career,edit');
 
+// ############ Partner with us Introduction ############ 
 
+Route::get('/partner-introduction', [PartnerController::class, 'partnerIntroductionIndex'])->name('partnerintroduction.index')->middleware('check.permission:Partner Introduction,view');
+Route::get('/partner-introduction-edit/{id}', [PartnerController::class, 'partnerIntroductionEdit'])->name('partnerintroduction.edit')->middleware('check.permission:Partner Introduction,edit');
+Route::post('/partner-introduction-update/{id}', [PartnerController::class, 'partnerIntroductionUpdate'])->name('partnerintroduction.update')->middleware('check.permission:Partner Introduction,edit');
+
+// ############ Roomeno helps hotels ############ 
+Route::get('/roomeno-helps-hotels', [PartnerController::class, 'helpHotelIndex'])->name('helphotel.index')->middleware('check.permission:Roomeno helps hotels,view');
+Route::get('/roomeno-helps-hotels-edit/{id}', [PartnerController::class, 'helpHotelEdit'])->name('helphotel.edit')->middleware('check.permission:Roomeno helps hotels,edit');
+Route::post('/roomeno-helps-hotels-update/{id}', [PartnerController::class, 'helpHotelUpdate'])->name('helphotel.update')->middleware('check.permission:Roomeno helps hotels,edit');
+Route::get('/roomeno-helps-hotels-show/{id}', [PartnerController::class, 'helpHotelShow'])->name('helphotel.show')->middleware('check.permission:Roomeno helps hotels,show');
+Route::get('/roomeno-helps-hotels-show-edit/{id}', [PartnerController::class, 'helpHotelShowEdit'])->name('helphotel.showedit')->middleware('check.permission:Roomeno helps hotels,edit');
+Route::post('/roomeno-helps-hotels-show-update/{id}', [PartnerController::class, 'helpHotelShowUpdate'])->name('helphotel.showupdate')->middleware('check.permission:Roomeno helps hotels,edit');
+
+// ############ Roomeno Helps Agencies ############ 
+Route::get('/roomeno-helps-agencies', [PartnerController::class, 'helpAgencyIndex'])->name('helpagency.index')->middleware('check.permission:Roomeno helps Agencies,view');
+Route::get('/roomeno-helps-agencies-edit/{id}', [PartnerController::class, 'helpAgencyEdit'])->name('helpagency.edit')->middleware('check.permission:Roomeno helps Agencies,edit');
+Route::post('/roomeno-helps-agencies-update/{id}', [PartnerController::class, 'helpAgencyUpdate'])->name('helpagency.update')->middleware('check.permission:Roomeno helps Agencies,edit');
+Route::get('/roomeno-helps-agencies-show/{id}', [PartnerController::class, 'helpAgencyShow'])->name('helpagency.show')->middleware('check.permission:Roomeno helps Agencies,show');
+Route::get('/roomeno-helps-agencies-show-edit/{id}', [PartnerController::class, 'helpAgencyShowEdit'])->name('helpagency.showedit')->middleware('check.permission:Roomeno helps Agencies,edit');
+Route::post('/roomeno-helps-agencies-show-update/{id}', [PartnerController::class, 'helpAgencyShowUpdate'])->name('helpagency.showupdate')->middleware('check.permission:Roomeno helps Agencies,edit');
+
+// ############ Roomeno Solutions ############ 
+Route::get('/roomeno-solutions', [PartnerController::class, 'roomenoSolutionIndex'])->name('roomenosolution.index')->middleware('check.permission:Roomeno Solutions,view');
+Route::get('/roomeno-solutions-edit/{id}', [PartnerController::class, 'roomenoSolutionEdit'])->name('roomenosolution.edit')->middleware('check.permission:Roomeno Solutions,edit');
+Route::post('/roomeno-solutions-update/{id}', [PartnerController::class, 'roomenoSolutionUpdate'])->name('roomenosolution.update')->middleware('check.permission:Roomeno Solutions,edit');
+Route::get('/roomeno-solutions-show/{id}', [PartnerController::class, 'roomenoSolutionShow'])->name('roomenosolution.show')->middleware('check.permission:Roomeno Solutions,show');
+Route::get('/roomeno-solutions-show-edit/{id}', [PartnerController::class, 'roomenoSolutionShowEdit'])->name('roomenosolution.showedit')->middleware('check.permission:Roomeno Solutions,edit');
+Route::post('/roomeno-solutions-show-update/{id}', [PartnerController::class, 'roomenoSolutionShowUpdate'])->name('roomenosolution.showupdate')->middleware('check.permission:Roomeno Solutions,edit');
+
+// ############ Press ############ 
+Route::get('/press', [PressController::class, 'pressIndex'])->name('press.index')->middleware('check.permission:Press,view');
+Route::get('/press-edit/{id}', [PressController::class, 'pressEdit'])->name('press.edit')->middleware('check.permission:Press,edit');
+Route::post('/press-update/{id}', [PressController::class, 'pressUpdate'])->name('press.update')->middleware('check.permission:Press,edit');
 
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
