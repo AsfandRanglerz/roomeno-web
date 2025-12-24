@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\TrustAndSafetyController;
 use App\Http\Controllers\Admin\SellerProtectionController;
 use App\Http\Controllers\Admin\CancellationGuideController;
 
@@ -305,6 +306,43 @@ Route::post('/roomeno-solutions-show-update/{id}', [PartnerController::class, 'r
 Route::get('/press', [PressController::class, 'pressIndex'])->name('press.index')->middleware('check.permission:Press,view');
 Route::get('/press-edit/{id}', [PressController::class, 'pressEdit'])->name('press.edit')->middleware('check.permission:Press,edit');
 Route::post('/press-update/{id}', [PressController::class, 'pressUpdate'])->name('press.update')->middleware('check.permission:Press,edit');
+
+// ############ Trust & Safety Introduction ############ 
+Route::get('/trust-and-safety-introduction', [TrustAndSafetyController::class, 'trustIntroIndex'])->name('trustintro.index')->middleware('check.permission:Trust & Safety,view');
+Route::get('/trust-and-safety-introduction-edit/{id}', [TrustAndSafetyController::class, 'trustIntroEdit'])->name('trustintro.edit')->middleware('check.permission:Trust & Safety,edit');
+Route::post('/trust-and-safety-introduction-update/{id}', [TrustAndSafetyController::class, 'trustIntroUpdate'])->name('trustintro.update')->middleware('check.permission:Trust & Safety,edit');
+
+// ############ Trust & Safety Protect our buyers ############ 
+Route::get('/protect-our-buyers', [TrustAndSafetyController::class, 'protectBuyerIndex'])->name('protectbuyer.index')->middleware('check.permission:Protect our buyers,view');
+Route::get('/protect-our-buyers-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerEdit'])->name('protectbuyer.edit')->middleware('check.permission:Protect our buyers,edit');
+Route::post('/protect-our-buyers-update/{id}', [TrustAndSafetyController::class, 'protectBuyerUpdate'])->name('protectbuyer.update')->middleware('check.permission:Protect our buyers,edit');
+Route::get('/protect-our-buyers-show/{id}', [TrustAndSafetyController::class, 'protectBuyerShow'])->name('protectbuyer.show')->middleware('check.permission:Protect our buyers,show');
+Route::get('/protect-our-buyers-show-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerShowEdit'])->name('protectbuyer.showedit')->middleware('check.permission:Protect our buyers,edit');
+Route::post('/protect-our-buyers-show-update/{id}', [TrustAndSafetyController::class, 'protectBuyerShowUpdate'])->name('protectbuyer.showupdate')->middleware('check.permission:Protect our buyers,edit');
+
+// ############ Trust & Safety Protect our sellers ############ 
+Route::get('/protect-our-sellers', [TrustAndSafetyController::class, 'protectSellerIndex'])->name('protectseller.index')->middleware('check.permission:Protect our sellers,view');
+Route::get('/protect-our-sellers-edit/{id}', [TrustAndSafetyController::class, 'protectSellerEdit'])->name('protectseller.edit')->middleware('check.permission:Protect our sellers,edit');
+Route::post('/protect-our-sellers-update/{id}', [TrustAndSafetyController::class, 'protectSellerUpdate'])->name('protectseller.update')->middleware('check.permission:Protect our sellers,edit');
+Route::get('/protect-our-sellers-show/{id}', [TrustAndSafetyController::class, 'protectSellerShow'])->name('protectseller.show')->middleware('check.permission:Protect our sellers,show');
+Route::get('/protect-our-sellers-show-edit/{id}', [TrustAndSafetyController::class, 'protectSellerShowEdit'])->name('protectseller.showedit')->middleware('check.permission:Protect our sellers,edit');
+Route::post('/protect-our-sellers-show-update/{id}', [TrustAndSafetyController::class, 'protectSellerShowUpdate'])->name('protectseller.showupdate')->middleware('check.permission:Protect our sellers,edit');
+
+// ############ Trust & Safety Not real reservation ############ 
+Route::get('/not-real-reservation', [TrustAndSafetyController::class, 'realReservationIndex'])->name('realreservation.index')->middleware('check.permission:Verified Reservations,view');
+Route::get('/not-real-reservation-edit/{id}', [TrustAndSafetyController::class, 'realReservationEdit'])->name('realreservation.edit')->middleware('check.permission:Verified Reservations,edit');
+Route::post('/not-real-reservation-update/{id}', [TrustAndSafetyController::class, 'realReservationUpdate'])->name('realreservation.update')->middleware('check.permission:Verified Reservations,edit');
+Route::get('/not-real-reservation-show/{id}', [TrustAndSafetyController::class, 'realReservationShow'])->name('realreservation.show')->middleware('check.permission:Verified Reservations,show');
+Route::get('/not-real-reservation-show-edit/{id}', [TrustAndSafetyController::class, 'realReservationShowEdit'])->name('realreservation.showedit')->middleware('check.permission:Verified Reservations,edit');
+Route::post('/not-real-reservation-show-update/{id}', [TrustAndSafetyController::class, 'realReservationShowUpdate'])->name('realreservation.showupdate')->middleware('check.permission:Verified Reservations,edit');
+
+// ############ Trust & Safety roomeno benefits everyone ############ 
+Route::get('/roomeno-benefits-everyone', [TrustAndSafetyController::class, 'roomenoBenefitsIndex'])->name('roomenobenefits.index')->middleware('check.permission:Roomeno benefits everyone,view');
+Route::get('/roomeno-benefits-everyone-edit/{id}', [TrustAndSafetyController::class, 'roomenoBenefitsEdit'])->name('roomenobenefits.edit')->middleware('check.permission:Roomeno benefits everyone,edit');
+Route::post('/roomeno-benefits-everyone-update/{id}', [TrustAndSafetyController::class, 'roomenoBenefitsUpdate'])->name('roomenobenefits.update')->middleware('check.permission:Roomeno benefits everyone,edit');
+Route::get('/roomeno-benefits-everyone-show/{id}', [TrustAndSafetyController::class, 'roomenoBenefitsShow'])->name('roomenobenefits.show')->middleware('check.permission:Roomeno benefits everyone,show');
+Route::get('/roomeno-benefits-everyone-show-edit', [TrustAndSafetyController::class, 'roomenoBenefitsShowEdit'])->name('roomenobenefits.showedit')->middleware('check.permission:Roomeno benefits everyone,edit');
+Route::post('/roomeno-benefits-everyone-show-update', [TrustAndSafetyController::class, 'roomenoBenefitsShowUpdate'])->name('roomenobenefits.showupdate')->middleware('check.permission:Roomeno benefits everyone,edit');
 
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {

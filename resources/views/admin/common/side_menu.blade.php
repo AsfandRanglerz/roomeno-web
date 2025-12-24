@@ -337,6 +337,61 @@
                     </a>
                 </li>
             @endif
+            
+            {{-- Partner with us --}}
+
+              @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('Trust & Safety') && $sideMenuPermissions['Trust & Safety']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="shield"></i> 
+                        <span>Trust & Safety</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/trust-and-safety-introduction*') || request()->is('admin/protect-our-buyers*') || request()->is('admin/protect-our-sellers*') || request()->is('admin/not-real-reservation*') || request()->is('admin/roomeno-benefits-everyone*') ? 'show' : '' }}">
+
+
+                        <li>
+                            <a href="{{ url('admin/trust-and-safety-introduction') }}"
+                            class="nav-link {{ request()->is('admin/trust-and-safety-introduction*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Introduction</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/protect-our-buyers') }}"
+                            class="nav-link {{ request()->is('admin/protect-our-buyers*') ? 'active bg-primary text-white' : '' }}">
+                                <span>We Protect Our Buyers</span>
+                            </a>
+                        </li>
+
+                        
+                        <li>
+                            <a href="{{ url('admin/protect-our-sellers') }}"
+                            class="nav-link {{ request()->is('admin/protect-our-sellers*') ? 'active bg-primary text-white' : '' }}">
+                            <span>We Protect Our Sellers</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/not-real-reservation') }}"
+                            class="nav-link {{ request()->is('admin/not-real-reservation*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Verified Reservations</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/roomeno-benefits-everyone') }}"
+                            class="nav-link {{ request()->is('admin/roomeno-benefits-everyone*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Roomeno Benefits Everyone</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            @endif 
+            
 
             {{--  Blogs --}}
 
