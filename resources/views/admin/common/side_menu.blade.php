@@ -403,7 +403,7 @@
                         <span>Testimonials</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/review-one*') || request()->is('admin/review-two*')  ? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/review-one*') || request()->is('admin/review-two*') || request()->is('admin/review-three*') || request()->is('admin/review-four*')  ? 'show' : '' }}">
 
 
                         <li>
@@ -417,6 +417,20 @@
                             <a href="{{ url('admin/review-two') }}"
                             class="nav-link {{ request()->is('admin/review-two*') ? 'active bg-primary text-white' : '' }}">
                                 <span>Review Section Two</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/review-three') }}"
+                            class="nav-link {{ request()->is('admin/review-three*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Review Section Three</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/review-four') }}"
+                            class="nav-link {{ request()->is('admin/review-four*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Review Section Four</span>
                             </a>
                         </li>
                     </ul>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewSectionOnesTable extends Migration
+class CreateReviewSectionTwosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateReviewSectionOnesTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_section_ones', function (Blueprint $table) {
+        Schema::create('review_section_twos', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateReviewSectionOnesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('review_section_ones');
+        Schema::dropIfExists('review_section_twos');
     }
 }

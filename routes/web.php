@@ -351,9 +351,22 @@ Route::post('/roomeno-benefits-everyone-show-update', [TrustAndSafetyController:
 Route::get('/review-one', [TestimonialController::class, 'reviewOneIndex'])->name('reviewone.index')->middleware('check.permission:Review Section One,view');
 Route::get('/review-one-edit/{id}', [TestimonialController::class, 'reviewOneEdit'])->name('reviewone.edit')->middleware('check.permission:Review Section One,edit');
 Route::post('/review-one-update/{id}', [TestimonialController::class, 'reviewOneUpdate'])->name('reviewone.update')->middleware('check.permission:Review Section One,edit');
-Route::get('/review-one-show/{id}', [TestimonialController::class, 'reviewOneShow'])->name('reviewone.show')->middleware('check.permission:Review Section One,show');
-Route::get('/review-one-show-edit', [TestimonialController::class, 'reviewOneShowEdit'])->name('reviewone.showedit')->middleware('check.permission:Review Section One,edit');
-Route::post('/review-one-show-update', [TestimonialController::class, 'reviewOneShowUpdate'])->name('reviewone.showupdate')->middleware('check.permission:Review Section One,edit');
+
+// ############ Testimonials Review Section Two ############
+Route::get('/review-two', [TestimonialController::class, 'reviewTwoIndex'])->name('reviewtwo.index')->middleware('check.permission:Review Section Two,view');
+Route::get('/review-two-edit/{id}', [TestimonialController::class, 'reviewTwoEdit'])->name('reviewtwo.edit')->middleware('check.permission:Review Section Two,edit');
+Route::post('/review-two-update/{id}', [TestimonialController::class, 'reviewTwoUpdate'])->name('reviewtwo.update')->middleware('check.permission:Review Section Two,edit');
+
+// ############ Testimonials Review Section Three ############
+Route::get('/review-three', [TestimonialController::class, 'reviewThreeIndex'])->name('reviewthree.index')->middleware('check.permission:Review Section Three,view');
+Route::get('/review-three-edit/{id}', [TestimonialController::class, 'reviewThreeEdit'])->name('reviewthree.edit')->middleware('check.permission:Review Section Three,edit');
+Route::post('/review-three-update/{id}', [TestimonialController::class, 'reviewThreeUpdate'])->name('reviewthree.update')->middleware('check.permission:Review Section Three,edit');
+
+// ############ Testimonials Review Section Four ############
+Route::get('/review-four', [TestimonialController::class, 'reviewFourIndex'])->name('reviewfour.index')->middleware('check.permission:Review Section Four,view');
+Route::get('/review-four-edit/{id}', [TestimonialController::class, 'reviewFourEdit'])->name('reviewfour.edit')->middleware('check.permission:Review Section Four,edit');
+Route::post('/review-four-update/{id}', [TestimonialController::class, 'reviewFourUpdate'])->name('reviewfour.update')->middleware('check.permission:Review Section Four,edit');
+
 
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
