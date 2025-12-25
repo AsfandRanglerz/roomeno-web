@@ -10,10 +10,12 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebAuthController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\WebPartnerController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PressController;
 use App\Http\Controllers\Admin\CareerController;
@@ -26,6 +28,7 @@ use App\Http\Controllers\Admin\SubAdminController;
 use App\Http\Controllers\Admin\SellARoomController;
 use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\TrustAndSafetyController;
@@ -344,6 +347,14 @@ Route::get('/roomeno-benefits-everyone-show/{id}', [TrustAndSafetyController::cl
 Route::get('/roomeno-benefits-everyone-show-edit', [TrustAndSafetyController::class, 'roomenoBenefitsShowEdit'])->name('roomenobenefits.showedit')->middleware('check.permission:Roomeno benefits everyone,edit');
 Route::post('/roomeno-benefits-everyone-show-update', [TrustAndSafetyController::class, 'roomenoBenefitsShowUpdate'])->name('roomenobenefits.showupdate')->middleware('check.permission:Roomeno benefits everyone,edit');
 
+// ############ Testimonials Review Section One ############
+Route::get('/review-one', [TestimonialController::class, 'reviewOneIndex'])->name('reviewone.index')->middleware('check.permission:Review Section One,view');
+Route::get('/review-one-edit/{id}', [TestimonialController::class, 'reviewOneEdit'])->name('reviewone.edit')->middleware('check.permission:Review Section One,edit');
+Route::post('/review-one-update/{id}', [TestimonialController::class, 'reviewOneUpdate'])->name('reviewone.update')->middleware('check.permission:Review Section One,edit');
+Route::get('/review-one-show/{id}', [TestimonialController::class, 'reviewOneShow'])->name('reviewone.show')->middleware('check.permission:Review Section One,show');
+Route::get('/review-one-show-edit', [TestimonialController::class, 'reviewOneShowEdit'])->name('reviewone.showedit')->middleware('check.permission:Review Section One,edit');
+Route::post('/review-one-show-update', [TestimonialController::class, 'reviewOneShowUpdate'])->name('reviewone.showupdate')->middleware('check.permission:Review Section One,edit');
+
     // ############ Sub Admin #################
     Route::controller(SubAdminController::class)->group(function () {
         Route::get('/subadmin',  'index')->name('subadmin.index') ->middleware('check.permission:Sub Admins,view');
@@ -417,6 +428,61 @@ Route::post('/admin/contact-us-store', [ContactController::class, 'store'])->nam
 Route::get('/admin/contact-us-edit/{id}', [ContactController::class, 'updateview'])->name('contact.updateview') ->middleware('check.permission:Contact us,edit');
 Route::post('/admin/contact-us-update/{id}', [ContactController::class, 'update'])->name('contact.update') ;
 
+// ############ Hotel #################
+Route::prefix('admin')->middleware('admin')->group(function () {
+
+    Route::get('/hotels',              [HotelController::class, 'index'])->name('hotels.index');
+    Route::get('/hotels/create',       [HotelController::class, 'create'])->name('hotels.create');
+    Route::post('/hotels',             [HotelController::class, 'store'])->name('hotels.store');
+    Route::get('/hotels/{id}/edit',    [HotelController::class, 'edit'])->name('hotels.edit');
+    Route::post('/hotels/{id}',        [HotelController::class, 'update'])->name('hotels.update');
+    Route::delete('/hotels/{id}',      [HotelController::class, 'destroy'])->name('hotels.destroy');
+
+});
+});
+// ############ Web Auth Routes #################
+
+Route::get('/sign-up', [WebAuthController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/sign-up', [WebAuthController::class, 'storeSignup'])->name('signup.store');
+Route::get('/login', [WebAuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [WebAuthController::class, 'login'])->name('login.submit');
+Route::get('/send-otp', [WebAuthController::class, 'sendOtpForm'])->name('send.otp.form');
+Route::post('/send-otp', [WebAuthController::class, 'sendOtp'])->name('send.otp');
+
+Route::get('/verify-otp/{token}', [WebAuthController::class, 'verifyOtpForm'])->name('verify.otp.form');
+Route::post('/verify-otp', [WebAuthController::class, 'verifyOtp'])->name('verify.otp');
+
+Route::post('/resend-otp', [WebAuthController::class, 'resendOtp'])->name('resend.otp');
+Route::get('/reset-password/{token}', [WebAuthController::class, 'showResetPasswordForm'])->name('reset.password.form');
+Route::post('/reset-password-submit', [WebAuthController::class, 'resetPasswordSubmit'])->name('reset.password.submit');
+
+
+Route::get('partner/signup', [WebPartnerController::class, 'showSignup'])
+    ->name('partner.signup');
+
+Route::post('partner/signup', [WebPartnerController::class, 'signup'])
+    ->name('partner.signup.store');
+    Route::get('partner/login', [WebPartnerController::class, 'showLogin'])->name('partner.login');
+
+// Login Submit
+Route::post('partner/login', [WebPartnerController::class, 'loginSubmit'])->name('partner.login.submit');
+
+/* ADMIN → PARTNER INDEX */
+
+Route::prefix('admin')->group(function () {
+
+    // Partner Index
+    Route::get('partner', [WebPartnerController::class, 'index'])->name('partner.index');
+
+    Route::delete('partner/{id}', [WebPartnerController::class, 'destroy'])->name('partner.destroy');
+    Route::post('admin/partner/toggle-status', [WebPartnerController::class, 'toggleStatus'])
+     ->name('partner.toggleStatus');
+   
+    // Optional: Create/Edit/Update if needed
+    Route::get('partner/create', [WebPartnerController::class, 'create'])->name('partner.create');
+    Route::post('partner', [WebPartnerController::class, 'store'])->name('partner.store');
+    Route::get('partner/{id}/edit', [WebPartnerController::class, 'edit'])->name('partner.edit');
+    Route::put('partner/{id}', [WebPartnerController::class, 'update'])->name('partner.update');
 
 
 });

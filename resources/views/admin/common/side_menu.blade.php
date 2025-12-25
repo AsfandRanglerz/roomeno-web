@@ -338,7 +338,7 @@
                 </li>
             @endif
             
-            {{-- Partner with us --}}
+            {{-- Trust & Safety--}}
 
               @if (Auth::guard('admin')->check() ||
                 ($sideMenuPermissions->has('Trust & Safety') && $sideMenuPermissions['Trust & Safety']->contains('view')))
@@ -390,7 +390,39 @@
 
                     </ul>
                 </li>
+            @endif
+            
+            {{-- Testimonials--}}
+
+              @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('Testimonials') && $sideMenuPermissions['Testimonials']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="message-circle"></i> 
+                        <span>Testimonials</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/review-one*') || request()->is('admin/review-two*')  ? 'show' : '' }}">
+
+
+                        <li>
+                            <a href="{{ url('admin/review-one') }}"
+                            class="nav-link {{ request()->is('admin/review-one*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Review Section One</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/review-two') }}"
+                            class="nav-link {{ request()->is('admin/review-two*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Review Section Two</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             @endif 
+            
             
 
             {{--  Blogs --}}
