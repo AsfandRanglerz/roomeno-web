@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Selling')
+@section('title', 'Buyer Protection Questions')
 
 @section('content')
 <div class="main-content" style="min-height: 562px;">
@@ -9,50 +9,52 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Selling</h4>
+                            <h4>Buyer Protection Questions</h4>
                         </div>
                         <div class="card-body table-striped table-bordered table-responsive">
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
                                         <th>Sr.</th>
-                                        <th>Main Title</th>
+                                        <th>Image</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     @foreach ($sellings as $selling)
+                                    @foreach($questions as $question)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $selling->main_title ?? '--' }}</td>
+                                        <td>@if($question && $question->image)
+                                            <img src="{{ asset($question->image) }}" alt="" height="50"
+                                                        width="50" class="image">
+                                            @else
+                                            <span>--</span>
+                                            @endif
+                                        </td>
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('edit')))
-                                                <a href="{{ route('selling.edit', $selling->id) }}"
+                                                ($sideMenuPermissions->has('Buyer Protection Questions') && $sideMenuPermissions['Buyer Protection Questions']->contains('edit')))
+                                                <a href="{{ route('protectionquestions.edit', $question->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
 
-                                                 <div class="d-flex align-items-center" style="gap: 6px;">
-                                                @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('show')))
-                                                <a href="{{ route('selling.show', $selling->id) }}"
-                                                    class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                @endif
-
-
-                                               
+                                                <div class="d-flex align-items-center" style="gap: 6px;">
+                                                    @if (Auth::guard('admin')->check() ||
+                                                    ($sideMenuPermissions->has('Buyer Protection Questions') && $sideMenuPermissions['Buyer Protection Questions']->contains('show')))
+                                                    <a href="{{ route('protectionquestions.show', $question->id) }}"
+                                                        class="btn btn-primary p-2"
+                                                        style="background-color: #cb84fe;">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    @endif
+                                                </div>
+                                                
                                             </div>
-                                        </td>
-                                        
-                                        </div>
-                                        </div>
+
                                         </td>
                                     </tr>
                                     @endforeach

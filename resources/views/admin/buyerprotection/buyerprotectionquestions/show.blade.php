@@ -1,58 +1,44 @@
 @extends('admin.layout.app')
-@section('title', 'Selling')
+@section('title', 'Buyer Protection Questions')
 
 @section('content')
 <div class="main-content" style="min-height: 562px;">
     <section class="section">
         <div class="section-body">
+            <a class="btn btn-primary mb-3" href="{{ route('protectionquestions.index')}}">Back</a>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Selling</h4>
+                            <h4>Buyer Protection Questions</h4>
                         </div>
                         <div class="card-body table-striped table-bordered table-responsive">
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
                                         <th>Sr.</th>
-                                        <th>Main Title</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     @foreach ($sellings as $selling)
+                                     @foreach ($questions as $question)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $selling->main_title ?? '--' }}</td>
+                                        <td>{{ $question->title ?? '--' }}</td>
+                                        <td>{{ $question->description ?? '--' }}</td>
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('edit')))
-                                                <a href="{{ route('selling.edit', $selling->id) }}"
+                                                    ($sideMenuPermissions->has('Buyer Protection Questions') && $sideMenuPermissions['Buyer Protection Questions']->contains('edit')))
+                                                <a href="{{ route('protectionquestions.showedit', $question->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
-
-                                                 <div class="d-flex align-items-center" style="gap: 6px;">
-                                                @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('show')))
-                                                <a href="{{ route('selling.show', $selling->id) }}"
-                                                    class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                @endif
-
-
-                                               
                                             </div>
-                                        </td>
-                                        
-                                        </div>
-                                        </div>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\TrustAndSafetyController;
+use App\Http\Controllers\Admin\BuyerProtectionController;
 use App\Http\Controllers\Admin\SellerProtectionController;
 use App\Http\Controllers\Admin\CancellationGuideController;
 
@@ -57,7 +58,7 @@ Route::get('/hotel',[HomeController::class ,'hotelinfo'])->name('hotel');
  * */
 
 Route::get('/admin', [AuthController::class, 'getLoginPage']);
-Route::post('/login', [AuthController::class, 'Login']);
+Route::post('/admin/login', [AuthController::class, 'Login']);
 Route::get('/admin-forgot-password', [AdminController::class, 'forgetPassword']);
 Route::post('/admin-reset-password-link', [AdminController::class, 'adminResetPasswordLink']);
 Route::get('/change_password/{id}', [AdminController::class, 'change_password']);
@@ -154,11 +155,11 @@ Route::delete('/users/{id}/force', [UserController::class, 'forceDelete'])->name
 Route::post('/users/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggle-status');
 
 // ############ Hotel Info #################
-Route::get('/hotel-info', [SellRoomController::class, 'hotelInfoIndex'])->name('hotelinfo.index')->middleware('check.permission:HotelInfo,view');
+Route::get('/hotel-info', [SellRoomController::class, 'hotelInfoIndex'])->name('hotelinfo.index')->middleware('check.permission:Hotel Info,view');
 Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])->name('hotel.toggle-status');
 
 // ############ Reservation Info #################
-Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:ReservationInfo,view');
+Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:Reservation Info,view');
 // ############ Payment Info #################
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
 
@@ -168,13 +169,31 @@ Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name
 Route::post('/booking/approve/{id}', [BookingController::class, 'approve'])->name('booking.approve');
 Route::post('/booking/reject/{id}', [BookingController::class, 'reject'])->name('booking.reject');
 
+// ############ Buyer Protection Guarantee Protection #################
+Route::get('/guarantee-protection', [BuyerProtectionController::class, 'guaranteeProtectionIndex'])->name('guaranteeprotection.index')->middleware('check.permission:Guarantee Protection,view');
+Route::get('/guarantee-protection-edit/{id}', [BuyerProtectionController::class, 'guaranteeProtectionEdit'])->name('guaranteeprotection.edit')->middleware('check.permission:Guarantee Protection,edit');
+Route::post('/guarantee-protection-update/{id}', [BuyerProtectionController::class, 'guaranteeProtectionUpdate'])->name('guaranteeprotection.update')->middleware('check.permission:Guarantee Protection,edit');
+
+// ############ Buyer Protection Customer Protection & Guarantees #################
+Route::get('/service-guarantees', [BuyerProtectionController::class, 'customerProtectionIndex'])->name('customerprotection.index')->middleware('check.permission:Service Guarantees,view');
+Route::get('/service-guarantees-edit/{id}', [BuyerProtectionController::class, 'customerProtectionEdit'])->name('customerprotection.edit')->middleware('check.permission:Service Guarantees,edit');
+Route::post('/service-guarantees-update/{id}', [BuyerProtectionController::class, 'customerProtectionUpdate'])->name('customerprotection.update')->middleware('check.permission:Service Guarantees,edit');
+
+// ############ Buyer Protection Buyer Protection Questions #################
+Route::get('/buyer-protection-questions', [BuyerProtectionController::class, 'protectionQuestionsIndex'])->name('protectionquestions.index')->middleware('check.permission:Buyer Protection Questions,view');
+Route::get('/buyer-protection-questions-edit/{id}', [BuyerProtectionController::class, 'protectionQuestionsEdit'])->name('protectionquestions.edit')->middleware('check.permission:Buyer Protection Questions,edit');
+Route::post('/buyer-protection-questions-update/{id}', [BuyerProtectionController::class, 'protectionQuestionsUpdate'])->name('protectionquestions.update')->middleware('check.permission:Buyer Protection Questions,edit');
+Route::get('/buyer-protection-questions-show/{id}', [BuyerProtectionController::class, 'protectionQuestionsShow'])->name('protectionquestions.show')->middleware('check.permission:Buyer Protection Questions,show');
+Route::get('/buyer-protection-questionsshow-edit/{id}', [BuyerProtectionController::class, 'protectionQuestionsShowEdit'])->name('protectionquestions.showedit')->middleware('check.permission:Buyer Protection Questions,edit');
+Route::post('/buyer-protection-questionsshow-update/{id}', [BuyerProtectionController::class,  'protectionQuestionsShowUpdate'])->name('protectionquestions.showupdate')->middleware('check.permission:Buyer Protection Questions,edit');
+
 // ############ Selling #################
-Route::get('/selling', [HowItWorksController::class, 'sellingMain'])->name('selling.index')->middleware('check.permission:Selling,view');
-Route::get('/selling-edit/{id}', [HowItWorksController::class, 'edit'])->name('selling.edit')->middleware('check.permission:Selling,edit');
-Route::post('/selling-update/{id}', [HowItWorksController::class, 'update'])->name('selling.update')->middleware('check.permission:Selling,edit');
-Route::get('/selling-show/{id}', [HowItWorksController::class, 'show'])->name('selling.show')->middleware('check.permission:Selling,show');
-Route::get('/sellingshow-edit/{id}', [HowItWorksController::class, 'editsellingshow'])->name('sellingshow.edit')->middleware('check.permission:Selling,edit');
-Route::post('/sellingshow-update/{id}', [HowItWorksController::class,  'updatesellingshow'])->name('sellingshow.update')->middleware('check.permission:Selling,edit');
+Route::get('/selling', [HowItWorksController::class, 'sellingMain'])->name('selling.index')->middleware('check.permission:How It Works,view');
+Route::get('/selling-edit/{id}', [HowItWorksController::class, 'edit'])->name('selling.edit')->middleware('check.permission:How It Works,edit');
+Route::post('/selling-update/{id}', [HowItWorksController::class, 'update'])->name('selling.update')->middleware('check.permission:How It Works,edit');
+Route::get('/selling-show/{id}', [HowItWorksController::class, 'show'])->name('selling.show')->middleware('check.permission:How It Works,show');
+Route::get('/sellingshow-edit/{id}', [HowItWorksController::class, 'editsellingshow'])->name('sellingshow.edit')->middleware('check.permission:How It Works,edit');
+Route::post('/sellingshow-update/{id}', [HowItWorksController::class,  'updatesellingshow'])->name('sellingshow.update')->middleware('check.permission:How It Works,edit');
 
 // ############ Buying #################
 Route::get('/buying', [HowItWorksController::class, 'buyingMain'])->name('buying.index')->middleware('check.permission:Buying,view');

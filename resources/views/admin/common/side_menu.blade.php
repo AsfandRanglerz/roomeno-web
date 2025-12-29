@@ -54,7 +54,7 @@
              {{--  Hotel Info --}}
 
             @if (Auth::guard('admin')->check() ||
-                    ($sideMenuPermissions->has('Hotelinfo') && $sideMenuPermissions['Hotelinfo']->contains('view')))
+                    ($sideMenuPermissions->has('Hotel Info') && $sideMenuPermissions['Hotel Info']->contains('view')))
                 <li class="dropdown {{ request()->is('admin/hotel-info*') ? 'active' : '' }}">
                     <a href="{{ url('admin/hotel-info') }}" class="nav-link">
                         <i data-feather="info"></i>
@@ -66,7 +66,7 @@
             {{--  Reservation Info --}}
 
             @if (Auth::guard('admin')->check() ||
-                    ($sideMenuPermissions->has('ReservationInfo') && $sideMenuPermissions['ReservationInfo']->contains('view')))
+                    ($sideMenuPermissions->has('Reservation Info') && $sideMenuPermissions['Reservation Info']->contains('view')))
                 <li class="dropdown {{ request()->is('admin/reservation-info*') ? 'active' : '' }}">
                     <a href="{{ url('admin/reservation-info') }}" class="nav-link">
                         <i data-feather="info"></i>
@@ -78,7 +78,7 @@
             {{--  Bookings --}}
 
             @if (Auth::guard('admin')->check() ||
-                    ($sideMenuPermissions->has('Booking') && $sideMenuPermissions['Booking']->contains('view')))
+                    ($sideMenuPermissions->has('Bookings') && $sideMenuPermissions['Bookings']->contains('view')))
                 <li class="dropdown {{ request()->is('admin/bookings*') ? 'active' : '' }}">
                     <a href="{{ url('admin/bookings') }}" class="nav-link">
                         <i data-feather="calendar"></i>
@@ -94,10 +94,48 @@
                 </li>
             @endif
 
+            {{-- Buyer Protection --}}
+
+             @if (Auth::guard('admin')->check() ||
+                ($sideMenuPermissions->has('Guarantee Protection') && $sideMenuPermissions['Guarantee Protection']->contains('view')))
+                
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="shield"></i> 
+                        <span>Buyer Protection</span>
+                    </a>
+
+                    <ul class="dropdown-menu {{ request()->is('admin/guarantee-protection*') ||  request()->is('admin/service-guarantees*') || request()->is('admin/buyer-protection-questions*') ? 'show' : '' }}">
+
+                        <li>
+                            <a href="{{ url('admin/guarantee-protection') }}"
+                            class="nav-link {{ request()->is('admin/guarantee-protection*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Guarantee Protection</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/service-guarantees') }}"
+                            class="nav-link {{ request()->is('admin/service-guarantees*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Service Guarantees</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/buyer-protection-questions') }}"
+                            class="nav-link {{ request()->is('admin/buyer-protection-questions*') ? 'active bg-primary text-white' : '' }}">
+                                <span>Buyer Protection Questions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            
+
              {{--  How it works --}}
 
            @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('HowItWorks') && $sideMenuPermissions['HowItWorks']->contains('view')))
+                ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">

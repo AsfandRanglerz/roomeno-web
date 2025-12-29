@@ -13,7 +13,7 @@
                                 class="img-fluid" alt="Logo">
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ url('login') }}" class="mb-0 needs-validation" novalidate>
+                            <form method="POST" action="{{ url('/admin/login') }}" class="mb-0 needs-validation" novalidate>
                                 @csrf
                                 <!-- Email Field -->
                                 <div class="form-group">
