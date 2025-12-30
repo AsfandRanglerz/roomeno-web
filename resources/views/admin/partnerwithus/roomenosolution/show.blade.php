@@ -39,7 +39,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Roomeno Solutions') && $sideMenuPermissions['Roomeno Solutions']->contains('show')))
+                                                ($sideMenuPermissions->has('Roomeno Solutions') && $sideMenuPermissions['Roomeno Solutions']->contains('edit')))
                                                 <a href="{{ route('roomenosolution.showedit', $solution->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

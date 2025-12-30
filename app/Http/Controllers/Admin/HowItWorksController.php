@@ -87,7 +87,7 @@ class HowItWorksController extends Controller
         $buying->main_title = $request->input('maintitle');
         $buying->save();
 
-        return redirect()->route('buying.index')->with('success', 'Main title updated successfully.');
+        return redirect()->route('buying.index')->with('success', 'Buying updated successfully.');
     }
 
     public function showbuying($id)
@@ -114,7 +114,7 @@ class HowItWorksController extends Controller
         $buying->description = $request->input('description');
         $buying->save();
 
-        return redirect()->route('buying.show', $buying->id)->with('success', 'Buying details updated successfully.');
+        return redirect()->route('buying.show', $buying->id)->with('success', 'Buying updated successfully.');
     }
 
     public function questionsIndex()
@@ -141,7 +141,7 @@ class HowItWorksController extends Controller
         $question->description = $request->input('description');
         $question->save();
 
-        return redirect()->route('questions.index')->with('success', 'Question updated successfully.');
+        return redirect()->route('questions.index')->with('success', 'Questions updated successfully.');
     }
 
 

@@ -29,7 +29,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Cancellation Guide One') && $sideMenuPermissions['Cancellation Guide One']->contains('show')))
+                                                ($sideMenuPermissions->has('Cancellation Guide One') && $sideMenuPermissions['Cancellation Guide One']->contains('edit')))
                                                 <a href="{{ route('cancellationguide.showedit', $cancelguide->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

@@ -5,7 +5,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <a class="btn btn-primary mb-3" href="{{ url('admin/cancellation-guide-show/' . $cancelguide->id) }}">Back</a>
+                <a class="btn btn-primary mb-3" href="{{ url('admin/cancellation-guide-one-show/' . $cancelguide->id) }}">Back</a>
 
                 <form id="edit_farmer" action="{{ route('cancellationguide.showupdate', $cancelguide->id) }}" method="POST"
                     enctype="multipart/form-data">

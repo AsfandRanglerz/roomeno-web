@@ -31,7 +31,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Roomeno helps Agencies') && $sideMenuPermissions['Roomeno helps Agencies']->contains('show')))
+                                                ($sideMenuPermissions->has('Roomeno helps Agencies') && $sideMenuPermissions['Roomeno helps Agencies']->contains('edit')))
                                                 <a href="{{ route('helpagency.showedit', $help->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

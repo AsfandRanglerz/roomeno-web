@@ -172,7 +172,7 @@
             {{-- Seller Protection --}}
 
             @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('SellerProtection') && $sideMenuPermissions['SellerProtection']->contains('view')))
+                ($sideMenuPermissions->has('Seller Protection') && $sideMenuPermissions['Seller Protection']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -215,7 +215,7 @@
             
             {{-- Cancellation Guide  --}}
               @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('CancellationGuide') && $sideMenuPermissions['CancellationGuide']->contains('view')))
+                ($sideMenuPermissions->has('Cancellation Guide One') && $sideMenuPermissions['Cancellation Guide One']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -257,7 +257,7 @@
 
             {{-- Sell Reservation --}}
              @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('Sell Reservation') && $sideMenuPermissions['Sell Reservation']->contains('view')))
+                ($sideMenuPermissions->has('Changed Travel Plans') && $sideMenuPermissions['Changed Travel Plans']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -265,12 +265,12 @@
                         <span>Sell Reservation</span>
                     </a>
 
-                    <ul class="dropdown-menu {{ request()->is('admin/sell-reservation*')  || request()->is('admin/roomeno-works*') || request()->is('admin/protect-sellers*')? 'show' : '' }}">
+                    <ul class="dropdown-menu {{ request()->is('admin/changed-travel-plans*')  || request()->is('admin/roomeno-works*') || request()->is('admin/protect-sellers*')? 'show' : '' }}">
 
 
                         <li>
-                            <a href="{{ url('admin/sell-reservation') }}"
-                            class="nav-link {{ request()->is('admin/sell-reservation*') ? 'active bg-primary text-white' : '' }}">
+                            <a href="{{ url('admin/changed-travel-plans') }}"
+                            class="nav-link {{ request()->is('admin/changed-travel-plans*') ? 'active bg-primary text-white' : '' }}">
                                 <span>Changed Travel Plans</span>
                             </a>
                         </li>
@@ -320,7 +320,7 @@
             {{-- Partner with us --}}
 
               @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('Partner with us') && $sideMenuPermissions['Partner with us']->contains('view')))
+                ($sideMenuPermissions->has('Partner Introduction') && $sideMenuPermissions['Partner Introduction']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -379,7 +379,7 @@
             {{-- Trust & Safety--}}
 
               @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('Trust & Safety') && $sideMenuPermissions['Trust & Safety']->contains('view')))
+                ($sideMenuPermissions->has('Trust & Safety Introduction') && $sideMenuPermissions['Trust & Safety Introduction']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -433,7 +433,7 @@
             {{-- Testimonials--}}
 
               @if (Auth::guard('admin')->check() ||
-                ($sideMenuPermissions->has('Testimonials') && $sideMenuPermissions['Testimonials']->contains('view')))
+                ($sideMenuPermissions->has('Review Section One') && $sideMenuPermissions['Review Section One']->contains('view')))
                 
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">

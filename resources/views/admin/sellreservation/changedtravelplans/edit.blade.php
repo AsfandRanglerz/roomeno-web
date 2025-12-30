@@ -5,7 +5,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <a class="btn btn-primary mb-3" href="{{ url('admin/sell-reservation') }}">Back</a>
+                <a class="btn btn-primary mb-3" href="{{ url('admin/changed-travel-plans') }}">Back</a>
 
                 <form id="edit_farmer" action="{{ route('sellreservation.update', $reservation->id) }}" method="POST"
                     enctype="multipart/form-data">

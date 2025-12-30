@@ -85,7 +85,7 @@ class SellerProtectionController extends Controller
     }
         $sectionOne->save();
         
-        return redirect()->route('sellerprotectionsectionone.index')->with('success', 'Section One updated successfully.');
+        return redirect()->route('sellerprotectionsectionone.index')->with('success', 'Seller protection section one updated successfully.');
     }
 
     public function sellerProtectionSectionOneShow($id)
@@ -112,7 +112,7 @@ class SellerProtectionController extends Controller
         $sectionOne->description = $request->input('description');
         $sectionOne->save();
         
-        return redirect()->route('sellerprotectionsectionone.show', $id)->with('success', 'Section One details updated successfully.');
+        return redirect()->route('sellerprotectionsectionone.show', $id)->with('success', 'Seller protection section one updated successfully.');
     }
 
     public function sellerProtectionSectionTwoIndex()
@@ -150,7 +150,7 @@ class SellerProtectionController extends Controller
     }
         $sectiontwo->save();
         
-        return redirect()->route('sellerprotectionsectiontwo.index')->with('success', 'Section Two updated successfully.');
+        return redirect()->route('sellerprotectionsectiontwo.index')->with('success', 'Seller protection section two updated successfully.');
 }
 
     public function sellerProtectionSectionTwoShow($id)
@@ -177,7 +177,7 @@ class SellerProtectionController extends Controller
         $sectiontwo->description = $request->input('description');
         $sectiontwo->save();
         
-        return redirect()->route('sellerprotectionsectiontwo.show', $id)->with('success', 'Section Two details updated successfully.');
+        return redirect()->route('sellerprotectionsectiontwo.show', $id)->with('success', 'Seller protection section two updated successfully.');
     }
 
     public function sellerProtectionSectionThreeIndex()
@@ -211,7 +211,7 @@ class SellerProtectionController extends Controller
     }
         $sectionthree->save();
         
-        return redirect()->route('sellerprotectionsectionthree.index')->with('success', 'Question updated successfully.');
+        return redirect()->route('sellerprotectionsectionthree.index')->with('success', 'Questions updated successfully.');
 }
 
 public function sellerProtectionSectionThreeShow($id)

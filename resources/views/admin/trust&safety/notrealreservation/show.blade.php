@@ -31,7 +31,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Verified Reservations') && $sideMenuPermissions['Verified Reservations']->contains('show')))
+                                                ($sideMenuPermissions->has('Verified Reservations') && $sideMenuPermissions['Verified Reservations']->contains('edit')))
                                                 <a href="{{ route('realreservation.showedit', $reservation->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

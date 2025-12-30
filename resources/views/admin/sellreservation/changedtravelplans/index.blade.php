@@ -27,7 +27,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Sell Reservation') && $sideMenuPermissions['Sell Reservation']->contains('edit')))
+                                                ($sideMenuPermissions->has('Changed Travel Plans') && $sideMenuPermissions['Changed Travel Plans']->contains('edit')))
                                                 <a href="{{ route('sellreservation.edit', $reservations->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

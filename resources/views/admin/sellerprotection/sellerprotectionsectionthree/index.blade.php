@@ -33,7 +33,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Seller Protection Section Three') && $sideMenuPermissions['Seller Protection Section Three']->contains('edit')))
+                                                ($sideMenuPermissions->has('Seller Protection Questions') && $sideMenuPermissions['Seller Protection Questions']->contains('edit')))
                                                 <a href="{{ route('sellerprotectionsectionthree.edit', $sectionthree->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
@@ -42,7 +42,7 @@
                                                 @endif
                                                 <div class="d-flex align-items-center" style="gap: 6px;">
                                                     @if (Auth::guard('admin')->check() ||
-                                                    ($sideMenuPermissions->has('Seller Protection Section Three') && $sideMenuPermissions['Seller Protection Section Three']->contains('show')))
+                                                    ($sideMenuPermissions->has('Seller Protection Questions') && $sideMenuPermissions['Seller Protection Questions']->contains('show')))
                                                     <a href="{{ route('sellerprotectionsectionthree.show', $sectionthree->id) }}"
                                                         class="btn btn-primary p-2"
                                                         style="background-color: #cb84fe;">

@@ -37,7 +37,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Introduction') && $sideMenuPermissions['Introduction']->contains('edit')))
+                                                ($sideMenuPermissions->has('Seller Protection') && $sideMenuPermissions['Seller Protection']->contains('edit')))
                                                 <a href="{{ route('sellerprotectionintro.edit', $intros->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">

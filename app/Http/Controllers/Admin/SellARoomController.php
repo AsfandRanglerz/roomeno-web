@@ -74,6 +74,6 @@ class SellARoomController extends Controller
         } else {
             SellARoom::create($request->all());
         }
-        return redirect('/admin/sell-a-room')->with('success', 'Sell A Room updated successfully');
+        return redirect('/admin/sell-a-room')->with('success', 'Sell a room updated successfully.');
     }
 }

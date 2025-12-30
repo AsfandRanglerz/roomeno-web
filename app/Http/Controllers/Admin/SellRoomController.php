@@ -97,7 +97,7 @@ public function sellReservationIndex()
         $reservation = SellReservation::findOrFail($id);
         $reservation->description = $request->input('description');
         $reservation->save();
-        return redirect()->route('sellreservation.index')->with('success', 'Reservation updated successfully.');
+        return redirect()->route('sellreservation.index')->with('success', 'Changed travel plans updated successfully.');
     }
 
     public function roomenoWorksIndex()

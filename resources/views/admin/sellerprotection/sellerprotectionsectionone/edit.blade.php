@@ -48,6 +48,7 @@
                                                  style="width: 80px; height: 80px; border: 1px solid #ddd;">
                                         </div>
                                         @endif
+                                      </div>
                                     <!-- Submit Button -->
                                     <div class="card-footer text-center row">
                                         <div class="col-12">

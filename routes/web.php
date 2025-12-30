@@ -197,8 +197,8 @@ Route::post('/sellingshow-update/{id}', [HowItWorksController::class,  'updatese
 
 // ############ Buying #################
 Route::get('/buying', [HowItWorksController::class, 'buyingMain'])->name('buying.index')->middleware('check.permission:Buying,view');
-Route::get('/buying-edit/{id}', [HowItWorksController::class, 'edit'])->name('buying.edit')->middleware('check.permission:Buying,edit');
-Route::post('/buying-update/{id}', [HowItWorksController::class, 'update'])->name('buying.update')->middleware('check.permission:Buying,edit');
+Route::get('/buying-edit/{id}', [HowItWorksController::class, 'editbuying'])->name('buying.edit')->middleware('check.permission:Buying,edit');
+Route::post('/buying-update/{id}', [HowItWorksController::class, 'updatebuying'])->name('buying.update')->middleware('check.permission:Buying,edit');
 Route::get('/buying-show/{id}', [HowItWorksController::class, 'showbuying'])->name('buying.show')->middleware('check.permission:Buying,show');
 Route::get('/buyingshow-edit/{id}', [HowItWorksController::class, 'editbuyingshow'])->name('buyingshow.edit')->middleware('check.permission:Buying,edit');
 Route::post('/buyingshow-update/{id}', [HowItWorksController::class,  'updatebuyingshow'])->name('buyingshow.update')->middleware('check.permission:Buying,edit');
@@ -209,9 +209,9 @@ Route::get('/questions-edit/{id}', [HowItWorksController::class, 'questionsEdit'
 Route::post('/questions-update/{id}', [HowItWorksController::class, 'questionsUpdate'])->name('questions.update')->middleware('check.permission:Questions,edit');
 
 // ############ Seller Protection Introduction #################
-Route::get('/seller-protection-intro', [SellerProtectionController::class, 'sellerProtectionIntroIndex'])->name('sellerprotectionintro.index')->middleware('check.permission:Seller Protection Introduction,view');
-Route::get('/seller-protection-intro-edit/{id}', [SellerProtectionController::class, 'sellerProtectionIntroEdit'])->name('sellerprotectionintro.edit')->middleware('check.permission:Seller Protection Introduction,edit');
-Route::post('/seller-protection-intro-update/{id}', [SellerProtectionController::class, 'sellerProtectionIntroUpdate'])->name('sellerprotectionintro.update')->middleware('check.permission:Seller Protection Introduction,edit');
+Route::get('/seller-protection-intro', [SellerProtectionController::class, 'sellerProtectionIntroIndex'])->name('sellerprotectionintro.index')->middleware('check.permission:Seller Protection,view');
+Route::get('/seller-protection-intro-edit/{id}', [SellerProtectionController::class, 'sellerProtectionIntroEdit'])->name('sellerprotectionintro.edit')->middleware('check.permission:Seller Protection,edit');
+Route::post('/seller-protection-intro-update/{id}', [SellerProtectionController::class, 'sellerProtectionIntroUpdate'])->name('sellerprotectionintro.update')->middleware('check.permission:Seller Protection,edit');
 
 // ############ Seller Protection Section One #################
 Route::get('/seller-protection-section-one', [SellerProtectionController::class, 'sellerProtectionSectionOneIndex'])->name('sellerprotectionsectionone.index')->middleware('check.permission:Seller Protection Section One,view');
@@ -230,20 +230,20 @@ Route::get('/seller-protection-section-two-show-edit/{id}', [SellerProtectionCon
 Route::post('/seller-protection-section-two-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionTwoShowUpdate'])->name('sellerprotectionsectiontwo.showupdate')->middleware('check.permission:Seller Protection Section Two,edit');
 
 // ############ Seller Protection Section Three #################
-Route::get('/seller-protection-section-three', [SellerProtectionController::class, 'sellerProtectionSectionThreeIndex'])->name('sellerprotectionsectionthree.index')->middleware('check.permission:Seller Protection Section Three,view');
-Route::get('/seller-protection-section-three-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeEdit'])->name('sellerprotectionsectionthree.edit')->middleware('check.permission:Seller Protection Section Three,edit');  
-Route::post('/seller-protection-section-three-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeUpdate'])->name('sellerprotectionsectionthree.update')->middleware('check.permission:Seller Protection Section Three,edit');
-Route::get('/seller-protection-section-three-show/{id}', [SellerProtectionController::class , 'sellerProtectionSectionThreeShow'])->name('sellerprotectionsectionthree.show')->middleware('check.permission:Seller Protection Section Three,show');
-Route::get('/seller-protection-section-three-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowEdit'])->name('sellerprotectionsectionthree.showedit')->middleware('check.permission:Seller Protection Section Three,edit');
-Route::post('/seller-protection-section-three-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowUpdate'])->name('sellerprotectionsectionthree.showupdate')->middleware('check.permission:Seller Protection Section Three,edit');
+Route::get('/seller-protection-section-three', [SellerProtectionController::class, 'sellerProtectionSectionThreeIndex'])->name('sellerprotectionsectionthree.index')->middleware('check.permission:Seller Protection Questions,view');
+Route::get('/seller-protection-section-three-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeEdit'])->name('sellerprotectionsectionthree.edit')->middleware('check.permission:Seller Protection Questions,edit');  
+Route::post('/seller-protection-section-three-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeUpdate'])->name('sellerprotectionsectionthree.update')->middleware('check.permission:Seller Protection Questions,edit');
+Route::get('/seller-protection-section-three-show/{id}', [SellerProtectionController::class , 'sellerProtectionSectionThreeShow'])->name('sellerprotectionsectionthree.show')->middleware('check.permission:Seller Protection Questions,show');
+Route::get('/seller-protection-section-three-show-edit/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowEdit'])->name('sellerprotectionsectionthree.showedit')->middleware('check.permission:Seller Protection Questions,edit');
+Route::post('/seller-protection-section-three-show-update/{id}', [SellerProtectionController::class, 'sellerProtectionSectionThreeShowUpdate'])->name('sellerprotectionsectionthree.showupdate')->middleware('check.permission:Seller Protection Questions,edit');
 
 // ############ Cancellation Guide One #################
-Route::get('/cancellation-guide-one', [CancellationGuideController::class, 'cancellationGuideIndex'])->name('cancellationguide.index')->middleware('check.permission:Cancellation Guide,view');
-Route::get('/cancellation-guide-edit/{id}', [CancellationGuideController::class, 'cancellationGuideEdit'])->name('cancellationguide.edit')->middleware('check.permission:Cancellation Guide,edit');
-Route::post('/cancellation-guide-update/{id}', [CancellationGuideController::class, 'cancellationGuideUpdate'])->name('cancellationguide.update')->middleware('check.permission:Cancellation Guide,edit');
-Route::get('/cancellation-guide-show/{id}', [CancellationGuideController::class, 'cancellationGuideShow'])->name('cancellationguide.show')->middleware('check.permission:Cancellation Guide,show');
-Route::get('/cancellation-guide-show-edit/{id}', [CancellationGuideController::class, 'cancellationGuideShowEdit'])->name('cancellationguide.showedit')->middleware('check.permission:Cancellation Guide,edit');
-Route::post('/cancellation-guide-show-update/{id}', [CancellationGuideController::class, 'cancellationGuideShowUpdate'])->name('cancellationguide.showupdate')->middleware('check.permission:Cancellation Guide,edit');
+Route::get('/cancellation-guide-one', [CancellationGuideController::class, 'cancellationGuideIndex'])->name('cancellationguide.index')->middleware('check.permission:Cancellation Guide One,view');
+Route::get('/cancellation-guide-one-edit/{id}', [CancellationGuideController::class, 'cancellationGuideEdit'])->name('cancellationguide.edit')->middleware('check.permission:Cancellation Guide One,edit');
+Route::post('/cancellation-guide-one-update/{id}', [CancellationGuideController::class, 'cancellationGuideUpdate'])->name('cancellationguide.update')->middleware('check.permission:Cancellation Guide One,edit');
+Route::get('/cancellation-guide-one-show/{id}', [CancellationGuideController::class, 'cancellationGuideShow'])->name('cancellationguide.show')->middleware('check.permission:Cancellation Guide One,show');
+Route::get('/cancellation-guide-one-show-edit/{id}', [CancellationGuideController::class, 'cancellationGuideShowEdit'])->name('cancellationguide.showedit')->middleware('check.permission:Cancellation Guide One,edit');
+Route::post('/cancellation-guide-one-show-update/{id}', [CancellationGuideController::class, 'cancellationGuideShowUpdate'])->name('cancellationguide.showupdate')->middleware('check.permission:Cancellation Guide One,edit');
 
 // ############ Cancellation Guide Two #################
 Route::get('/cancellation-guide-two', [CancellationGuideController::class, 'cancellationGuideTwoIndex'])->name('cancellationguidetwo.index')->middleware('check.permission:Cancellation Guide Two,view');
@@ -258,9 +258,9 @@ Route::post('/sell-a-room-update', [SellARoomController::class, 'sellARoomUpdate
 Route::get('/sell-a-room-view', [SellARoomController::class, 'sellARoomView']) ->middleware('check.permission:Sell a Room,view');
 
 // ############ Sell Reservation #################
-Route::get('/sell-reservation', [SellRoomController::class, 'sellReservationIndex'])->name('sellreservation.index')->middleware('check.permission:Sell Reservation,view');
-Route::get('/sell-reservation-edit/{id}', [SellRoomController::class, 'sellReservationEdit'])->name('sellreservation.edit')->middleware('check.permission:Sell Reservation,edit');
-Route::post('/sell-reservation-update/{id}', [SellRoomController::class, 'sellReservationUpdate'])->name('sellreservation.update')->middleware('check.permission:Sell Reservation,edit');
+Route::get('/changed-travel-plans', [SellRoomController::class, 'sellReservationIndex'])->name('sellreservation.index')->middleware('check.permission:Changed Travel Plans,view');
+Route::get('/changed-travel-plans-edit/{id}', [SellRoomController::class, 'sellReservationEdit'])->name('sellreservation.edit')->middleware('check.permission:Changed Travel Plans,edit');
+Route::post('/changed-travel-plans-update/{id}', [SellRoomController::class, 'sellReservationUpdate'])->name('sellreservation.update')->middleware('check.permission:Changed Travel Plans,edit');
 
 // ############ How Roomeno Works #################
 Route::get('/roomeno-works', [SellRoomController::class, 'roomenoWorksIndex'])->name('roomenoworks.index')->middleware('check.permission:How Roomeno Works,view');
@@ -330,17 +330,17 @@ Route::get('/press-edit/{id}', [PressController::class, 'pressEdit'])->name('pre
 Route::post('/press-update/{id}', [PressController::class, 'pressUpdate'])->name('press.update')->middleware('check.permission:Press,edit');
 
 // ############ Trust & Safety Introduction ############ 
-Route::get('/trust-and-safety-introduction', [TrustAndSafetyController::class, 'trustIntroIndex'])->name('trustintro.index')->middleware('check.permission:Trust & Safety,view');
-Route::get('/trust-and-safety-introduction-edit/{id}', [TrustAndSafetyController::class, 'trustIntroEdit'])->name('trustintro.edit')->middleware('check.permission:Trust & Safety,edit');
-Route::post('/trust-and-safety-introduction-update/{id}', [TrustAndSafetyController::class, 'trustIntroUpdate'])->name('trustintro.update')->middleware('check.permission:Trust & Safety,edit');
+Route::get('/trust-and-safety-introduction', [TrustAndSafetyController::class, 'trustIntroIndex'])->name('trustintro.index')->middleware('check.permission:Trust & Safety Introduction,view');
+Route::get('/trust-and-safety-introduction-edit/{id}', [TrustAndSafetyController::class, 'trustIntroEdit'])->name('trustintro.edit')->middleware('check.permission:Trust & Safety Introduction,edit');
+Route::post('/trust-and-safety-introduction-update/{id}', [TrustAndSafetyController::class, 'trustIntroUpdate'])->name('trustintro.update')->middleware('check.permission:Trust & Safety Introduction,edit');
 
 // ############ Trust & Safety Protect our buyers ############ 
-Route::get('/protect-our-buyers', [TrustAndSafetyController::class, 'protectBuyerIndex'])->name('protectbuyer.index')->middleware('check.permission:Protect our buyers,view');
-Route::get('/protect-our-buyers-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerEdit'])->name('protectbuyer.edit')->middleware('check.permission:Protect our buyers,edit');
-Route::post('/protect-our-buyers-update/{id}', [TrustAndSafetyController::class, 'protectBuyerUpdate'])->name('protectbuyer.update')->middleware('check.permission:Protect our buyers,edit');
-Route::get('/protect-our-buyers-show/{id}', [TrustAndSafetyController::class, 'protectBuyerShow'])->name('protectbuyer.show')->middleware('check.permission:Protect our buyers,show');
-Route::get('/protect-our-buyers-show-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerShowEdit'])->name('protectbuyer.showedit')->middleware('check.permission:Protect our buyers,edit');
-Route::post('/protect-our-buyers-show-update/{id}', [TrustAndSafetyController::class, 'protectBuyerShowUpdate'])->name('protectbuyer.showupdate')->middleware('check.permission:Protect our buyers,edit');
+Route::get('/protect-our-buyers', [TrustAndSafetyController::class, 'protectBuyerIndex'])->name('protectbuyer.index')->middleware('check.permission:We Protect our buyers,view');
+Route::get('/protect-our-buyers-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerEdit'])->name('protectbuyer.edit')->middleware('check.permission:We Protect our buyers,edit');
+Route::post('/protect-our-buyers-update/{id}', [TrustAndSafetyController::class, 'protectBuyerUpdate'])->name('protectbuyer.update')->middleware('check.permission:We Protect our buyers,edit');
+Route::get('/protect-our-buyers-show/{id}', [TrustAndSafetyController::class, 'protectBuyerShow'])->name('protectbuyer.show')->middleware('check.permission:We Protect our buyers,show');
+Route::get('/protect-our-buyers-show-edit/{id}', [TrustAndSafetyController::class, 'protectBuyerShowEdit'])->name('protectbuyer.showedit')->middleware('check.permission:We Protect our buyers,edit');
+Route::post('/protect-our-buyers-show-update/{id}', [TrustAndSafetyController::class, 'protectBuyerShowUpdate'])->name('protectbuyer.showupdate')->middleware('check.permission:We Protect our buyers,edit');
 
 // ############ Trust & Safety Protect our sellers ############ 
 Route::get('/protect-our-sellers', [TrustAndSafetyController::class, 'protectSellerIndex'])->name('protectseller.index')->middleware('check.permission:Protect our sellers,view');

@@ -31,7 +31,7 @@
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">
                                                 @if (Auth::guard('admin')->check() ||
-                                                ($sideMenuPermissions->has('Career') && $sideMenuPermissions['Career']->contains('show')))
+                                                ($sideMenuPermissions->has('Career') && $sideMenuPermissions['Career']->contains('edit')))
                                                 <a href="{{ route('career.showedit', $career->id) }}"
                                                     class="btn btn-primary p-2"
                                                     style="background-color: #cb84fe;">
