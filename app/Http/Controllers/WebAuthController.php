@@ -24,14 +24,21 @@ class WebAuthController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
             'email'      => 'required|email|unique:users,email',
+            'phone'      => 'required',
+            'country'    => 'required',
             'password'   => 'required|min:8|confirmed',
+            'referral_code' => 'nullable',
+            
         ]);
 
         User::create([
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'email'      => $request->email,
+            'phone'      => $request->phone,
+            'country'    => $request->country,
             'password'   => Hash::make($request->password),
+            'referral_code' => $request->referral_code,
         ]);
 
         return redirect()->route('login.form')->with('success', 'Signup successful! Please login.');

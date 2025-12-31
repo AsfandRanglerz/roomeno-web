@@ -21,11 +21,24 @@
                                     <!-- Name Field -->
                                     <div class="col-sm-6 pl-sm-0 pr-sm-3">
                                         <div class="form-group">
-                                            <label for="name">Name <span style="color: red;">*</span></label>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                id="name" name="name" value="{{ old('name', $user->name) }}"
-                                                placeholder="Enter your name" required>
-                                            @error('name')
+                                            <label for="first_name">First Name <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                                id="first_name" name="first_name" value="{{ old('first_name', $user->first_name) }}"
+                                                placeholder="Enter your first name" required>
+                                            @error('first_name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- Last Name Field -->
+                                    <div class="col-sm-6 pl-sm-0 pr-sm-3">
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                                id="last_name" name="last_name" value="{{ old('last_name', $user->last_name) }}"
+                                                placeholder="Enter your last name" required>
+                                            @error('last_name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -57,9 +70,22 @@
                                         </div>
                                     </div>
 
+                                    <!-- Country Field -->
+                                    <div class="col-sm-6 pl-sm-0 pr-sm-3">
+                                        <div class="form-group">
+                                            <label for="country">Country <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control @error('country') is-invalid @enderror"
+                                                id="country" name="country" value="{{ old('country', $user->country) }}"
+                                                placeholder="Enter your country" required>
+                                            @error('country')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
 									
 									  <!-- IMAGE -->
-										<div class="col-sm-6 pl-sm-0 pr-sm-3">
+										{{-- <div class="col-sm-6 pl-sm-0 pr-sm-3">
 											<div class="form-group">
 												<label for="image">Image <span>(Optional)</span></label>
 												<input type="file" 
@@ -71,7 +97,7 @@
 													<div class="text-danger">{{ $message }}</div>
 												@enderror
 											</div>
-										</div>
+										</div> --}}
 
                                     <!-- Password Field (fixed) -->
                                     <div class="col-sm-6 pl-sm-0 pr-sm-3">
@@ -83,6 +109,21 @@
                                             <span class="fa fa-eye toggle-password position-absolute"
                                                 style="top: 42px; right: 15px; cursor: pointer;"></span>
                                             @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- Referral Code Field -->
+                                    <div class="col-sm-6 pl-sm-0 pr-sm-3">
+                                        <div class="form-group">
+                                            <label for="referral_code">Referral Code</label>
+                                            <input type="text"
+                                                class="form-control @error('referral_code') is-invalid @enderror"
+                                                id="referral_code" name="referral_code"
+                                                value="{{ old('referral_code', $user->referral_code) }}"
+                                                placeholder="Enter referral code">
+                                            @error('referral_code')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

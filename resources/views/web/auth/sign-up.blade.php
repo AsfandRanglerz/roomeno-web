@@ -33,10 +33,19 @@
     <label>Email</label><br>
     <input type="email" name="email" value="{{ old('email') }}" required><br><br>
 
+    <label>Phone Number</label><br>
+    <input type="text" name="phone" value="{{ old('phone') }}" required><br><br>
+
+    <label>Country</label><br>
+    <input type="text" name="country" value="{{ old('country') }}" required><br><br>
+
     <label>Password</label><br>
     <input type="password" name="password" required><br>
     <label>Confirm_Password</label><br>
     <input type="password" name="password_confirmation" required><br><br>
+
+    <label>Referral Code</label><br>
+    <input type="text" name="referral_code" value="{{ old('referral_code') }}"><br><br>
 
 
     <button type="submit">Sign Up</button>

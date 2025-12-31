@@ -12,14 +12,17 @@
                             <h4>Users</h4>
                         </div>
                         <div class="card-body table-striped table-bordered table-responsive">
-                            <table class="table" id="table_id_events">
+                            <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
                                         <th>Sr.</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
+                                        {{-- <th>Image</th> --}}
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
+                                        <th>Country</th>
+                                        <th>Referral Code</th>
                                         <th>Toggle</th>
                                         <th>Actions</th>
                                     </tr>
@@ -28,7 +31,7 @@
                                     @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>
+                                        {{-- <td>
                                             @if ($user->image)
                                             <img src="{{ asset('public/' . $user->image) }}"
                                                 style="width: 70px; height: 70px;">
@@ -36,11 +39,14 @@
                                             <img src="{{ asset('public/admin/assets/images/avator.png') }}"
                                                 style="width: 70px; height: 70px;">
                                             @endif
-                                        </td>
-                                        <td>{{ $user->name ?? '-' }}</td>
+                                        </td> --}}
+                                        <td>{{ $user->first_name ?? '--' }}</td>
+                                        <td>{{ $user->last_name ?? '--' }}</td>
                                         <td><a href="mailto:{{ $user->email }}">{{ $user->email ?? '-' }}</a>
                                         </td>
                                         <td>{{ $user->phone ?? '-' }}</td>
+                                        <td>{{ $user->country ?? '--' }}</td>
+                                        <td>{{ $user->referral_code ?? '--' }}</td>
                                         <td>
                                             <label class="custom-switch">
                                                 <input type="checkbox" class="custom-switch-input toggle-status"

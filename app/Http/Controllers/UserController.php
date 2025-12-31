@@ -153,8 +153,9 @@ protected function sendDeactivationEmail($user, $reason)
 public function update(Request $request, $id)
 {
     $request->validate([
-        'name' => 'required',
-        'image' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:2048',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        // 'image' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:2048',
         'email' => [
             'required',
             'email',
@@ -162,7 +163,7 @@ public function update(Request $request, $id)
         ],
         'phone' => [
             'required',
-            'regex:/^\+92[0-9]{10}$/'
+            // 'regex:/^\+92[0-9]{10}$/'
         ],
         'password' => 'nullable|min:6',
     ]);
@@ -171,26 +172,29 @@ public function update(Request $request, $id)
     $user = User::findOrFail($id);
 
     // Update fields
-    $user->name = $request->name;
+    $user->first_name = $request->first_name;
+    $user->last_name = $request->last_name;
     $user->email = $request->email;
     $user->phone = $request->phone;
+    $user->country = $request->country;
+    $user->referral_code = $request->referral_code;
 
     // Agar new image upload hui hai to hi update karo
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
+    // if ($request->hasFile('image')) {
+    //     $file = $request->file('image');
 
-        // unique name
-        $imageName = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+    //     // unique name
+    //     $imageName = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
 
-        // move to public/admin/assets/images
-        $file->move(public_path('admin/assets/images/'), $imageName);
+    //     // move to public/admin/assets/images
+    //     $file->move(public_path('admin/assets/images/'), $imageName);
 
-        // relative path (public نہ رکھو)
-        $imagePath = 'public/admin/assets/images/'.$imageName;
+    //     // relative path (public نہ رکھو)
+    //     $imagePath = 'public/admin/assets/images/'.$imageName;
 
-        // assign new image path
-        $user->image = $imagePath;
-    }
+    //     // assign new image path
+    //     $user->image = $imagePath;
+    // }
     // else case nahi lagانا, پرانی image jesi ki jesi رہے گی
 
     // Agar password diya gaya hai toh update karo
