@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PressController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
@@ -162,7 +163,11 @@ Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])
 Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:Reservation Info,view');
 // ############ Payment Info #################
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
-
+//  ############ Listing #################
+Route::get('/listing', [ListingController::class, 'listingIndex'])->name('listing.index')->middleware('check.permission:Listings,view');
+Route::get('/listing-edit/{id}', [ListingController::class, 'listingEdit'])->name('listing.edit')->middleware('check.permission:Listings,edit');
+Route::post('/listing-update/{id}', [ListingController::class, 'listingUpdate'])->name('listing.update')->middleware('check.permission:Listings,edit');
+Route::post('/listing/toggle-status', [ListingController::class, 'toggleStatus'])->name('listing.toggle-status');
 // ############ Bookings  #################
 Route::get('/bookings', [BookingController::class, 'bookingIndex'])->name('booking.index')->middleware('check.permission:Bookings,view');
 Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name('booking.counter');

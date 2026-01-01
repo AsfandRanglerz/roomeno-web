@@ -75,6 +75,25 @@
                 </li>
             @endif
 
+             {{--  Listings --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Listings') && $sideMenuPermissions['Listings']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/listing*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/listing') }}" class="nav-link">
+                        <i data-feather="list"></i>
+                        <span>Listings</span>
+                        {{-- <div id="updatebookingCounter"
+                        class="badge {{ request()->is('admin/booking*') ? 'bg-white text-dark' : 'bg-primary text-white' }} rounded-circle"
+                        style="display: inline-flex; justify-content: center; align-items: center; 
+                            min-width: 22px; height: 22px; border-radius: 50%; 
+                            text-align: center; font-size: 12px; margin-left: 5px; padding: 3px;">
+                        0
+                    </div> --}}
+                    </a>
+                </li>
+            @endif
+
             {{--  Bookings --}}
 
             @if (Auth::guard('admin')->check() ||
