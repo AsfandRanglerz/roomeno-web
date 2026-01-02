@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Mail;
 
 class ListingController extends Controller
 {
+    public function listingCounter()
+{
+    $count = Listing::where('is_read', false)->count();
+
+    return response()->json(['count' => $count]);
+}
+
+public function resetListingCounter()
+{
+    Listing::where('is_read', false)->update(['is_read' => true]);
+
+    return response()->json(['message' => 'All marked as read']);
+}
+
+
     public function listingIndex()
     {
         $listings = Listing::latest()->get();
@@ -93,4 +108,19 @@ class ListingController extends Controller
             Log::error("Failed to send deactivation email: " . $e->getMessage());
         }
     }
+
+public function toggleFeature(Request $request)
+{
+    $listing = Listing::findOrFail($request->id);
+
+    // toggle
+    $listing->is_featured = !$listing->is_featured;
+    $listing->save();
+
+    return response()->json([
+        'status' => 'success',
+        'is_featured' => $listing->is_featured
+    ]);
+}
+
 }

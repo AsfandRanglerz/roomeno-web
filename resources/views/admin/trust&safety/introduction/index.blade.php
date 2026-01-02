@@ -31,7 +31,7 @@
                                                 ($sideMenuPermissions->has('Trust & Safety Introduction') && $sideMenuPermissions['Trust & Safety Introduction']->contains('edit')))
                                                 <a href="{{ route('trustintro.edit', $intro->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif

@@ -34,7 +34,7 @@
                                                 ($sideMenuPermissions->has('Seller Protection Section One') && $sideMenuPermissions['Seller Protection Section One']->contains('edit')))
                                                 <a href="{{ route('sellerprotectionsectionone.showedit', $sectionOne->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif

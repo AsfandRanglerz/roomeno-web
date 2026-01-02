@@ -34,7 +34,7 @@
                                                 ($sideMenuPermissions->has('Verified Reservations') && $sideMenuPermissions['Verified Reservations']->contains('edit')))
                                                 <a href="{{ route('realreservation.showedit', $reservation->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif

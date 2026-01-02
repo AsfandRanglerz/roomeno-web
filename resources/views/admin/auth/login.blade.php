@@ -9,7 +9,7 @@
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div class="card card-primary">
                         <div class="card-header d-flex justify-content-center">
-                            <img src="{{ asset('public/admin/assets/img/logo.png') }}" style="width: 50%; height: 50%;"
+                            <img style = "background-color: #0F1142;"src="{{ asset('public/admin/assets/images/header_logo.png') }}" style="width: 50%; height: 50%;"
                                 class="img-fluid" alt="Logo">
                         </div>
                         <div class="card-body">
@@ -62,7 +62,7 @@
                                 <!-- Submit Button -->
                                 <div class="form-group mt-3 mb-0">
                                     <button type="submit" class="btn btn-lg btn-block btn-login" tabindex="4"
-                                        style="background-color: #ff5608;">
+                                        style="background-color: #0F1142;">
                                         Login
                                     </button>
                                 </div>

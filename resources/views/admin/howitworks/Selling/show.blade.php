@@ -34,7 +34,7 @@
                                                 ($sideMenuPermissions->has('How It Works') && $sideMenuPermissions['How It Works']->contains('edit')))
                                                 <a href="{{ route('sellingshow.edit', $selling->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif

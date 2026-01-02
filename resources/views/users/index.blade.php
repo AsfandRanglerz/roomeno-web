@@ -64,7 +64,7 @@
                                                 ($sideMenuPermissions->has('Users') && $sideMenuPermissions['Users']->contains('edit')))
                                                 <a href="{{ route('user.edit', $user->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
@@ -79,7 +79,7 @@
                                                 </form>
 
                                                 <button class="show_confirm btn p-2"
-                                                    style="background-color: #cb84fe;"
+                                                    style="background-color: #0F1142;"
                                                     data-form="delete-form-{{ $user->id }}" type="button">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

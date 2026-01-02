@@ -34,7 +34,7 @@
                                         <th>Payment Type</th>
                                         <th>Card Number</th>
                                         <th>Cardholder Name</th>
-                                        {{-- <th>Feature</th> --}}
+                                        <th>Feature</th>
                                         <th>Toggle</th>
                                         <th>Action</th>
                                     </tr>
@@ -45,7 +45,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $listing->customer_name ?? '--' }}</td>
                                         <td>{{ $listing->name ?? '--' }}</td>
-                                       <td>{{ $listing->board_name ?? '--' }}</td>
+                                        <td>{{ $listing->board_name ?? '--' }}</td>
                                         <td>{{ $listing->check_in ? \Carbon\Carbon::parse($listing->check_in)->format('M d, Y') : '--' }}</td>
                                         <td>{{ $listing->check_out ? \Carbon\Carbon::parse($listing->check_out)->format('M d, Y') : '--' }}</td>
                                         <td>{{ $listing->people_number ?? '--' }} </td>
@@ -61,6 +61,17 @@
                                         <td>{{ $listing->paid_type ?? '--' }}</td>
                                         <td>{{ $listing->card_number ?? '--' }}</td>
                                         <td>{{ $listing->cardholder_name ?? '--' }}</td>
+                                         <td>
+                                            <label class="custom-switch">
+                                                <input type="checkbox" class="custom-switch-input toggle-feature"
+                                                    data-id="{{ $listing->id }}"
+                                                    {{ $listing->is_featured ? 'checked' : '' }}>
+                                                <span class="custom-switch-indicator"></span>
+                                                <span class="custom-switch-description">
+                                                    {{ $listing->is_featured ? 'Featured' : 'Not Featured' }}
+                                                </span>
+                                            </label>
+                                        </td>
                                         <td>
                                             <label class="custom-switch">
                                                 <input type="checkbox" class="custom-switch-input toggle-status"
@@ -78,7 +89,7 @@
                                                 ($sideMenuPermissions->has('Listings') && $sideMenuPermissions['Listings']->contains('edit')))
                                                 <a href="{{ route('listing.edit', $listing->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
@@ -196,7 +207,70 @@
         });
     }
 
-        //deleting alert
+   $(document).on('change', '.toggle-feature', function () {
+
+    let id = $(this).data('id');
+    let checkbox = $(this);
+
+    // Disable checkbox while processing
+    checkbox.prop('disabled', true);
+
+    $.ajax({
+        url: "{{ route('listing.toggle-feature') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id: id
+        },
+        success: function(response) {
+
+            if(response.status === 'success') {
+
+                // Toastr message
+                if(response.is_featured == 1){
+                    toastr.success('Listing marked as featured');
+                } else {
+                    toastr.success('Listing removed from featured');
+                }
+
+                // Reload after short delay
+                setTimeout(function(){
+                    location.reload();
+                }, 800);
+            }
+        },
+        error: function() {
+
+            toastr.error('Something went wrong');
+
+            // Revert UI
+            checkbox.prop('checked', !checkbox.prop('checked'));
+        },
+        complete: function(){
+            checkbox.prop('disabled', false);
+        }
+    });
+});
+
+
+
+        //reset listing counter to 0
+
+    $(document).ready(function() {
+
+    $.ajax({
+        url: "{{ route('listing.reset-counter') }}",
+        type: 'POST',
+        data: {
+            _token: "{{ csrf_token() }}"
+        },
+        success: function(response) {
+            // After marking as read, refresh counter
+            updatelistingCounter();
+        }
+    });
+
+});
 
        
     });

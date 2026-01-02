@@ -165,9 +165,13 @@ Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoInde
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
 //  ############ Listing #################
 Route::get('/listing', [ListingController::class, 'listingIndex'])->name('listing.index')->middleware('check.permission:Listings,view');
+Route::get('/listing/count', [ListingController::class, 'listingCounter'])->name('listing.counter');
+Route::post('/listing/reset-counter', [ListingController::class, 'resetListingCounter'])->name('listing.reset-counter');
 Route::get('/listing-edit/{id}', [ListingController::class, 'listingEdit'])->name('listing.edit')->middleware('check.permission:Listings,edit');
 Route::post('/listing-update/{id}', [ListingController::class, 'listingUpdate'])->name('listing.update')->middleware('check.permission:Listings,edit');
 Route::post('/listing/toggle-status', [ListingController::class, 'toggleStatus'])->name('listing.toggle-status');
+Route::post('/listing/toggle-feature', [ListingController::class, 'toggleFeature'])->name('listing.toggle-feature');
+
 // ############ Bookings  #################
 Route::get('/bookings', [BookingController::class, 'bookingIndex'])->name('booking.index')->middleware('check.permission:Bookings,view');
 Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name('booking.counter');

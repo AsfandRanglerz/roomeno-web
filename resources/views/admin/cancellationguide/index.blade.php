@@ -38,7 +38,7 @@
                                                 ($sideMenuPermissions->has('Cancellation Guide One') && $sideMenuPermissions['Cancellation Guide One']->contains('edit')))
                                                 <a href="{{ route('cancellationguide.edit', $cancelguides->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
@@ -47,7 +47,7 @@
                                                     ($sideMenuPermissions->has('Cancellation Guide One') && $sideMenuPermissions['Cancellation Guide One']->contains('show')))
                                                     <a href="{{ route('cancellationguide.show', $cancelguides->id) }}"
                                                         class="btn btn-primary p-2"
-                                                        style="background-color: #cb84fe;">
+                                                        style="background-color: #0F1142;">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     @endif

@@ -37,7 +37,7 @@
                                                 ($sideMenuPermissions->has('Buyer Protection Questions') && $sideMenuPermissions['Buyer Protection Questions']->contains('edit')))
                                                 <a href="{{ route('protectionquestions.edit', $question->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
@@ -47,7 +47,7 @@
                                                     ($sideMenuPermissions->has('Buyer Protection Questions') && $sideMenuPermissions['Buyer Protection Questions']->contains('show')))
                                                     <a href="{{ route('protectionquestions.show', $question->id) }}"
                                                         class="btn btn-primary p-2"
-                                                        style="background-color: #cb84fe;">
+                                                        style="background-color: #0F1142;">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     @endif

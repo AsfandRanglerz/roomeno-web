@@ -41,7 +41,7 @@
                                                 ($sideMenuPermissions->has('Service Guarantees') && $sideMenuPermissions['Service Guarantees']->contains('edit')))
                                                 <a href="{{ route('customerprotection.edit', $customer->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif

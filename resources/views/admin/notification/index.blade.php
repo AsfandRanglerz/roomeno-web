@@ -14,7 +14,7 @@
                             <div class="card-body table-striped table-bordered table-responsive">
                                 @if (Auth::guard('admin')->check() ||
                                         ($sideMenuPermissions->has('Notifications') && $sideMenuPermissions['Notifications']->contains('create')))
-                                    <a class="btn mb-3 text-white" data-bs-toggle="modal" style="background-color: #cb84fe;"
+                                    <a class="btn mb-3 text-white" data-bs-toggle="modal" style="background-color: #0F1142;"
                                         data-bs-target="#createUserModal">Create</a>
                                 @endif
 
@@ -57,7 +57,7 @@
                                                             @method('DELETE')
                                                         </form>
 
-                                                        <button class="show_confirm btn" style="background-color: #cb84fe;"
+                                                        <button class="show_confirm btn" style="background-color: #0F1142;"
                                                             data-form="delete-form-{{ $notification->id }}" type="button">
                                                             <span><i class="fa fa-trash"></i></span>
                                                         </button>

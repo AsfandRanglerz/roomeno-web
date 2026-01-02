@@ -36,7 +36,7 @@
                                                 ($sideMenuPermissions->has('Protect our sellers') && $sideMenuPermissions['Protect our sellers']->contains('edit')))
                                                 <a href="{{ route('protectseller.edit', $protect->id) }}"
                                                     class="btn btn-primary p-2"
-                                                    style="background-color: #cb84fe;">
+                                                    style="background-color: #0F1142;">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 @endif
@@ -45,7 +45,7 @@
                                                     ($sideMenuPermissions->has('Protect our sellers') && $sideMenuPermissions['Protect our sellers']->contains('show')))
                                                     <a href="{{ route('protectseller.show', $protect->id) }}"
                                                         class="btn btn-primary p-2"
-                                                        style="background-color: #cb84fe;">
+                                                        style="background-color: #0F1142;">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     @endif

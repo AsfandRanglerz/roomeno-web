@@ -2,7 +2,7 @@
     <aside" id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="{{ url('/admin/dashboard') }}">
-                <img alt="image" src="{{ asset('public/admin/assets/img/logo.png') }}" class="header-logo" />
+                <img alt="image" style = "background-color: #0F1142;" src="{{ asset('public/admin/assets/images/header_logo.png') }}" class="header-logo" />
                 {{-- <span class="logo-name">Crop Secure</span> --}}
             </a>
         </div>
@@ -83,13 +83,13 @@
                     <a href="{{ url('admin/listing') }}" class="nav-link">
                         <i data-feather="list"></i>
                         <span>Listings</span>
-                        {{-- <div id="updatebookingCounter"
-                        class="badge {{ request()->is('admin/booking*') ? 'bg-white text-dark' : 'bg-primary text-white' }} rounded-circle"
+                        <div id="updatelistingCounter"
+                        class="badge {{ request()->is('admin/listing*') ? 'bg-white text-dark' : 'bg-primary text-white' }} rounded-circle"
                         style="display: inline-flex; justify-content: center; align-items: center; 
                             min-width: 22px; height: 22px; border-radius: 50%; 
                             text-align: center; font-size: 12px; margin-left: 5px; padding: 3px;">
                         0
-                    </div> --}}
+                    </div>
                     </a>
                 </li>
             @endif
