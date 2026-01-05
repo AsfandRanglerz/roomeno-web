@@ -9,7 +9,7 @@
                     @csrf
                     @method('POST') <!-- Use POST for updates in this context -->
 
-                    <a href="{{ url('/admin/faq') }}" class="btn mb-3" style="background: #ff5608;">Back</a>
+                    <a href="{{ url('/admin/faq') }}" class="btn mb-3" style="background: #0F1142;">Back</a>
 
                     <div class="row">
                         <div class="col-12">

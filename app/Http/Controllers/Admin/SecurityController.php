@@ -193,6 +193,6 @@ class SecurityController extends Controller
         } else {
             AboutUs::create($request->all());
         }
-        return redirect('/admin/about-us')->with('success', 'About-Us updated successfully');
+        return redirect('/admin/about-us')->with('success', 'About Us updated successfully');
     }
 }

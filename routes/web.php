@@ -118,10 +118,8 @@ Route::prefix('admin')->middleware(['admin', 'check.subadmin.status'])->group(fu
     // ############ Term & Condition #################
     Route::get('term-condition', [SecurityController::class, 'TermCondition']) ->middleware('check.permission:Terms & Conditions,view');
     Route::get('term-condition-edit', [SecurityController::class, 'TermConditionEdit']) ->middleware('check.permission:Terms & Conditions,edit');
-    Route::post('term-condition-update', [SecurityController::class, 'TermConditionUpdate']) ->middleware('check.permission:Terms & Conditions
-,edit');
-    Route::get('term-condition-view', [SecurityController::class, 'TermConditionView']) ->middleware('check.permission:Terms & Conditions
-,view');
+    Route::post('term-condition-update', [SecurityController::class, 'TermConditionUpdate']) ->middleware('check.permission:Terms & Conditions,edit');
+    Route::get('term-condition-view', [SecurityController::class, 'TermConditionView']) ->middleware('check.permission:Terms & Conditions,view');
 
     // ############ About Us #################
     Route::get('about-us', [SecurityController::class, 'AboutUs']) ->middleware('check.permission:About us,view');
