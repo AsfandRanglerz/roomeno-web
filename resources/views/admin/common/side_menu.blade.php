@@ -75,6 +75,18 @@
                 </li>
             @endif
 
+            {{--  Commission --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Commission') && $sideMenuPermissions['Commission']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/commission*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/commission') }}" class="nav-link">
+                        <i data-feather="dollar-sign"></i>
+                        <span>Commission</span>
+                    </a>
+                </li>
+            @endif
+
              {{--  Listings --}}
 
             @if (Auth::guard('admin')->check() ||

@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
+use App\Http\Controllers\Admin\ComissionController;
 use App\Http\Controllers\Admin\SellARoomController;
 use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
@@ -159,6 +160,11 @@ Route::post('/hotel/toggle-status', [SellRoomController::class, 'toggleStatus'])
 
 // ############ Reservation Info #################
 Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoIndex'])->name('reservationinfo.index')->middleware('check.permission:Reservation Info,view');
+
+// ############ Commission #################
+Route::get('/commission', [ComissionController::class, 'commissionIndex'])->name('commissions.index')->middleware('check.permission:Commission,view');
+Route::get('/commission/edit/{id}', [ComissionController::class, 'commissionEdit'])->name('commissions.edit')->middleware('check.permission:Commission,edit');
+Route::post('/commission/update/{id}', [ComissionController::class, 'commissionUpdate'])->name('commissions.update')->middleware('check.permission:Commission,edit');
 // ############ Payment Info #################
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
 //  ############ Listing #################
