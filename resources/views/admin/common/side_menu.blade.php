@@ -125,6 +125,18 @@
                 </li>
             @endif
 
+            {{--  Seller History--}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Seller History') && $sideMenuPermissions['Seller History']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/sellerhistory*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/sellerhistory') }}" class="nav-link">
+                        <i data-feather="file-text"></i>
+                        <span>Seller History</span>
+                    </a>
+                </li>
+            @endif
+
             {{-- Buyer Protection --}}
 
              @if (Auth::guard('admin')->check() ||

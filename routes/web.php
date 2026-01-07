@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\SellerHistoryController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\TrustAndSafetyController;
 use App\Http\Controllers\Admin\BuyerProtectionController;
@@ -165,8 +166,10 @@ Route::get('/reservation-info', [SellRoomController::class, 'reservationInfoInde
 Route::get('/commission', [ComissionController::class, 'commissionIndex'])->name('commissions.index')->middleware('check.permission:Commission,view');
 Route::get('/commission/edit/{id}', [ComissionController::class, 'commissionEdit'])->name('commissions.edit')->middleware('check.permission:Commission,edit');
 Route::post('/commission/update/{id}', [ComissionController::class, 'commissionUpdate'])->name('commissions.update')->middleware('check.permission:Commission,edit');
+
 // ############ Payment Info #################
 Route::get('/payment-info/{reservation}', [SellRoomController::class, 'paymentInfoIndex'])->name('paymentinfo.index');
+
 //  ############ Listing #################
 Route::get('/listing', [ListingController::class, 'listingIndex'])->name('listing.index')->middleware('check.permission:Listings,view');
 Route::get('/listing/count', [ListingController::class, 'listingCounter'])->name('listing.counter');
@@ -181,6 +184,12 @@ Route::get('/bookings', [BookingController::class, 'bookingIndex'])->name('booki
 Route::get('/booking/count', [BookingController::class, 'bookingCounter'])->name('booking.counter');
 Route::post('/booking/approve/{id}', [BookingController::class, 'approve'])->name('booking.approve');
 Route::post('/booking/reject/{id}', [BookingController::class, 'reject'])->name('booking.reject');
+Route::post('/booking/{id}/payment', [BookingController::class, 'payment'])->name('booking.payment');
+Route::post('/booking/{id}/refund', [BookingController::class, 'refund'])->name('booking.refund');
+
+// ############ Seller History  #################
+Route::get('/seller-history', [SellerHistoryController::class, 'index'])->name('sellerhistory.index')->middleware('check.permission:Seller History,view');
+
 
 // ############ Buyer Protection Guarantee Protection #################
 Route::get('/guarantee-protection', [BuyerProtectionController::class, 'guaranteeProtectionIndex'])->name('guaranteeprotection.index')->middleware('check.permission:Guarantee Protection,view');

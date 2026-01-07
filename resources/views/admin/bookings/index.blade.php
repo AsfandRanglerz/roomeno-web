@@ -27,6 +27,8 @@
                                         <th>Discounted Price</th>
                                         <th>Total Price</th>
                                         <th>Request</th>
+                                        <th>Payment</th>
+                                        <th>Refund</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -45,6 +47,25 @@
                                         <td>{{ $booking->discounted_price?? '--' }}</td>
                                         <td>{{ $booking->total_price?? '--' }}</td>
                                         <td>{{ $booking->request?? '--' }}</td>
+                                         <td>
+                                            <button 
+                                            class="btn btn-primary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#paymentModal{{ $booking->id }}">
+                                            Pay Seller
+                                            </button>
+
+                                        </td>
+                                        <td>
+                                            <button 
+                                            class="btn btn-primary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#refundModal{{ $booking->id }}">
+                                            Refund
+                                            </button>
+
+                                        </td>
+
                                          <td>
                                                     @php
                                                         $status = (int) $booking->status;
@@ -105,6 +126,7 @@
                                                     </div>
                                                 </td>
                                     </tr>
+                                    
                                     @endforeach
                                 </tbody>
                             </table>
@@ -116,6 +138,119 @@
     </section>
 </div>
 
+@foreach($bookings as $booking)
+
+<div class="modal fade" id="paymentModal{{ $booking->id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form method="POST"
+            action="{{ route('booking.payment', $booking->id) }}"
+            enctype="multipart/form-data"
+            class="paymentForm">
+        @csrf
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Payment — Booking #{{ $booking->id }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <label class="mb-2">Payment Screenshot</label>
+
+          <input type="file"
+                 name="payment_image"
+                 class="form-control refundInput"
+                 data-preview="preview{{ $booking->id }}"
+                 accept="image/*"
+                 {{ $booking->is_paid ? 'disabled' : 'required' }}>
+
+          {{-- Show stored image if already paid --}}
+          <img id="preview{{ $booking->id }}"
+               class="img-thumbnail mt-3 {{ $booking->payment_image ? '' : 'd-none' }}"
+               style="max-height:250px;"
+               src="{{ $booking->payment_image ? asset('public/'.$booking->payment_image) : '' }}">
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">
+            Close
+          </button>
+
+          <button type="submit"
+                  class="btn btn-success paymentBtn"
+                  {{ $booking->is_paid ? 'disabled' : '' }}>
+            {{ $booking->is_paid ? 'Paid' : 'Confirm Payment' }}
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="refundModal{{ $booking->id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form method="POST"
+            action="{{ route('booking.refund', $booking->id) }}"
+            enctype="multipart/form-data"
+            class="refundForm">
+        @csrf
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Refund — Booking #{{ $booking->id }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <label class="mb-2">Refund Screenshot</label>
+
+          <input type="file"
+                 name="refund_image"
+                 class="form-control refundInput"
+                 data-preview="preview{{ $booking->id }}"
+                 accept="image/*"
+                 {{ $booking->is_refunded ? 'disabled' : 'required' }}>
+
+          {{-- Show stored image if already refunded --}}
+          <img id="preview{{ $booking->id }}"
+               class="img-thumbnail mt-3 {{ $booking->refund_image ? '' : 'd-none' }}"
+               style="max-height:250px;"
+               src="{{ $booking->refund_image ? asset('public/'.$booking->refund_image) : '' }}">
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">
+            Close
+          </button>
+
+          <button type="submit"
+                  class="btn btn-success refundBtn"
+                  {{ $booking->is_refunded ? 'disabled' : '' }}>
+            {{ $booking->is_refunded ? 'Refunded' : 'Confirm Refund' }}
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+@endforeach
 @endsection
 
 @section('js')
@@ -126,4 +261,72 @@
        
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    // === IMAGE PREVIEW ===
+    document.querySelectorAll(".refundInput").forEach(input => {
+
+        input.addEventListener("change", function(e) {
+
+            const file = this.files[0];
+            const previewId = this.getAttribute("data-preview");
+            const img = document.getElementById(previewId);
+
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                img.classList.remove("d-none");
+            }
+        });
+    });
+
+
+    // === DISABLE BUTTON AFTER SUBMIT ===
+    document.querySelectorAll(".refundForm").forEach(form => {
+
+        form.addEventListener("submit", function() {
+
+            const btn = this.querySelector(".refundBtn");
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+        });
+    });
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    // === IMAGE PREVIEW ===
+    document.querySelectorAll(".paymentInput").forEach(input => {
+
+        input.addEventListener("change", function(e) {
+
+            const file = this.files[0];
+            const previewId = this.getAttribute("data-preview");
+            const img = document.getElementById(previewId);
+
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                img.classList.remove("d-none");
+            }
+        });
+    });
+
+
+    // === DISABLE BUTTON AFTER SUBMIT ===
+    document.querySelectorAll(".paymentForm").forEach(form => {
+
+        form.addEventListener("submit", function() {
+
+            const btn = this.querySelector(".paymentBtn");
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+        });
+    });
+
+});
+</script>
+
 @endsection

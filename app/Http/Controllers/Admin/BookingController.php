@@ -38,4 +38,65 @@ class BookingController extends Controller
 
         return redirect()->route('booking.index')->with('success', 'Booking Rejected Successfully');
     }
+
+    public function payment(Request $request, $id)
+    {
+        $request->validate([
+            'payment_image' => 'required',
+        ]);
+
+        $booking = Booking::findOrFail($id);
+
+        // upload image
+        if ($request->hasFile('payment_image')) {
+
+            $file = $request->file('payment_image');
+
+            // Create unique filename
+            $imageName = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            // Move file to public/admin/assets/images/refunds
+            $file->move(public_path('admin/assets/images/payments/'), $imageName);
+
+            // Save DB path
+            $imagePath = 'admin/assets/images/payments/'.$imageName;
+
+            $booking->payment_image = $imagePath;
+        }
+        $booking->is_paid = 1; // 1 = Paid
+        $booking->save();
+
+        return redirect()->route('booking.index')->with('success', 'Payment uploaded successfully');
+    }
+
+    public function refund(Request $request, $id)
+    {
+        $request->validate([
+            'refund_image' => 'required',
+        ]);
+
+        $booking = Booking::findOrFail($id);
+
+        // upload image
+        if ($request->hasFile('refund_image')) {
+
+            $file = $request->file('refund_image');
+
+            // Create unique filename
+            $imageName = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+
+            // Move file to public/admin/assets/images/refunds
+            $file->move(public_path('admin/assets/images/refunds/'), $imageName);
+
+            // Save DB path
+            $imagePath = 'admin/assets/images/refunds/'.$imageName;
+
+            $booking->refund_image = $imagePath;
+        }
+        $booking->is_refunded = 1; // 1 = Refunded
+        $booking->save();
+
+        return redirect()->route('booking.index')->with('success', 'Refund uploaded successfully');
+    }
+
 }
