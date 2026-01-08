@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Sellers Payment History')
+@section('title', 'Refund History')
 
 @section('content')
 <div class="main-content" style="min-height: 562px;">
@@ -9,22 +9,29 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Sellers Payment History</h4>
+                            <h4>Refund History</h4>
                         </div>
                         <div class="card-body table-striped table-bordered table-responsive">
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
-                                        <th>Seller Name</th>
-                                        <th>Payment Date</th>
-                                        <th>Payment Time</th>
-                                        <th>Payment Screenshot</th>
+                                        <th>Customer Name</th>
+                                        <th>Refund Date</th>
+                                        <th>Refund Time</th>
+                                        <th>Refund Screenshot</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                      @foreach ($histories as $history)
                                     <tr>
-                                            <td>{{ $history->seller_name ?? '--' }}</td>
+                                           <td>
+                                            {{ 
+                                                optional($history->booking)->first_name 
+                                                ? $history->booking->first_name . ' ' . $history->booking->last_name 
+                                                : '--' 
+                                            }}
+                                            </td>
+
 
                                             <td>
                                                 {{ \Carbon\Carbon::parse($history->created_at)->format('M d, Y') }}
@@ -34,13 +41,13 @@
                                                 {{ \Carbon\Carbon::parse($history->created_at)->format('h:i A') }}
                                             </td>
                                             <td>
-                                            @if($history->booking && $history->booking->payment_image)
-                                                <img src="{{ asset('public/'. $history->booking->payment_image) }}"
-                                                    class="img-thumbnail payment-thumb"
+                                            @if($history->booking && $history->booking->refund_image)
+                                                <img src="{{ asset('public/'. $history->booking->refund_image) }}"
+                                                    class="img-thumbnail refund-thumb"
                                                     style="height:50px;cursor:pointer"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#imageZoomModal"
-                                                    data-image="{{ asset('public/'. $history->booking->payment_image) }}">
+                                                    data-image="{{ asset('public/'. $history->booking->refund_image) }}">
                                             @endif
                                             </td>
                                         </tr>
@@ -62,7 +69,7 @@
         <div class="modal-content bg-transparent border-0 shadow-none">
 
             <div class="modal-header border-0">
-                <h5 class="modal-title text-white">Payment Screenshot</h5>
+                <h5 class="modal-title text-white">Refund Screenshot</h5>
                 <button type="button"
                         class="btn-close btn-close-white"
                         data-bs-dismiss="modal"></button>
@@ -100,7 +107,7 @@
 
     let zoomed = false;
 
-    document.querySelectorAll('.payment-thumb').forEach(img => {
+    document.querySelectorAll('.refund-thumb').forEach(img => {
         img.addEventListener('click', function () {
             const modalImg = document.getElementById('zoomImage');
             modalImg.src = this.dataset.image;

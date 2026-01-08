@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSellerHistoriesTable extends Migration
+class CreateRefundHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSellerHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('seller_histories', function (Blueprint $table) {
+        Schema::create('refund_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id')->nullable();
-            $table->string('seller_name')->nullable();
             $table->timestamps();
 
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
@@ -30,6 +29,6 @@ class CreateSellerHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seller_histories');
+        Schema::dropIfExists('refund_histories');
     }
 }

@@ -129,10 +129,22 @@
 
             @if (Auth::guard('admin')->check() ||
                     ($sideMenuPermissions->has('Seller History') && $sideMenuPermissions['Seller History']->contains('view')))
-                <li class="dropdown {{ request()->is('admin/sellerhistory*') ? 'active' : '' }}">
-                    <a href="{{ url('admin/sellerhistory') }}" class="nav-link">
+                <li class="dropdown {{ request()->is('admin/seller-history*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/seller-history') }}" class="nav-link">
                         <i data-feather="file-text"></i>
-                        <span>Seller History</span>
+                        <span>Sellers Payment History</span>
+                    </a>
+                </li>
+            @endif
+
+            {{--  Refund History--}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Refund History') && $sideMenuPermissions['Refund History']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/refund-history*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/refund-history') }}" class="nav-link">
+                        <i data-feather="file-text"></i>
+                        <span>Refund History</span>
                     </a>
                 </li>
             @endif

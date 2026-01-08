@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\RefundHistoryController;
 use App\Http\Controllers\Admin\SellerHistoryController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\TrustAndSafetyController;
@@ -190,6 +191,8 @@ Route::post('/booking/{id}/refund', [BookingController::class, 'refund'])->name(
 // ############ Seller History  #################
 Route::get('/seller-history', [SellerHistoryController::class, 'index'])->name('sellerhistory.index')->middleware('check.permission:Seller History,view');
 
+// ############ Refund History  #################
+Route::get('/refund-history', [RefundHistoryController::class, 'index'])->name('refundhistory.index')->middleware('check.permission:Refund History,view');
 
 // ############ Buyer Protection Guarantee Protection #################
 Route::get('/guarantee-protection', [BuyerProtectionController::class, 'guaranteeProtectionIndex'])->name('guaranteeprotection.index')->middleware('check.permission:Guarantee Protection,view');

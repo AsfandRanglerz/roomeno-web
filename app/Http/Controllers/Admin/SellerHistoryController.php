@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SellerHistory;
+use App\Http\Controllers\Controller;
 
 class SellerHistoryController extends Controller
 {
     public function index()
     {
-        return view('admin.sellerhistory.index');
+        $histories = SellerHistory::latest()->get();
+        return view('admin.sellerhistory.index', compact('histories'));
     }
 }
