@@ -128,7 +128,7 @@
             {{--  Seller History--}}
 
             @if (Auth::guard('admin')->check() ||
-                    ($sideMenuPermissions->has('Seller History') && $sideMenuPermissions['Seller History']->contains('view')))
+                    ($sideMenuPermissions->has('Sellers Payment History') && $sideMenuPermissions['Sellers Payment History']->contains('view')))
                 <li class="dropdown {{ request()->is('admin/seller-history*') ? 'active' : '' }}">
                     <a href="{{ url('admin/seller-history') }}" class="nav-link">
                         <i data-feather="file-text"></i>

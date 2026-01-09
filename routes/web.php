@@ -189,7 +189,7 @@ Route::post('/booking/{id}/payment', [BookingController::class, 'payment'])->nam
 Route::post('/booking/{id}/refund', [BookingController::class, 'refund'])->name('booking.refund');
 
 // ############ Seller History  #################
-Route::get('/seller-history', [SellerHistoryController::class, 'index'])->name('sellerhistory.index')->middleware('check.permission:Seller History,view');
+Route::get('/seller-history', [SellerHistoryController::class, 'index'])->name('sellerhistory.index')->middleware('check.permission:Sellers Payment History,view');
 
 // ############ Refund History  #################
 Route::get('/refund-history', [RefundHistoryController::class, 'index'])->name('refundhistory.index')->middleware('check.permission:Refund History,view');
