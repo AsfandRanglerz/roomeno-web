@@ -11,7 +11,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebAuthController;
-use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
@@ -56,7 +56,15 @@ Route::get('/index',[HomeController::class ,'index'])->name('index');
 Route::get('/hotel',[HomeController::class ,'hotelinfo'])->name('hotel');
 
 
+Route::get('/user-profile',[HomeController::class ,'userinfo'])->name('user-profile');
+Route::get('/check-out',[HomeController::class ,'checkoutinfo'])->name('check-out');
+Route::get('/booking-confirmation',[HomeController::class ,'bookinginfo'])->name('booking-confirmation');
+Route::get('/reservation-detail',[HomeController::class ,'reservationDetail'])->name('reservation-detail');
+Route::get('/reservation-booking-detail',[HomeController::class ,'reservationBookingDetail'])->name('reservation-bookingdetail');
 
+Route::get('/user-profile-info',[HomeController::class ,'userProfileInfo'])->name('user-profile-info');
+Route::get('/upload-video',[HomeController::class ,'uploadVideo'])->name('upload-video');
+Route::get('/user-account-info',[HomeController::class ,'userAccountInfo'])->name('user-account-info');
 
 /*Admin routes
  * */
