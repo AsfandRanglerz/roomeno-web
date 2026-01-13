@@ -64,13 +64,13 @@ class HowItWorksController extends Controller
     public function buyingMain()
     {
         $buyings = Buying::wherenotNull('main_title')->get();
-        return view('admin.howitworks.Buying.index', compact('buyings'));
+        return view('admin.howitworks.buying.index', compact('buyings'));
     }
 
     public function editbuying($id)
     {
         $buying = Buying::findOrFail($id);
-        return view('admin.howitworks.Buying.edit', compact('buying'));
+        return view('admin.howitworks.buying.edit', compact('buying'));
     }
 
     public function updatebuying(Request $request, $id)
@@ -93,13 +93,13 @@ class HowItWorksController extends Controller
     public function showbuying($id)
     {
         $buyings = Buying::whereNotNull('title')->whereNotNull('description')->get();
-        return view('admin.howitworks.Buying.show', compact('buyings'));
+        return view('admin.howitworks.buying.show', compact('buyings'));
     }
 
     public function editbuyingshow($id)
     {
         $buying = Buying::findOrFail($id);
-        return view('admin.howitworks.Buying.editshow', compact('buying'));
+        return view('admin.howitworks.buying.editshow', compact('buying'));
     }
 
     public function updatebuyingshow(Request $request, $id)

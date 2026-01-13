@@ -1,7 +1,73 @@
 @extends('web.layout.app')
 @section('title','Home')
 @section('content')
-<div class="container-fluid main-container-for-index-page">
+<div class="container-fluid px-0">
+    <div class="row px-0 hero-row align-items-center">
+        <div class="col-md-6 hero-content">
+            <h2>
+                Stay Quietly, <br>
+                With No Worries
+            </h2>
+            <p>
+                Smarter hotel booking starts here. Get recommendations based on where you are, what you like, and how
+                you travel.
+            </p>
+        </div>
+        <div class="banner d-flex align-items-end">
+            <div class="container mb-4">
+                <div class="row g-3 p-4 search-bar rounded-4 shadow">
+
+                    <div class="col-md">
+                        <label class="text-white small mb-2 d-flex align-items-center gap-2">
+                            <span class="bi bi-geo-alt"></span>
+                            Location
+                        </label>
+                        <input type="text" class="form-control" placeholder="United State">
+                    </div>
+
+                    <div class="col-md">
+                        <label class="text-white small mb-2 d-flex align-items-center gap-2">
+                            <span class="bi bi-people"></span>
+                            Guests
+                        </label>
+                        <select class="form-select">
+                            <option>Single</option>
+                            <option>Double</option>
+                            <option>3 Guests</option>
+                            <option>4 Guests</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md">
+                        <label class="text-white small mb-2 d-flex align-items-center gap-2">
+                            <span class="bi bi-calendar-event"></span>
+                            Check-in
+                        </label>
+                        <input type="text" class="form-control checkin" placeholder="Check-in">
+
+
+                    </div>
+
+                    <div class="col-md">
+                        <label class="text-white small mb-2 d-flex align-items-center gap-2">
+                            <span class="bi bi-calendar-check"></span>
+                            Check-out
+                        </label>
+                        <input type="text" class="form-control checkout" placeholder="Check-out">
+                    </div>
+
+                    <div class="col-md-auto d-flex align-items-end">
+                        <button class="btn btn-search px-4 py-2">Search</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid  main-container-for-index-page">
+
 
     <div class="row px-0 py-3 content-container-for-stories align-items-center">
 
@@ -26,7 +92,7 @@
         <!-- Stories row -->
         <div class="col-12 px-0 d-flex flex-nowrap gap-3 mt-1" style="overflow-x: auto;">
 
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video1.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -45,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video2.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -63,7 +129,7 @@
                     <p class="story-location">New York, USA</p>
                 </div>
             </div>
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video3.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -81,7 +147,7 @@
                     <p class="story-location">New York, USA</p>
                 </div>
             </div>
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video1.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -99,7 +165,7 @@
                     <p class="story-location">New York, USA</p>
                 </div>
             </div>
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video1.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -118,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-8 p-0 mt-4 story-video-wrapper ">
+            <div class="col-md-3 col-8 px-1 mt-4 story-video-wrapper ">
                 <video class="story-video" src="{{asset('public/web/assets/images/video3.mp4')}}" autoplay muted loop
                     preload="none"></video>
                 <a href="#" class="anchor-for-image-name-for-stories">
@@ -173,7 +239,7 @@
                 <!-- Sort By (Right / Bottom on mobile) -->
                 <div class="sortby-all-week-month-div ms-sm-3 ms-0 flex-shrink-0">
                     <div class="input-group deals-custom-select-group">
-                        <select class="form-select" id="dealsortBy">
+                        <select class="form-select discount-form-for-filter" id="dealsortBy">
                             <option value="discount" selected>Highest Discount</option>
                             <option value="low_price">Lowest Price</option>
                             <option value="high_price">Highest Price</option>

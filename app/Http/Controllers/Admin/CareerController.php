@@ -11,7 +11,7 @@ class CareerController extends Controller
     public function careerIndex()
     {
         $careers = Career::wherenotNull('description_one')->first();
-        return view('admin.Career.index', ['careers' => $careers]);
+        return view('admin.career.index', ['careers' => $careers]);
     }
 
     public function careerEdit($id)

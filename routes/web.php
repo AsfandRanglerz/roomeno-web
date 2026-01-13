@@ -65,6 +65,15 @@ Route::get('/reservation-booking-detail',[HomeController::class ,'reservationBoo
 Route::get('/user-profile-info',[HomeController::class ,'userProfileInfo'])->name('user-profile-info');
 Route::get('/upload-video',[HomeController::class ,'uploadVideo'])->name('upload-video');
 Route::get('/user-account-info',[HomeController::class ,'userAccountInfo'])->name('user-account-info');
+Route::get('/user-booking-info',[HomeController::class ,'userBookingInfo'])->name('user-booking-info');
+Route::get('/listing-info',[HomeController::class ,'listingInfo'])->name('listing-info');
+Route::get('/credit-info',[HomeController::class ,'creditInfo'])->name('credit-info');
+Route::get('/partner-login',[HomeController::class ,'partnerLogin'])->name('partner-login');
+Route::get('/partner-signup',[HomeController::class ,'partnerSignup'])->name('partner-signup');
+Route::get('/partner-joining',[HomeController::class ,'partnerJoining'])->name('partner-joining');
+Route::get('/add-inventory',[HomeController::class ,'addInventory'])->name('add-inventory');
+Route::get('/partner-dashboard',[HomeController::class ,'partnerDashboard'])->name('partner-dashboard');
+Route::get('/filter',[HomeController::class ,'filter'])->name('filter');
 
 /*Admin routes
  * */
