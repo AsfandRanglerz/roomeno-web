@@ -64,6 +64,18 @@
                         placeholder="example@gmail.com" required>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label text-white">Phone Number<span class="text-danger"> *</span></label>
+                    <input type="number" name="phone" class="form-control auth-input" value="{{ old('phone') }}"
+                        placeholder="e.g. 1234567890" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-white">Country<span class="text-danger"> *</span></label>
+                    <input type="text" name="country" class="form-control auth-input" value="{{ old('country') }}"
+                        placeholder="e.g. United States" required>
+                </div>
+
                 {{-- Password --}}
                 <div class="mb-3 auth-password-field">
                     <div class="d-flex justify-content-between align-items-center mb-1">

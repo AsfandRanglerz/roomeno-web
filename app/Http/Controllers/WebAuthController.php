@@ -57,11 +57,16 @@ class WebAuthController extends Controller
             'password' => 'required',
         ]);
 
+        
         $user = User::where('email', $request->email)->first();
 
+        if ($user->toggle == 0) {
+        return back()->with('error', 'Your account is disabled');
+        }
+
         if ($user && Hash::check($request->password, $user->password)) {
-            auth()->login($user);
-            return redirect()->route('hotels.index');
+            auth()->login($user, $request->filled('remember'));
+            return redirect()->route('index');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);

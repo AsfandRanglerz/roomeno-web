@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/1.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/total users.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/2.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Total listings.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/3.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Total bookings.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/3.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Rooms.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/3.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Revenue Summery.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/3.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Top Sellers.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                         <div class="banner-img">
-                                            <img src="{{ asset('public/admin/assets/img/banner/3.png') }}" alt="">
+                                            <img src="{{ asset('public/admin/assets/img/banner/Payout Pendings.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>

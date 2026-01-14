@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\WebPartnerController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HotelController;
 use App\Http\Controllers\Admin\PressController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\BookingController;

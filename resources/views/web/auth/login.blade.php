@@ -44,12 +44,12 @@
                     </span>
                 </div>
 
-                <input type="password" id="password" class="form-control auth-input">
+                <input type="password" name ="password" id="password" class="form-control auth-input">
 
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <label class="text-white mt-1 small remember-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" name ="remember">
                         <span>Remember Me</span>
                     </label>
                 </div>
