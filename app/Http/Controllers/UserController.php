@@ -165,6 +165,7 @@ public function update(Request $request, $id)
             'required',
             // 'regex:/^\+92[0-9]{10}$/'
         ],
+        'country' => 'required',
         'password' => 'nullable|min:6',
     ]);
 
