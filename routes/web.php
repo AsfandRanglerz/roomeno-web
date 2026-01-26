@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RefundHistoryController;
 use App\Http\Controllers\Admin\SellerHistoryController;
 use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\RoomenoPartnerController;
 use App\Http\Controllers\Admin\TrustAndSafetyController;
 use App\Http\Controllers\Admin\BuyerProtectionController;
 use App\Http\Controllers\Admin\SellerProtectionController;
@@ -171,6 +172,11 @@ Route::delete('/users-destory/{id}', [UserController::class, 'delete'])->name('u
 // Route::get('/users/trashed', [UserController::class, 'trashed']);
 // Route::post('/users/{id}/restore', [UserController::class, 'restore']);
 Route::delete('/users/{id}/force', [UserController::class, 'forceDelete'])->name('user.forceDelete')->middleware('check.permission:Users,delete');
+Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+
+//Roomeno Partner Inventory
+Route::post('/inventory/store', [RoomenoPartnerController::class, 'addInventory'])->name('inventory.store');
+
 
 Route::post('/users/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggle-status');
 

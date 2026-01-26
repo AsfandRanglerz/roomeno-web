@@ -40,36 +40,38 @@ class UserController extends Controller
         return view('users.index', compact('users' , 'sideMenuPermissions'));
     }
 
-public function toggleStatus(Request $request)
-{
-    $user = User::find($request->id);
     
-    if ($user) {
-        $user->toggle = $request->status;
-        $user->save();
+
+    public function toggleStatus(Request $request)
+    {
+        $user = User::find($request->id);
         
-        // If deactivating and reason provided
-        if ($request->status == 0 && $request->reason) {
-            // Save the reason (you might want to create a separate table for this)
-            // $user->deactivation_reason = $request->reason;
-            // $user->save();
+        if ($user) {
+            $user->toggle = $request->status;
+            $user->save();
             
-            // Send email notification
-            $this->sendDeactivationEmail($user, $request->reason);
+            // If deactivating and reason provided
+            if ($request->status == 0 && $request->reason) {
+                // Save the reason (you might want to create a separate table for this)
+                // $user->deactivation_reason = $request->reason;
+                // $user->save();
+                
+                // Send email notification
+                $this->sendDeactivationEmail($user, $request->reason);
+            }
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Status updated successfully',
+                'new_status' => $user->toggle ? 'Activated' : 'Deactivated'
+            ]);
         }
         
         return response()->json([
-            'success' => true,
-            'message' => 'Status updated successfully',
-            'new_status' => $user->toggle ? 'Activated' : 'Deactivated'
-        ]);
+            'success' => false,
+            'message' => 'User not found'
+        ], 404);
     }
-    
-    return response()->json([
-        'success' => false,
-        'message' => 'User not found'
-    ], 404);
-}
 
 protected function sendDeactivationEmail($user, $reason)
 {
@@ -219,5 +221,29 @@ public function update(Request $request, $id)
             return redirect('/user')->with('error', 'User not found');
         }
     }
+
+    public function updateProfile(Request $request)
+{
+    
+
+    $user = Auth::user();
+
+    // Personal Data
+    $user->first_name     = $request->first_name;
+    $user->last_name      = $request->last_name;
+    $user->email          = $request->email;
+    $user->country_region = $request->country_region;
+    $user->phone          = $request->phone;
+
+    // Billing Address
+    $user->billing_country = $request->billing_country;
+    $user->street_address  = $request->street_address;
+    $user->city            = $request->city;
+    $user->zip_code        = $request->zip_code;
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profile updated successfully');
+}
 
 }
