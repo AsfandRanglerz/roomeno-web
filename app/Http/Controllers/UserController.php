@@ -142,7 +142,7 @@ protected function sendDeactivationEmail($user, $reason)
         'password' => bcrypt($request->password),
     ]);
 
-    return redirect()->route('user.index')->with('success', 'User created successfully');
+    return redirect()->route('user.index')->with('success', 'User created successfully.');
 }
 
 
@@ -207,7 +207,7 @@ public function update(Request $request, $id)
 
     $user->save();
 
-    return redirect('/admin/user')->with('success', 'User updated successfully');
+    return redirect('/admin/user')->with('success', 'User updated successfully.');
 }
 
 
@@ -216,7 +216,7 @@ public function update(Request $request, $id)
         $user = User::find($id);
         if ($user) {
             $user->delete();
-            return redirect('/admin/user')->with('success', 'User deleted successfully');
+            return redirect('/admin/user')->with('success', 'User deleted successfully.');
         } else {
             return redirect('/user')->with('error', 'User not found');
         }
@@ -243,7 +243,7 @@ public function update(Request $request, $id)
 
     $user->save();
 
-    return redirect()->back()->with('success', 'Profile updated successfully');
+    return redirect()->back()->with('success', 'Profile updated successfully.');
 }
 
 }

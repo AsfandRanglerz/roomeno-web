@@ -139,7 +139,7 @@ class SubAdminController extends Controller
 
         $subAdmin->roles()->attach($request->role);
 
-        return redirect()->route('subadmin.index')->with(['success' => 'Sub-Admin created successfully']);
+        return redirect()->route('subadmin.index')->with(['success' => 'Sub-Admin created successfully.']);
 
     }
 
@@ -210,14 +210,14 @@ $validatedData = $validator->validated();
          // Single role update
         $subAdmin->roles()->sync([$request->role]);
 
-        return redirect()->route('subadmin.index')->with('success', 'Sub-Admin updated successfully');
+        return redirect()->route('subadmin.index')->with('success', 'Sub-Admin updated successfully.');
     }
 
     public function destroy($id)
     {
         // return $id;
         SubAdmin::destroy($id);
-        return redirect()->route('subadmin.index')->with(['message' => 'Sub-Admin Deleted Successfully']);
+        return redirect()->route('subadmin.index')->with(['message' => 'Sub-Admin Deleted Successfully.']);
     }
 
     public function updatePermissions(Request $request, $id)
@@ -245,7 +245,7 @@ $validatedData = $validator->validated();
 
         SubAdminPermission::insert($permissions);
 
-        return redirect()->route('subadmin.index')->with('message', 'Permissions Updated Successfully');
+        return redirect()->route('subadmin.index')->with('message', 'Permissions Updated Successfully.');
     }
 
     public function StatusChange(Request $request)
