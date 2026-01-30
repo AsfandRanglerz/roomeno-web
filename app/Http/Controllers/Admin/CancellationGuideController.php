@@ -134,7 +134,7 @@ class CancellationGuideController extends Controller
         } else {
             CancellationGuideTwo::create($request->all());
         }
-        return redirect('/admin/cancellation-guide-two')->with('success', 'Cancellation guide two updated successfully');
+        return redirect('/admin/cancellation-guide-two')->with('success', 'Cancellation guide two updated successfully.');
     }
 
     public function cancellationPolicyIndex()
@@ -197,7 +197,7 @@ class CancellationGuideController extends Controller
         } else {
             CancellationPolicy::create($request->all());
         }
-        return redirect('/admin/cancellation-policy')->with('success', 'Cancellation policy updated successfully');
+        return redirect('/admin/cancellation-policy')->with('success', 'Cancellation policy updated successfully.');
     }
 
     public function cancellationPolicyShow($id)

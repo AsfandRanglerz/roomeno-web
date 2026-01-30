@@ -60,7 +60,7 @@ public function resetListingCounter()
         $listing->card_number = $request->input('card_number');
         $listing->cardholder_name = $request->input('cardholder_name');
         $listing->save();
-        return redirect()->route('listing.index')->with('success', 'Listings updated successfully.');
+        return redirect()->route('listing.index')->with('success', 'Listings updated successfully');
     }
 
     public function toggleStatus(Request $request)

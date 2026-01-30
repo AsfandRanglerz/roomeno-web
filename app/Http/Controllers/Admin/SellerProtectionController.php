@@ -49,7 +49,7 @@ class SellerProtectionController extends Controller
     }
         $intro->save();
         
-        return redirect()->route('sellerprotectionintro.index')->with('success', 'Introduction updated successfully.');
+        return redirect()->route('sellerprotectionintro.index')->with('success', 'Introduction updated successfully');
     }
 
     public function sellerProtectionSectionOneIndex()
@@ -211,7 +211,7 @@ class SellerProtectionController extends Controller
     }
         $sectionthree->save();
         
-        return redirect()->route('sellerprotectionsectionthree.index')->with('success', 'Questions updated successfully.');
+        return redirect()->route('sellerprotectionsectionthree.index')->with('success', 'Questions updated successfully');
 }
 
 public function sellerProtectionSectionThreeShow($id)
@@ -238,7 +238,7 @@ public function sellerProtectionSectionThreeShow($id)
         $sectionthree->description = $request->input('description');
         $sectionthree->save();
         
-        return redirect()->route('sellerprotectionsectionthree.show', $id)->with('success', 'Questions updated successfully.');
+        return redirect()->route('sellerprotectionsectionthree.show', $id)->with('success', 'Questions updated successfully');
     }
 
 }

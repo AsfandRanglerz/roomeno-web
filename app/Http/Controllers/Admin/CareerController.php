@@ -34,7 +34,7 @@ class CareerController extends Controller
         $career->description_one = $request->input('description_one');
         $career->save();
         
-        return redirect()->route('career.index')->with('success', 'Career updated successfully.');
+        return redirect()->route('career.index')->with('success', 'Career updated successfully');
     }
 
     public function careerShow($id)
@@ -65,6 +65,6 @@ class CareerController extends Controller
         $career->description_two = $request->input('description_two');
         $career->save();
         
-        return redirect()->route('career.show', $id)->with('success', 'Career updated successfully.');
+        return redirect()->route('career.show', $id)->with('success', 'Career updated successfully');
     }
 }

@@ -103,7 +103,7 @@
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"
                                         {{ old('users') && in_array($user->id, old('users')) ? 'selected' : '' }}>
-                                        {{ $user->name }}
+                                        {{ $user->first_name }}
                                     </option>
                                 @endforeach
                             </select>

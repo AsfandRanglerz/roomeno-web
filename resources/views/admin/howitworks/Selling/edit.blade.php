@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Edit Main Title')
+@section('title', 'Edit Selling')
 @section('content')
 
     <div class="main-content">
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card">
-                                <h4 class="text-center my-4">Edit Main Title</h4>
+                                <h4 class="text-center my-4">Edit Selling</h4>
                                 <div class="row mx-0 px-4">
 
                                     <!-- Main Title Field -->

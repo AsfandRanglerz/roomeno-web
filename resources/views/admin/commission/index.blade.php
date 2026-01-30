@@ -24,7 +24,7 @@
                                     @foreach ($commisions as $commision)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $commision->commision ?? '--' }} $</td>
+                                        <td>{{ $commision->commision ?? '--' }}%</td>
                                        
                                         <td style="vertical-align: middle;">
                                             <div class="d-flex align-items-center" style="gap: 6px;">

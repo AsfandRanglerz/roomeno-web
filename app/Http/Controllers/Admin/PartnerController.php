@@ -45,7 +45,7 @@ class PartnerController extends Controller
         }
         $intro->save();
 
-        return redirect()->route('partnerintroduction.index')->with('success', 'Introduction updated successfully.');
+        return redirect()->route('partnerintroduction.index')->with('success', 'Introduction updated successfully');
     }
 
     public function helpHotelIndex()

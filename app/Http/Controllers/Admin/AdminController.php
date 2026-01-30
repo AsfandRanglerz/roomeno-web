@@ -121,7 +121,7 @@ public function update_profile(Request $request)
     // Update other profile data
     $user->update($data);
 
-    return back()->with('success', 'Profile updated successfully');
+    return back()->with('success', 'Settings updated successfully');
 }
 
 

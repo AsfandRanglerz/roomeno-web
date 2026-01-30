@@ -42,6 +42,6 @@ class PressController extends Controller
         }
         $press->save();
 
-        return redirect()->route('press.index')->with('success', 'Press updated successfully.');
+        return redirect()->route('press.index')->with('success', 'Press updated successfully');
     }
 }

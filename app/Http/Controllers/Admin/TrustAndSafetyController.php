@@ -38,7 +38,7 @@ class TrustAndSafetyController extends Controller
         $intro->description = $request->input('description');
         $intro->save();
 
-        return redirect()->route('trustintro.index')->with('success', 'Introduction updated successfully.');
+        return redirect()->route('trustintro.index')->with('success', 'Introduction updated successfully');
     }
 
     public function protectBuyerIndex()
@@ -313,7 +313,7 @@ class TrustAndSafetyController extends Controller
         } else {
             RoomenoBenefit::create($request->all());
         }
-        return redirect('/admin/roomeno-benefits-everyone-show/'. $data->id)->with('success', 'Roomeno benefits everyone updated successfully');
+        return redirect('/admin/roomeno-benefits-everyone-show/'. $data->id)->with('success', 'Roomeno benefits everyone updated successfully.');
     }
 
 

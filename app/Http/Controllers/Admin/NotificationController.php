@@ -116,7 +116,7 @@ class NotificationController extends Controller
 
         // 4️⃣ Redirect back with success after loop completes
         return redirect()->route('notification.index')
-            ->with(['success' => 'Notifications sent successfully.']);
+            ->with(['success' => 'Notifications sent successfully']);
     }
 
     public function destroy(Request $request, $id)
@@ -125,7 +125,7 @@ class NotificationController extends Controller
         $notification = AdminNotification::find($id);
         $notification->delete();
 
-        return redirect()->route('notification.index')->with(['success' => 'Notification Deleted Successfully.']);
+        return redirect()->route('notification.index')->with(['success' => 'Notification Deleted Successfully']);
     }
 
     public function deleteAll()

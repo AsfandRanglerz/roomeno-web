@@ -16,7 +16,7 @@ class SellRoomController extends Controller
 {
     public function hotelInfoIndex()
     {
-        $hotels = HotelInfo::latest()->get();
+        $hotels = HotelInfo::latest()->where('name', '!=', null)->where('board_name', '!=', null)->where('check_in', '!=', null)->where('check_out', '!=', null)->where('people_number', '!=', null)->get();
         return view('admin.sellaroom.hotelinfo', compact('hotels'));
     }
 
