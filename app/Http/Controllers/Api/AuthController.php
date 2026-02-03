@@ -139,42 +139,21 @@ class AuthController extends Controller
     public function registerUser(Request $request)
     {
         try {
-            $request->validate(
-                [
-                    'email' => 'nullable|unique:users,email',
-                    'phone' => 'nullable|unique:users,phone',
-                    'password' => 'required|min:6',
-                ],
-                [
-                    'email.unique' => 'This email is already taken.',
-                    'phone.unique' => 'This phone number is already taken.',
-                ]
-            );
-
-            // OTP Record Check
-            $otpRecord = EmailOtp::where('email', $request->email)->first();
-            if (! $otpRecord) {
-                return response()->json([
-                    'error' => 'OTP record not found for the given email.',
-                ], 404);
-            }
 
             // ✅ User Create
             $user = User::create([
-                'email' => $otpRecord->email,
-                'phone' => $otpRecord->phone,
-                'name' => $otpRecord->name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'country' => $request->country,
                 'password' => Hash::make($request->password),
-                'status' => is_null($otpRecord->phone) ? 1 : (is_null($otpRecord->email) ? 2 : null),
+                'referral_code' => $request->referral_code,
             ]);
 
-            // ✅ Delete OTP record
-            $otpRecord->delete();
-
-            // ✅ Notification send (Push + DB)
             // Title & Description   
             return response()->json([
-                'message' => 'Registered successfully.',
+                'message' => 'Registered successfully',
                 'user' => $user,
             ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -489,33 +468,28 @@ class AuthController extends Controller
     {
 
         try {
-            // Validate request
+           // ✅ Find user by email
+        $user = User::where('email', trim($request->email))->first();
 
-            $loginInput = $request->input('email') ?: $request->input('phone');
-
-            // Trim and clean the input
-            $loginInput = trim($loginInput);
-
-            // Determine if login is email or phone
-            $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
-
-            // For phone numbers, remove any non-digit characters
-
-            $user = User::where($fieldType, $loginInput)->first();
-
-            if (! $user) {
-                return response()->json(['message' => 'User not found'], 404);
-            }
-
-            if (! Hash::check($request->password, $user->password)) {
-                return response()->json(['message' => 'Invalid password'], 401);
-            }
-
-			 if ($user->toggle == 0) {
+        if (! $user) {
             return response()->json([
-                'message' => 'Your account has been deactivated. Please check your email for details or contact the administrator.'
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        // ✅ Check password
+        if (! Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => 'Invalid password'
+            ], 401);
+        }
+
+        // ✅ Check account status
+        if ($user->toggle == 0) {
+            return response()->json([
+                'message' => 'Your account has been deactivated.'
             ], 403);
-             }
+        }
 
             // Update FCM token
             $user->fcm = $request->fcm;
@@ -529,11 +503,12 @@ class AuthController extends Controller
                 'token' => $token,
                 'user' => [
                     'id' => $user->id,
-                    'name' => $user->name ?? null,
+                    'first_name' => $user->first_name ?? null,
+                    'last_name' => $user->last_name ?? null,
                     'email' => $user->email ?? null,
                     'phone' => $user->phone ?? null,
-                    'image' => $user->image ?? null,
                     'country' => $user->country ?? null,
+                    'referral_code' => $user->referral_code ?? null,
                     'fcm' => $user->fcm ?? null,
                 ],
             ], 200);
@@ -577,24 +552,14 @@ class AuthController extends Controller
 	 public function forgotPassword(Request $request)
     {
         try {
-            $type = $request->type; // 'email' or 'phone'
-            $identifier = $request->identifier; // This will hold either email or phone
-
-            // Validate type existence
-            if (! in_array($type, ['email', 'phone'])) {
-                return response()->json(['message' => 'Invalid type provided'], 400);
-            }
-
-            // Cross validation: If type = email but phone entered
+            $email = $request->email; // 'email'
 
             // Find user by email or phone
-            $user = User::where($type, $identifier)->first();
-
-            $label = $type === 'phone' ? 'Phone number' : 'Email';
+            $user = User::where('email', $email)->first();
 
             if (! $user) {
                 return response()->json([
-                    'message' => $label.' does not exist',
+                    'message' => 'Email does not exist.',
                 ], 404);
             }
 
@@ -604,30 +569,20 @@ class AuthController extends Controller
 
             // Store in database
              EmailOtp::updateOrCreate(
-				[$type => $identifier], // condition (email OR phone)
 				[
+                    'email' => $request->email,
 					'otp'       => $otp,
 					'otp_token' => $otpToken,
 				]
 			);
             // if ($type === 'email') {
-            //     Mail::to($identifier)->send(new ForgotOTPMail($otp));
+            //     Mail::to($email)->send(new ForgotOTPMail($otp));
             // }
-            // if ($type === 'phone') {
-            //     // Send SMS
-            //     $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
-            //     $twilio->messages->create($identifier, [
-            //         'from' => env('TWILIO_PHONE_NUMBER'),
-            //         'body' => "Dear user, your One-Time Password (OTP) is $otp. Please do not share this code with anyone. - RenSolutions",
-            //     ]);
-            // }
+            
 
-            $msg = $type === 'phone'
-            ? 'OTP sent successfully to your phone'
-            : 'OTP sent successfully to your email';
-
+        
             return response()->json([
-                'message' => $msg,
+                'message' => 'OTP sent successfully',
                 'otp_token' => $otpToken,
             ], 200);
 
@@ -643,11 +598,7 @@ class AuthController extends Controller
     public function forgotverifyOtp(Request $request)
     {
         try {
-            // Validate input
-            $request->validate([
-                'otp' => 'required|digits:4',
-                // 'otp_token' => 'required'
-            ]);
+            
 
             // Find OTP record
             $otpRecord = EmailOtp::where('otp_token', $request->otp_token)->latest()->first();
@@ -670,9 +621,7 @@ class AuthController extends Controller
 
             if ($otpRecord->email) {
                 $user = User::where('email', $otpRecord->email)->first();
-            } elseif ($otpRecord->phone) {
-                $user = User::where('phone', $otpRecord->phone)->first();
-            }
+            } 
 
             if (! $user) {
                 return response()->json([
@@ -685,7 +634,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => 'OTP verified successfully',
-                'otp_token' => $otpRecord->otp_token,
+                // 'otp_token' => $otpRecord->otp_token,
             ], 200);
 
         } catch (ValidationException $e) {
@@ -706,14 +655,10 @@ class AuthController extends Controller
     public function resendOtp(Request $request)
     {
         try {
-            $type = $request->type;
-            $identifier = $request->identifier;
+            $email = $request->email;
 
-            if (! in_array($type, ['email', 'phone'])) {
-                return response()->json(['message' => 'Invalid type provided'], 400);
-            }
-
-            $recentOtp = EmailOtp::where($type, $identifier)
+           
+            $recentOtp = EmailOtp::where('email', $email)
                 ->latest()
                 ->first();
 
@@ -732,23 +677,14 @@ class AuthController extends Controller
             ]);
 
             // if ($type === 'email') {
-            //     Mail::to($identifier)->send(new ForgotOTPMail($otp));
+            //     Mail::to($email)->send(new ForgotOTPMail($otp));
             // }
 
-            // if ($type === 'phone') {
-            //     $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
-            //     $twilio->messages->create($identifier, [
-            //         'from' => env('TWILIO_PHONE_NUMBER'),
-            //         'body' => "Dear user, your One-Time Password (OTP) is $otp. Please do not share this code with anyone. - RenSolutions",
-            //     ]);
-            // }
 
          return response()->json([
-    'message' => !empty($request->type === 'email')
-        ? 'A verification OTP has been sent to your email'
-        : 'A verification OTP has been sent to your phone',
-    'otp_token' => $otpToken,
-	], 200);
+            'message' => 'A verification OTP has been sent to your email.',
+            'otp_token' => $otpToken,
+	    ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'message' => 'Validation error',
@@ -756,7 +692,7 @@ class AuthController extends Controller
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Kuch ghalat ho gaya',
+                'message' => 'Something went wrong',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -779,12 +715,10 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Invalid or unverified OTP token'], 400);
             }
 
-            // Find the user by email or phone
+            // Find the user by email
             if ($otpRecord->email !== null) {
                 $user = User::where('email', $otpRecord->email)->first();
-            } elseif ($otpRecord->phone !== null) {
-                $user = User::where('phone', $otpRecord->phone)->first();
-            }
+            } 
 
             if (! $user) {
                 return response()->json(['message' => 'User not found'], 404);
@@ -821,7 +755,7 @@ class AuthController extends Controller
         }
     }
 
-	public function getLoggedInUserInfo()
+	public function getpersonalInfo()
     {
         try {
             $user = Auth::user();
@@ -831,9 +765,9 @@ class AuthController extends Controller
             }
 
             return response()->json([
-                'name' => $user->name ?? null,
-                'image' => $user->image ? 'public/'.$user->image : 'https://ranglerzwp.xyz/myren/public/admin/assets/images/avator.png',
-                'country' => $user->country ?? null,
+                'first_name' => $user->first_name ?? null,
+                'last_name' => $user->last_name ?? null,
+                // 'image' => $user->image ? 'public/'.$user->image : 'https://ranglerzwp.xyz/myren/public/admin/assets/images/avator.png',
                 'email' => $user->email ?? null,
                 'phone' => $user->phone ?? null,
             ]);
@@ -844,5 +778,75 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+    public function personalInfo(Request $request)
+{
+    try {
+        $user = Auth::user();
+
+        if (! $user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        // Update only if field exists in request
+        if ($request->has('first_name')) {
+            $user->first_name = $request->first_name;
+        }
+
+        if ($request->has('last_name')) {
+            $user->last_name = $request->last_name;
+        }
+
+        if ($request->has('email')) {
+            $user->email = $request->email;
+        }
+
+        if ($request->has('phone')) {
+            $user->phone = $request->phone;
+        }
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'Personal info updated successfully',
+            'data' => [
+                'first_name' => $user->first_name,
+                'last_name'  => $user->last_name,
+                'email'      => $user->email,
+                'phone'      => $user->phone,
+            ],
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong.',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+}
+
+ public function deleteAccount(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
+            // Perform account deletion logic here
+            $user->delete();
+            // Mail::to($user->email)->send(new AccountDeletion($user));
+
+            return response()->json([
+                'message' => 'Account deleted successfully'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while deleting the account',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }
 

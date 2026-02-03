@@ -61,10 +61,11 @@ Route::get('/companies-form-details/{form_no}', [FormController::class, 'getComp
 
 Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('get-profile', [AuthController::class, 'getProfile']); // Get Profile
-    Route::put('update-profile', [AuthController::class, 'updateProfile']); // Update Profile
+    Route::get('get-personalinfo', [AuthController::class, 'getpersonalInfo']); // Get Profile
+    Route::post('update-personalinfo', [AuthController::class, 'personalInfo']); // Update Profile
 	Route::post('/update-profile-verify', [AuthController::class, 'verifyAndUpdateContact']);
-	    Route::get('/get-logged-in-user-info', [AuthController::class, 'getLoggedInUserInfo']);
+	Route::get('/get-logged-in-user-info', [AuthController::class, 'getLoggedInUserInfo']);
+    Route::delete('/deleteaccount', [AuthController::class, 'deleteAccount']);
 
 
     // Password reset for Admin & SubAdmin via API
