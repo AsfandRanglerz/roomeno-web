@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\SellRoomController;
 use App\Http\Controllers\Admin\SubAdminController;
 use App\Http\Controllers\Admin\ComissionController;
 use App\Http\Controllers\Admin\SellARoomController;
+use App\Http\Controllers\Admin\HotelVideoController;
 use App\Http\Controllers\Admin\HowItWorksController;
 use App\Http\Controllers\Admin\CustomFormsController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -211,6 +212,12 @@ Route::post('/booking/approve/{id}', [BookingController::class, 'approve'])->nam
 Route::post('/booking/reject/{id}', [BookingController::class, 'reject'])->name('booking.reject');
 Route::post('/booking/{id}/payment', [BookingController::class, 'payment'])->name('booking.payment');
 Route::post('/booking/{id}/refund', [BookingController::class, 'refund'])->name('booking.refund');
+
+// ############ Hotel Videos  #################
+Route::get('/hotel-videos', [HotelVideoController::class, 'index'])->name('hotelvideos.index')->middleware('check.permission:Hotel Videos,view');
+Route::get('/hotel-videos/count', [HotelVideoController::class, 'updatehotelvideosCounter'])->name('hotelvideos.counter');
+Route::post('/hotel-videos/approve/{id}', [HotelVideoController::class, 'approve'])->name('hotelvideos.approve');
+Route::post('/hotel-videos/reject/{id}', [HotelVideoController::class, 'reject'])->name('hotelvideos.reject');
 
 // ############ Seller History  #################
 Route::get('/seller-history', [SellerHistoryController::class, 'index'])->name('sellerhistory.index')->middleware('check.permission:Sellers Payment History,view');

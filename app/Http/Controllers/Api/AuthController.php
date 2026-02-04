@@ -848,5 +848,45 @@ class AuthController extends Controller
         }
     }
 
+    public function changePassword(Request $request)
+{
+    try {
+        $user = Auth::user();
+
+        if (! $user) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
+        // ✅ Prevent same password
+        if (Hash::check($request->new_password, $user->password)) {
+                return response()->json([
+                    'message' => 'This password is already in use. Please choose a different password',
+                ], 422);
+            }
+
+        // ✅ Update password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password changed successfully'
+        ], 200);
+
+    } catch (ValidationException $e) {
+        return response()->json([
+            'message' => 'Validation error',
+            'errors'  => $e->errors(),
+        ], 422);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+}
+
 }
 

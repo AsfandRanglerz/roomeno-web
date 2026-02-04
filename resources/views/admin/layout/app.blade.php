@@ -81,6 +81,25 @@
         updatelistingCounter();
         setInterval(updatelistingCounter, 10000);
     </script>
+     <script>
+        function updatehotelvideosCounter() {
+            $.ajax({
+                url: "{{ route('hotelvideos.counter') }}",
+                type: 'GET',
+                success: function(response) {
+                    // Ensure response.count exists and handle counts over 99
+                    let count = response.count || 0; // Default to 0 if no count is returned
+                    $('#updatehotelvideosCounter').text(count > 99 ? '99+' : count);
+                    // $('#orderCounter').text(response.count);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+        updatehotelvideosCounter();
+        setInterval(updatehotelvideosCounter, 10000);
+    </script>
 
     <!-- ========== Core JS Libraries ========== -->
     // <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

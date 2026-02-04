@@ -15,6 +15,7 @@
                             <table class="responsive table" id="table_id_events">
                                 <thead>
                                     <tr>
+                                        <th>Sr.</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Email</th>
@@ -35,6 +36,7 @@
                                 <tbody>
                                      @foreach ($bookings as $booking)
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $booking->first_name?? '--' }}</td>
                                         <td>{{ $booking->last_name?? '--' }}</td>
                                         <td><a href="mailto:{{ $booking->email }}">{{ $booking->email?? '--' }}</a></td>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\SideMenueController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\HotelVideoController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\SideMenuPermissionController;
 
@@ -66,6 +67,14 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/update-profile-verify', [AuthController::class, 'verifyAndUpdateContact']);
 	Route::get('/get-logged-in-user-info', [AuthController::class, 'getLoggedInUserInfo']);
     Route::delete('/deleteaccount', [AuthController::class, 'deleteAccount']);
+
+    //Change Password
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+    // Uplaod Video
+    Route::post('/upload-video', [HotelVideoController::class, 'upload']);
+    Route::get('/my-videos', [HotelVideoController::class, 'myVideos']);
+
 
 
     // Password reset for Admin & SubAdmin via API

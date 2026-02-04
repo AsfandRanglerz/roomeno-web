@@ -125,6 +125,25 @@
                 </li>
             @endif
 
+            {{--  Hotel Videos --}}
+
+            @if (Auth::guard('admin')->check() ||
+                    ($sideMenuPermissions->has('Hotel Videos') && $sideMenuPermissions['Hotel Videos']->contains('view')))
+                <li class="dropdown {{ request()->is('admin/hotel-videos*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/hotel-videos') }}" class="nav-link">
+                        <i data-feather="video"></i>
+                        <span>Hotel Videos</span>
+                        <div id="updatehotelvideosCounter"
+                        class="badge {{ request()->is('admin/hotel-videos*') ? 'bg-white text-dark' : 'bg-primary text-white' }} rounded-circle"
+                        style="display: inline-flex; justify-content: center; align-items: center; 
+                            min-width: 22px; height: 22px; border-radius: 50%; 
+                            text-align: center; font-size: 12px; margin-left: 5px; padding: 3px;">
+                        0
+                    </div>
+                    </a>
+                </li>
+            @endif
+
             {{--  Seller History--}}
 
             @if (Auth::guard('admin')->check() ||
