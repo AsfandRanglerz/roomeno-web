@@ -22,7 +22,8 @@
                                         <th>Country Code</th>
                                         <th>Phone</th>
                                         <th>Card Number</th>
-                                        <th>Cardholder Name</th>
+                                        <th>Expiration Date</th>
+                                        <th>Security Code</th>
                                         <th>Country</th>
                                         <th>Original Price</th>
                                         <th>Discounted Price</th>
@@ -43,7 +44,8 @@
                                         <td>{{ $booking->country_code?? '--' }}</td>
                                         <td>{{ $booking->phone?? '--' }}</td>
                                         <td>{{ $booking->card_number?? '--' }}</td>
-                                        <td>{{ $booking->cardholder_name?? '--' }}</td>
+                                        <td>{{ $booking->expiration_date?? '--' }}</td>
+                                        <td>{{ $booking->security_code?? '--' }}</td>
                                         <td>{{ $booking->country?? '--' }}</td>
                                         <td>{{ $booking->original_price?? '--' }}</td>
                                         <td>{{ $booking->discounted_price?? '--' }}</td>

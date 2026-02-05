@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\FormController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\SideMenueController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\HotelVideoController;
+use App\Http\Controllers\Api\SellMyRoomController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\SideMenuPermissionController;
 
@@ -74,6 +76,18 @@ Route::middleware('auth:sanctum')->group(function () {
     // Uplaod Video
     Route::post('/upload-video', [HotelVideoController::class, 'upload']);
     Route::get('/my-videos', [HotelVideoController::class, 'myVideos']);
+
+    //Hotel Info
+    Route::post('/hotel-info', [SellMyRoomController::class, 'hotelInfo']);
+
+    //Booking Info
+    Route::post('/booking-info/{id}', [SellMyRoomController::class, 'bookingInfo']);
+    Route::get('/gethotel-info/{id}', [SellMyRoomController::class, 'gethotelInfo']);
+
+    //bookings
+    Route::post('/guest-info', [BookingController::class, 'guestinfo']);
+    Route::post('/special-request/{id}', [BookingController::class, 'specialrequest']);
+    Route::post('/payment-info/{id}', [BookingController::class, 'paymentinfo']);
 
 
 

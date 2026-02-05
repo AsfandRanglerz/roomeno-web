@@ -17,7 +17,7 @@ class BookingController extends Controller
 
     public function bookingIndex()
     {
-        $bookings = Booking::latest()->get();
+        $bookings = Booking::latest()->where('first_name', '!=', null)->where('last_name', '!=', null)->where('email', '!=', null)->where('country_code', '!=', null)->where('phone', '!=', null)->where('request', '!=', null)->where('card_number', '!=', null)->where('expiration_date', '!=', null)->where('security_code', '!=', null)->where('country', '!=', null)->get();
         return view('admin.bookings.index', compact('bookings'));
     }
 
