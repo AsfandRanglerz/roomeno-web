@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\SideMenueController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\ListingController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\HotelVideoController;
 use App\Http\Controllers\Api\SellMyRoomController;
@@ -88,6 +89,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/guest-info', [BookingController::class, 'guestinfo']);
     Route::post('/special-request/{id}', [BookingController::class, 'specialrequest']);
     Route::post('/payment-info/{id}', [BookingController::class, 'paymentinfo']);
+    Route::post('/store-bookinginfo/{id}', [BookingController::class, 'storeBookingInfo']);
+    Route::get('/get-bookinginfo/{id}', [BookingController::class, 'getBookingInfo']);
+    Route::get('/my-bookings', [BookingController::class, 'myBookings']);
+    Route::get('/booking-details/{id}', [BookingController::class, 'bookingDetail']);
+
+
+    //Listings
+    Route::get('/get-listings', [ListingController::class, 'getlistings']);
 
 
 

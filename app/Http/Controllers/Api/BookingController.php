@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -105,4 +106,182 @@ class BookingController extends Controller
             ], 500);
         }
     }
+
+    public function storeBookingInfo(Request $request, $id)
+{
+    try {
+        
+        $booking = Booking::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        // Convert date format: Nov 28, 2026 → Y-m-d
+        $checkIn  = Carbon::createFromFormat('M d, Y', $request->check_in)->format('Y-m-d');
+        $checkOut = Carbon::createFromFormat('M d, Y', $request->check_out)->format('Y-m-d');
+
+        // Save data directly
+        $booking->checkin = $checkIn;
+        $booking->checkout = $checkOut;
+        $booking->people_number = $request->people_number;
+        $booking->save();
+
+        return response()->json([
+            'message' => 'Booking info saved successfully',
+            'data' => [
+                'check_in'      => Carbon::parse($checkIn)->format('M d, Y'),
+                'check_out'     => Carbon::parse($checkOut)->format('M d, Y'),
+                'people_number' => $booking->people_number,
+            ],
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
+public function getBookingInfo($id)
+{
+    try {
+        $booking = Booking::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        return response()->json([
+            'message' => 'Booking info retrieved successfully',
+            'data' => [
+                'check_in'      => Carbon::parse($booking->checkin)->format('M d, Y'),
+                'check_out'     => Carbon::parse($booking->checkout)->format('M d, Y'),
+                'people_number' => $booking->people_number,
+            ],
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
+public function myBookings()
+{
+    try {
+        $bookings = Booking::where('user_id', Auth::id())
+            ->with('hotel')
+            ->latest()
+            ->get();
+
+        $data = $bookings->map(function ($booking) {
+
+            $checkIn  = Carbon::parse($booking->check_in);
+            $checkOut = Carbon::parse($booking->check_out);
+
+            return [
+                'booking_id' => $booking->id,
+
+                'hotel' => [
+                    'name'   => $booking->hotel->name ?? null,
+                    'image'  => $booking->hotel->image
+                                ? asset($booking->hotel->image)
+                                : null,
+                    'rating' => $booking->hotel->rating ?? null,
+                    'reviews'=> $booking->hotel->reviews_count ?? 0,
+                    'city'   => $booking->hotel->city ?? null,
+                    'country'=> $booking->hotel->country ?? null,
+                ],
+
+                'stay_duration' => $checkIn->format('F jS') .
+                                   ' - ' .
+                                   $checkOut->format('jS'),
+
+                'price' => [
+                    'per_night' => $booking->price_per_night,
+                    'currency'  => '$',
+                ],
+
+                // 'status' => $booking->status, // confirmed / cancelled
+            ];
+        });
+
+        return response()->json([
+            'message' => 'My bookings fetched successfully',
+            'data'    => $data
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+}
+
+public function bookingDetail($id)
+{
+    try {
+        $booking = Booking::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->with('hotel') // relationship required
+            ->first();
+
+        if (! $booking) {
+            return response()->json([
+                'message' => 'Booking not found'
+            ], 404);
+        }
+
+        // Dates
+        $checkIn  = Carbon::parse($booking->check_in);
+        $checkOut = Carbon::parse($booking->check_out);
+        $nights   = $checkIn->diffInDays($checkOut);
+
+        return response()->json([
+            'data' => [
+                'hotel' => [
+                    'name'        => $booking->hotel->name ?? null,
+                    'image'       => $booking->hotel->image 
+                                     ? asset($booking->hotel->image)
+                                     : null,
+                    'rating'      => $booking->hotel->rating ?? null,
+                    'address'     => $booking->hotel->address ?? null,
+                    'description' => $booking->hotel->description ?? null,
+                ],
+
+                'trip_info' => [
+                    'trip_start' => 'Your trip starts ' . $checkIn->format('l, d F Y'),
+                    'check_in'   => [
+                        'date' => $checkIn->format('l, d December Y'),
+                        // 'time' => '3 PM',
+                    ],
+                    'check_out'  => [
+                        'date' => $checkOut->format('l, d December Y'),
+                        // 'time' => '11 AM',
+                    ],
+                    'nights' => $nights . ' nights',
+                ],
+
+                'contact_info' => [
+                    'email' => $booking->email ?? null,
+                    'phone' => $booking->phone ?? null,
+                ],
+
+                'price' => [
+                    'total_price' => $booking->total_price,
+                    'currency'    => '$',
+                    'payment_status' => $booking->payment_status == 1 ? 'Paid' : 'Unpaid',
+                ],
+            ]
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Something went wrong',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+}
+
 }
