@@ -20,5 +20,17 @@ class Hotel extends Model
         'location',
         'city',
         'country',
+        'price',
+        'stars',
+        'amenities',
+        'rating',
+        'max_guests',
+        'free_cancellation',
+        
     ];
+
+    public function bookings()
+{
+    return $this->hasMany(Booking::class);
+}
 }

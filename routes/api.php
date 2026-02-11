@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FormController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\SideMenueController;
+use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ListingController;
@@ -116,6 +118,13 @@ Route::get('/getcontact', [ContactUsController::class, 'contactUs'])->name('getc
 
 
 });
+
+//Filter
+Route::get('/hotels/filter', [FilterController::class, 'filter']);
+
+//search
+Route::post('/search-hotels', [HomeController::class, 'search']);
+
 
 
 
