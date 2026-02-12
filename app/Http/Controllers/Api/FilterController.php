@@ -36,16 +36,12 @@ class FilterController extends Controller
 
         // 🔹 Free cancellation
         if ($request->filled('free_cancellation')) {
-            $query->where('free_cancellation', 1);
+            $query->where('free_cancellation', 1); // 1 for free cancellation is true
         }
 
         // 🔹 Guest rating
         if ($request->filled('ratings')) {
-            $query->where(function ($q) use ($request) {
-                foreach ($request->ratings as $rating) {
-                    $q->orWhere('rating', '>=', $rating);
-                }
-            });
+            $query->whereIn('rating', $request->ratings);
         }
 
         // 🔹 Amenities filter (stored as JSON)

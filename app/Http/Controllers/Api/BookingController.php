@@ -176,16 +176,16 @@ public function myBookings()
 
         $data = $bookings->map(function ($booking) {
 
-            $checkIn  = Carbon::parse($booking->check_in);
-            $checkOut = Carbon::parse($booking->check_out);
+            $checkIn  = Carbon::parse($booking->checkin);
+            $checkOut = Carbon::parse($booking->checkout);
 
             return [
                 'booking_id' => $booking->id,
 
                 'hotel' => [
                     'name'   => $booking->hotel->name ?? null,
-                    'image'  => $booking->hotel->image
-                                ? asset($booking->hotel->image)
+                    'image' => !empty($booking->hotel->images)
+                                ? asset($booking->hotel->images[0])
                                 : null,
                     'rating' => $booking->hotel->rating ?? null,
                     'reviews'=> $booking->hotel->reviews_count ?? 0,
@@ -198,8 +198,9 @@ public function myBookings()
                                    $checkOut->format('jS'),
 
                 'price' => [
-                    'per_night' => $booking->price_per_night,
-                    'currency'  => '$',
+                    'discounted_price' => $booking->discounted_price . '$',
+                    'per_night' => $booking->total_price .'$',
+                    
                 ],
 
                 // 'status' => $booking->status, // confirmed / cancelled
@@ -234,16 +235,16 @@ public function bookingDetail($id)
         }
 
         // Dates
-        $checkIn  = Carbon::parse($booking->check_in);
-        $checkOut = Carbon::parse($booking->check_out);
+        $checkIn  = Carbon::parse($booking->checkin);
+        $checkOut = Carbon::parse($booking->checkout);
         $nights   = $checkIn->diffInDays($checkOut);
 
         return response()->json([
             'data' => [
                 'hotel' => [
                     'name'        => $booking->hotel->name ?? null,
-                    'image'       => $booking->hotel->image 
-                                     ? asset($booking->hotel->image)
+                    'image'       => !empty($booking->hotel->images)
+                                     ? asset($booking->hotel->images[0])
                                      : null,
                     'rating'      => $booking->hotel->rating ?? null,
                     'address'     => $booking->hotel->address ?? null,
@@ -253,11 +254,11 @@ public function bookingDetail($id)
                 'trip_info' => [
                     'trip_start' => 'Your trip starts ' . $checkIn->format('l, d F Y'),
                     'check_in'   => [
-                        'date' => $checkIn->format('l, d December Y'),
+                        'date' => $checkIn->format('l, d F Y'),
                         // 'time' => '3 PM',
                     ],
                     'check_out'  => [
-                        'date' => $checkOut->format('l, d December Y'),
+                        'date' => $checkOut->format('l, d F Y'),
                         // 'time' => '11 AM',
                     ],
                     'nights' => $nights . ' nights',
@@ -269,9 +270,8 @@ public function bookingDetail($id)
                 ],
 
                 'price' => [
-                    'total_price' => $booking->total_price,
-                    'currency'    => '$',
-                    'payment_status' => $booking->payment_status == 1 ? 'Paid' : 'Unpaid',
+                    'total_price' => $booking->total_price . '$',
+                    'payment_status' => $booking->is_paid== 1 ? 'Paid' : 'Unpaid',
                 ],
             ]
         ], 200);

@@ -29,6 +29,11 @@ class Hotel extends Model
         
     ];
 
+     protected $casts = [
+        'images'    => 'array',
+        'amenities' => 'array',
+    ];
+
     public function bookings()
 {
     return $this->hasMany(Booking::class);

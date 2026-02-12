@@ -100,6 +100,14 @@ Route::middleware('auth:sanctum')->group(function () {
     //Listings
     Route::get('/get-listings', [ListingController::class, 'getlistings']);
 
+    //Featured Listings
+    Route::get('/featured-listings', [HomeController::class, 'getfeaturedListings']);
+
+    //Promo Code
+    Route::post('/promo/create', [PromoCodeController::class, 'createPromo']);
+    Route::post('/promo/apply', [PromoCodeController::class, 'applyPromo']);
+    
+
 
 
     // Password reset for Admin & SubAdmin via API

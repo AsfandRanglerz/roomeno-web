@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Hotel;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -71,4 +73,22 @@ class HomeController extends Controller
         ], 500);
     }
 }
+
+public function getfeaturedListings()
+    {
+        try {
+            $user = Auth::user();
+            $hotels = Listing::where('is_featured', 1)->get();
+
+            return response()->json([
+                'message' => 'Featured hotel retrieved successfully',
+                'data' => $hotels
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
