@@ -2,14 +2,47 @@
 
 namespace App\Http\Controllers\Api;
 
-use Carbon\Carbon;
-use App\Models\Booking;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\PromoCodeUsage;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
+    private function rewardSender($booking)
+{
+    
+    // Check if booking used a promo code
+    if (! $booking->promo_code_id) {
+        return;
+    }
+
+    // Find promo usage
+    $usage = PromoCodeUsage::where('promo_code_id', $booking->promo_code_id)
+        ->where('used_by', $booking->user_id)
+        ->where('sender_rewarded', false)
+        ->first();
+
+    if (! $usage) {
+        return;
+    }
+
+    // Reward sender
+    // $sender = User::find($usage->sender_id);
+
+    // if ($sender) {
+    //     $sender->wallet_balance += 15; // or create wallet transaction
+    //     $sender->save();
+    // }
+
+    // Mark sender as rewarded
+    $usage->update([
+        'sender_rewarded' => true
+    ]);
+}
     public function guestinfo(Request $request)
     {
         try {
@@ -17,12 +50,15 @@ class BookingController extends Controller
 
             $bookinginfo = Booking::create([
                 'user_id'    => $user->id,
+                'promo_code_id' => $request->promo_code_id,
                 'first_name' => $request->first_name,
                 'last_name'  => $request->last_name,
                 'email'      => $request->email,
                 'country_code'     => $request->country_code,
                 'phone'      => $request->phone,
             ]);
+
+            $this->rewardSender($bookinginfo);
 
             return response()->json([
                 'message' => 'Guest info submitted successfully',

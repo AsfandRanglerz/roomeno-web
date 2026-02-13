@@ -1,21 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\FormController;
 use App\Http\Controllers\Api\HomeController;
-use App\Http\Controllers\Admin\SeoController;
-use App\Http\Controllers\SideMenueController;
-use App\Http\Controllers\Api\FilterController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\Api\BookingController;
-use App\Http\Controllers\Api\ListingController;
-use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\HotelVideoController;
-use App\Http\Controllers\Api\SellMyRoomController;
+use App\Http\Controllers\Api\ListingController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\PromoCodeController;
+use App\Http\Controllers\Api\SellMyRoomController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SideMenueController;
 use App\Http\Controllers\SideMenuPermissionController;
+use Illuminate\Support\Facades\Route;
 
 
 

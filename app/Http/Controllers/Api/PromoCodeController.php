@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\PromoCode;
-use Illuminate\Support\Str;
 use App\Models\PromoCodeUsage;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 class PromoCodeController extends Controller
 {
@@ -46,7 +46,7 @@ public function applyPromo(Request $request)
 
     if ($hasBooking) {
         return response()->json([
-            'message' => 'Promo valid only on first booking'
+            'message' => 'Promo code valid only on first booking'
         ], 400);
     }
 
@@ -56,7 +56,7 @@ public function applyPromo(Request $request)
         ->exists();
 
     if ($used) {
-        return response()->json(['message' => 'Promo already used'], 400);
+        return response()->json(['message' => 'Promo code already used'], 400);
     }
 
     PromoCodeUsage::create([
@@ -67,23 +67,14 @@ public function applyPromo(Request $request)
 
     return response()->json([
         'message' => 'Promo applied successfully',
-        'discount' => 15
+        'data' => [
+            'promo_code_id' => $promo->id,
+            'discount' => 15
+        ]
     ]);
 }
 
-public function rewardSender($booking)
-{
-    $usage = PromoCodeUsage::where('used_by', $booking->user_id)
-        ->where('sender_rewarded', 0)
-        ->first();
 
-    if ($usage) {
-        Wallet::where('user_id', $usage->promoCode->user_id)
-            ->increment('balance', 15);
-
-        $usage->update(['sender_rewarded' => true]);
-    }
-}
 
 
 
